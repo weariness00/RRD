@@ -347,6 +347,13 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/AI/FindToMove.cs"
 "Assets/Scripts/AI/GiveInfoToObject.cs"
+"Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/System/DamageController.cs"
+"Assets/Scripts/System/Element/ElementalProperty.cs"
+"Assets/Scripts/System/Element/FireProperty.cs"
+"Assets/Scripts/System/Observer/IObserver.cs"
+"Assets/Scripts/System/Observer/Subject.cs"
+"Assets/Scripts/System/Status.cs"
 -langversion:9.0
 
 /deterministic

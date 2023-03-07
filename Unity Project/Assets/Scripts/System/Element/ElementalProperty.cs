@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// 속성들이 가져야할 최상위 클래스
 /// </summary>
 
-public class ElementalProperty : MonoBehaviour
+public abstract class ElementalProperty : MonoBehaviour
 {
     public string propertyName;
     public float releaseTime = 1f;

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public int HP { get; set; }
-    public int MaxHP { get; set; }
-    public int MP { get; set; }
-    public int MaxMP { get; set; }
+    public int hp;
+    public int maxHp;
+    public int mp;
+    public int maxMp;
+
+    private void Start()
+    {
+        hp = maxHp; mp = maxMp;
+    }
 }

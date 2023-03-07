@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 데미지 계산 관련 클래스
 /// </summary>
-public class DamageController : MonoBehaviour
+public class DamageController : Subject
 {
     Status info;
     [HideInInspector] public int resultDamage { get; set; }
@@ -19,7 +19,8 @@ public class DamageController : MonoBehaviour
 
     private void LateUpdate()
     {
-        info.HP += resultHeal - resultDamage;
+        info.hp += resultHeal - resultDamage;
+        Debug.Log(info.hp);
 
         resultDamage = 0;
         resultHeal = 0;
