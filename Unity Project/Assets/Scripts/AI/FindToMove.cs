@@ -13,6 +13,8 @@ public class FindToMove : MonoBehaviour
     [HideInInspector] public GameObject currentTarget;
     [HideInInspector] public int currentTargetPriority = -1;
     public float maxDistanceToTarget = 1f;
+    [Space]
+    [HideInInspector]public float speed = 1f;
 
     private void Awake()
     {
@@ -40,6 +42,6 @@ public class FindToMove : MonoBehaviour
                 currentTarget = defultTarget;
         }
 
-        transform.position += (currentTarget.transform.position - transform.position).normalized * Time.deltaTime;
+        transform.position += (currentTarget.transform.position - transform.position).normalized * speed * Time.deltaTime;
     }
 }
