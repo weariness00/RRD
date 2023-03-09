@@ -348,12 +348,11 @@
 "Assets/Scripts/AI/FindToMove.cs"
 "Assets/Scripts/AI/GiveInfoToObject.cs"
 "Assets/Scripts/Player/PlayerController.cs"
+"Assets/Scripts/Status.cs"
 "Assets/Scripts/System/DamageController.cs"
 "Assets/Scripts/System/Element/ElementalProperty.cs"
 "Assets/Scripts/System/Element/FireProperty.cs"
-"Assets/Scripts/System/Observer/IObserver.cs"
-"Assets/Scripts/System/Observer/Subject.cs"
-"Assets/Scripts/System/Status.cs"
+"Assets/Scripts/Weapon/Weapon.cs"
 -langversion:9.0
 
 /deterministic

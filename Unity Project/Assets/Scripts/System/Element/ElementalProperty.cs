@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
@@ -13,11 +14,17 @@ public abstract class ElementalProperty : MonoBehaviour
     public float releaseTime = 1f;
     [Space]
 
-    public ParticleSystem particle;
-    public Image image;
+    public int damage;
+    public float speed = 1f;
     [Space]
 
-    public int damage;
+    public UnityEvent unityEvent;
+    public Image image;
+
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
 
     // 해당 속성의 기본적인 기능을 구현한 함수
     public abstract void ApplyEffect(GameObject obj);
