@@ -18,9 +18,8 @@ public class FireProperty : ElementalProperty
         unityEvent?.Invoke();   // 파티클 사운드 등의 효과
         StartCoroutine(ReleaseTime());
 
-        DamageController damageController = target.GetComponent<DamageController>();
-        damageController.resultDamage += damage;
-        StartCoroutine(DotDamage(damageController));
+        Managers.Instance.damageManager.Attack(target, damage);
+        StartCoroutine(DotDamage(target));
     }
 
     public override void ReleaseEffect()
@@ -29,12 +28,12 @@ public class FireProperty : ElementalProperty
 
     }
 
-    IEnumerator DotDamage(DamageController damageController)
+    IEnumerator DotDamage(GameObject target)
     {
         for (int i = 0; i < dotDamgeTime; i++)
         {
-            yield return new WaitForSeconds(dotDamageInterval);            
-            damageController.resultDamage += dotDamage;
+            yield return new WaitForSeconds(dotDamageInterval);
+            Managers.Instance.damageManager.Attack(target, dotDamage);
         }
     }
 }
