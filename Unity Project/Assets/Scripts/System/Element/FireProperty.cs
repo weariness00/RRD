@@ -18,7 +18,7 @@ public class FireProperty : ElementalProperty
         unityEvent?.Invoke();   // 파티클 사운드 등의 효과
         StartCoroutine(ReleaseTime());
 
-        Managers.Instance.damageManager.Attack(target, damage);
+        Managers.Damage.Attack(target, damage);
         StartCoroutine(DotDamage(target));
     }
 
@@ -33,7 +33,7 @@ public class FireProperty : ElementalProperty
         for (int i = 0; i < dotDamgeTime; i++)
         {
             yield return new WaitForSeconds(dotDamageInterval);
-            Managers.Instance.damageManager.Attack(target, dotDamage);
+            Managers.Damage.Attack(target, dotDamage);
         }
     }
 }

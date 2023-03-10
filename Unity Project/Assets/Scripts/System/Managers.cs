@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-	Managers instance;
-	public static Managers Instance { get { return Instance; } }
+	static Managers instance;
+	public static Managers Instance { get { Init(); return instance; } }
 
-    public DamageManager damageManager = new DamageManager();
+    DamageManager damageManager = new DamageManager();
+    public static DamageManager Damage { get { return Instance.damageManager; } } // 임시 이름
 
-    public void Awake()
+    void Awake()
+    {
+        Init();
+    }
+
+    static void Init()
     {
         if (instance == null)
         {

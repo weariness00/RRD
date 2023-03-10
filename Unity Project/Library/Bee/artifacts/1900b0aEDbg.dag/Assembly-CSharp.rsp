@@ -350,9 +350,10 @@
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Skill/FireBall.cs"
 "Assets/Scripts/Status.cs"
-"Assets/Scripts/System/DamageController.cs"
+"Assets/Scripts/System/DamageManager.cs"
 "Assets/Scripts/System/Element/ElementalProperty.cs"
 "Assets/Scripts/System/Element/FireProperty.cs"
+"Assets/Scripts/System/Managers.cs"
 "Assets/Scripts/Weapon/Weapon.cs"
 -langversion:9.0
 
