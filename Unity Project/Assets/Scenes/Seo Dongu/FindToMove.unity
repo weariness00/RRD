@@ -431,6 +431,7 @@ MonoBehaviour:
   maxHp: 100
   mp: 0
   maxMp: 0
+  damage: 0
 --- !u!1 &1126857241
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +445,7 @@ GameObject:
   - component: {fileID: 1126857244}
   - component: {fileID: 1126857243}
   - component: {fileID: 1126857242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5408,10 +5409,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propertyName: Fire
   releaseTime: 3
-  particle: {fileID: 1683269709}
-  image: {fileID: 0}
   damage: 10
-  dotDamageDuration: 1
+  speed: 1
+  isCrowdController: 0
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  image: {fileID: 0}
+  dotDamage: 1
+  dotDamageInterval: 1
+  dotDamgeTime: 3
 --- !u!135 &1734267896
 SphereCollider:
   m_ObjectHideFlags: 0

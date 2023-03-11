@@ -14,12 +14,12 @@ public class GiveInfoToObject : MonoBehaviour
 {
     public int priority = 0;
     public float radius = 1f;
-    LayerMask layerMask;
 
     private void Update()
     {
+        LayerMask layerMask = LayerMask.GetMask("Monster");
         Vector3 origin = transform.position;
-        RaycastHit[] hits = Physics.SphereCastAll(origin, radius, Vector3.up, 0f);
+        RaycastHit[] hits = Physics.SphereCastAll(origin, radius, Vector3.up, 0f, layerMask);
 
         // 충돌된 객체에게 정보 전달.
         foreach (RaycastHit hit in hits)

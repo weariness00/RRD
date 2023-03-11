@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Seo Dongu/Elemental.unity
+- path: Assets/Scenes/Seo Dongu/FindToMove.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
