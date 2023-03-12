@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using System.Linq;
 
 [System.Serializable]
 public struct MonsterNode
@@ -42,7 +42,7 @@ public class WaveGenrator : MonoBehaviour
 
     private void OnEnable()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < buttons.Length; i++)
         {
             TMP_Text text = buttons[i].GetComponentInChildren<TMP_Text>();
             text.text = "";
@@ -53,7 +53,7 @@ public class WaveGenrator : MonoBehaviour
     public void MakeWaveNode(TMP_Text text)
     {
         WaveNode waveNode = new WaveNode();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < buttons.Length; i++)
         {
             MonsterNode monsterNode = new MonsterNode();
             monsterNode.monster = MonsterList.instance.RandomMonster();

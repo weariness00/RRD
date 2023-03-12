@@ -6,5 +6,5 @@ using UnityEngine;
 [ExcelAsset]
 public class MonsterData : ScriptableObject
 {
-	public List<Status> data; // Replace 'EntityType' to an actual type that is serializable.
+	public List<MonsterInfo> data; // Replace 'EntityType' to an actual type that is serializable.
 }
