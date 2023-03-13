@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        Managers.Key.AddKeyAction(KeyManager.KeyToAction.MoveFront, MoveFront);
+        Managers.Key.AddKeyAction(KeyManager.KeyToAction.MoveBack, MoveBack);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveFront()
     {
-        
+        Debug.Log("Character Is Move Front");
+    }
+
+    public void MoveBack()
+    {
+        Debug.Log("Character Is Move Back");
     }
 }
