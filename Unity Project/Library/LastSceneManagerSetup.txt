@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Seo Dongu/WaveSystem.unity
+- path: Assets/Scenes/Seo Dongu/KeyManager.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
