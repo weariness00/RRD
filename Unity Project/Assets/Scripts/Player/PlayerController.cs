@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private void Start()
     {
-        Managers.Key.AddKeyAction(KeyManager.KeyToAction.MoveFront, MoveFront);
-        Managers.Key.AddKeyAction(KeyManager.KeyToAction.MoveBack, MoveBack);
+        KeyManager.Instance.AddKeyAction(KeyManager.KeyToAction.MoveFront, MoveFront);
+        KeyManager.Instance.AddKeyAction(KeyManager.KeyToAction.MoveBack, MoveBack);
     }
 
     public void MoveFront()

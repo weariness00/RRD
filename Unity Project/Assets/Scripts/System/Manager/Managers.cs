@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-	static Managers instance;
+	static Managers instance = null;
 	public static Managers Instance { get { Init(); return instance; } }
 
     DamageManager damageManager;
-    KeyManager keyManager;
     public static DamageManager Damage { get { return Instance.damageManager; } } // 임시 이름
-    public static KeyManager Key { get { return Instance.keyManager; } }
 
     void Awake()
     {
@@ -29,12 +27,9 @@ public class Managers : MonoBehaviour
             if (obj == null)
                 obj = Resources.Load<GameObject>("Prefabs/Manager"); 
 
-            DontDestroyOnLoad(obj);
+            //DontDestroyOnLoad(obj);
             instance = obj.GetComponent<Managers>();
             instance.damageManager = instance.FindManager<DamageManager>();
-            instance.keyManager = instance.FindManager<KeyManager>();
-
-            instance.keyManager.DefulatKeySetting();
         }
     }
 
