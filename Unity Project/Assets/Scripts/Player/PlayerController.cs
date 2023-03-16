@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private void Start()
+    private void Update()
     {
-        KeyManager.Instance.AddKeyAction(KeyManager.KeyToAction.MoveFront, MoveFront);
-        KeyManager.Instance.AddKeyAction(KeyManager.KeyToAction.MoveBack, MoveBack);
+        
     }
 
     public void MoveFront()

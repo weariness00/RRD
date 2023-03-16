@@ -25,7 +25,7 @@ public class Managers : MonoBehaviour
         {
             GameObject obj = GameObject.Find("Managers");
             if (obj == null)
-                obj = Resources.Load<GameObject>("Prefabs/Manager"); 
+                obj = Resources.Load<GameObject>("Prefabs/Manager");
 
             //DontDestroyOnLoad(obj);
             instance = obj.GetComponent<Managers>();

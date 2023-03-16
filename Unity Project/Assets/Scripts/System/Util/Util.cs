@@ -56,7 +56,7 @@ public class Util
 }
 
 [System.Serializable]
-public class MultKeyDictionary<Key1,Key2,Value> : Dictionary<Key1, Dictionary<Key2, Value>>
+public class MultiKeyDictionary<Key1,Key2,Value> : Dictionary<Key1, Dictionary<Key2, Value>>
 {
 	public Value this[Key1 key1,Key2 key2]
 	{
