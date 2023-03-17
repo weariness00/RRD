@@ -13,10 +13,13 @@ public class UIUtil : MonoBehaviour
     protected void Bind<T>(GameObject _Object, string[] names) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objs;
+        int currentObjsIndex = 0;
         if (objectDictionary.ContainsKey(typeof(T)))
         {
             objs = objectDictionary[typeof(T)];
+            currentObjsIndex = objs.Length;
             Array.Resize(ref objs, objs.Length + names.Length);
+            objectDictionary[typeof(T)] = objs;
         }
         else
         {
@@ -27,11 +30,11 @@ public class UIUtil : MonoBehaviour
         for (int i = 0; i < names.Length; i++)
         {
             if (typeof(T) == typeof(GameObject))
-                objs[i] = Util.FindChild(_Object, names[i], true);
+                objs[i + currentObjsIndex] = Util.FindChild(_Object, names[i], true);
             else
-                objs[i] = Util.FindChild<T>(_Object, names[i], true);
+                objs[i + currentObjsIndex] = Util.FindChild<T>(_Object, names[i], true);
 
-            if (objs[i] == null)
+            if (objs[i + currentObjsIndex] == null)
                 Debug.LogWarning($"Failed To Bind({names[i]})");
         }
     }
