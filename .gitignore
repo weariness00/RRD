@@ -73,3 +73,7 @@ crashlytics-build.properties
 
 # Unity .rsp files
 *.rsp
+
+# Log files
+*.log
+*.txt
