@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainLighting : MonoBehaviour
+public class ChainLighting : Skill
 {
     public Transform Target;
     public LayerMask LayerMask;
+    public GameObject Player;
 
     public float chainCount;
-    public int damage;
-    public int range;
     public float projectileSpeed;
 
     private void Awake()
     {
-        FindNextTarget();
+        FindTarget();
     }
 
     private void Update()
@@ -24,11 +23,11 @@ public class ChainLighting : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        FindNextTarget();
+        FindTarget();
         chainCount--;
     }
 
-    private void FindNextTarget()  //적에게 도달했을 때 가장 가까운 적 탐색
+    public override void FindTarget()  //적에게 도달했을 때 가장 가까운 적 탐색
     {
         Collider[] enemy = null;
         List<Collider> currentEnemys = new List<Collider>();
@@ -52,5 +51,10 @@ public class ChainLighting : MonoBehaviour
 
         Target = currentEnemys[0].transform;
         Debug.Log(chainCount);
+    }
+
+    void Chain()
+    {
+
     }
 }

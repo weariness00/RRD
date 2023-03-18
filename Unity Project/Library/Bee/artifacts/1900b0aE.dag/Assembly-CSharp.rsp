@@ -349,6 +349,7 @@
 "Assets/Scripts/AI/GiveInfoToObject.cs"
 "Assets/Scripts/Player/PlayerController.cs"
 "Assets/Scripts/Skill/ChainLighting.cs"
+"Assets/Scripts/Skill/Skill.cs"
 "Assets/Scripts/Skill/Thunder.cs"
 "Assets/Scripts/System/DamageController.cs"
 "Assets/Scripts/System/Element/ElementalProperty.cs"

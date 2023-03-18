@@ -20,6 +20,17 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Turn();
+
+        if (key_Q)
+        {
+        }
+    }
+
+
+    bool key_Q;
+    void KeyDown()
+    {
+        key_Q = Input.GetButtonDown("Skill1");
     }
 
     void Move()
@@ -33,8 +44,9 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(transform.position + moveVec);
     }
 
-    void FindNearTarget()
-    {
 
-    }
+    
+
+    
+
 }
