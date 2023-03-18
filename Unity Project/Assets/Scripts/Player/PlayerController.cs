@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rigid; //ÀÌ°Å ÀÌ¸§ ¾îÄ³ÇØ¾ßÇÒÁö ¸ð¸£°ÚÀ½
-    public LayerMask LayerMask;  //Àû¸¸ °¨Áö, enemy == 6¹ø
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyManager.Instance.InputAction(KeyToAction.MoveFront)))
+            Debug.Log(KeyToAction.MoveFront.ToString());
+    }
+
+    public void MoveFront()
+    {
+        Debug.Log("Character Is Move Front");
+    }
+
+    public void MoveBack()
+    {
+        Debug.Log("Character Is Move Back");
+    }
+    Rigidbody rigid; //ï¿½Ì°ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½Ä³ï¿½Ø¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ð¸£°ï¿½ï¿½ï¿½
+    public LayerMask LayerMask;  //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, enemy == 6ï¿½ï¿½
 
     Vector3 moveVec;
     public float speed;
@@ -35,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        moveVec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;  //ÀÌµ¿ÀÎµ¥ µû·Î º¯¼ö¸¦ ¸¸µå´Â°Ô ÁÁÀ»±î?
+        moveVec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;  //ï¿½Ìµï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
         transform.position += moveVec * speed * Time.deltaTime;
     }
 
