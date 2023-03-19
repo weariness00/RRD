@@ -8,16 +8,23 @@ using UnityEngine;
 /// <summary>
 /// 데미지 계산 관련 클래스
 /// </summary>
-public class DamageManager : MonoBehaviour
+public class DamageManager
 {
     Dictionary<GameObject, DamageInfo> resultDamageDictionary = new Dictionary<GameObject, DamageInfo>();
 
-    private void LateUpdate()
+    public void LateUpdate()
     {
         foreach (var resultDamage in resultDamageDictionary)
         {
             Status info = resultDamage.Key.GetComponent<Status>();
+            if(!info)
+            {
+                Debug.Log($"Not Have Status : {resultDamage.Key.name}");
+                continue;
+            }
+
             info.hp -= resultDamage.Value.damage;
+            Debug.Log($"\"{info.name}\" Under Attack");
         }
 
         resultDamageDictionary.Clear();
@@ -39,6 +46,8 @@ public class DamageManager : MonoBehaviour
 
         resultDamageDictionary[obj].damage += _Damage;
     }
+
+    public void Attack(GameObject obj, Status status) { Attack(obj, status.damage); }
 }
 
 class DamageInfo

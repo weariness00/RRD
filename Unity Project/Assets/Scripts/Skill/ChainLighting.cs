@@ -32,7 +32,7 @@ public class ChainLighting : Skill
         Collider[] enemy = null;
         List<Collider> currentEnemys = new List<Collider>();
 
-        enemy = Physics.OverlapSphere(transform.position, range, LayerMask);
+        enemy = Physics.OverlapSphere(transform.position, status.range, LayerMask);
 
         if (enemy == null || chainCount <= 0)
         {

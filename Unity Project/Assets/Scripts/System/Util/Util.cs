@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Util
 {
+    /// <summary>
+    /// if not have Tpye(T) Component, _Object do Add Component
+    /// </summary>
     public static T GetORAddComponet<T>(GameObject _Object) where T : UnityEngine.Component
     {
         T component = _Object.GetComponent<T>();

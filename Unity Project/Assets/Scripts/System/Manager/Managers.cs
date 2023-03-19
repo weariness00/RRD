@@ -8,12 +8,17 @@ public class Managers : MonoBehaviour
 	static Managers instance = null;
 	public static Managers Instance { get { Init(); return instance; } }
 
-    DamageManager damageManager;
+    DamageManager damageManager = new DamageManager();
     public static DamageManager Damage { get { return Instance.damageManager; } } // 임시 이름
 
     void Awake()
     {
         Init();
+    }
+
+    private void LateUpdate()
+    {
+        damageManager.LateUpdate();
     }
 
     /// <summary>
@@ -29,16 +34,6 @@ public class Managers : MonoBehaviour
 
             //DontDestroyOnLoad(obj);
             instance = obj.GetComponent<Managers>();
-            instance.damageManager = instance.FindManager<DamageManager>();
         }
-    }
-
-    T FindManager<T>() where T : UnityEngine.Component
-    {
-        T component = gameObject.GetComponent<T>();
-        if(component == null)
-            component = gameObject.AddComponent<T>();
-
-        return component;
     }
 }

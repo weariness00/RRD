@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using JetBrains.Annotations;
 
 [System.Serializable]
 public struct MonsterNode
@@ -81,5 +82,7 @@ public class WaveGenrator : MonoBehaviour
         currentWaveNode = waveList[index - 1];
         MonsterSpawnManager.instance.waveNode = currentWaveNode;
         gameObject.SetActive(false);
+
+        waveList.Clear();
     }
 }

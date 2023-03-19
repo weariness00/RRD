@@ -11,6 +11,10 @@ public class Status : MonoBehaviour
     [Space]
 
     public int damage;
+    [Space]
+
+    public float speed;
+    public float range;
 
     private void Start()
     {

@@ -20,6 +20,8 @@ public enum KeyToAction
     MoveBack,
     MoveLeft,
     MoveRight,
+
+    Skill_Q,
 }
 
 /// <summary>
