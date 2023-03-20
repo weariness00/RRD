@@ -42,7 +42,6 @@ public class KeyManager : UIUtil
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
             
             instance.DefulatKeySetting();
         }  
@@ -88,7 +87,7 @@ public class KeyManager : UIUtil
         }
 		Bind<Button>(scrollContants, typeof(KeyToAction));  // ¸ÊÇÎ
 
-        for (int i = 0; i < Enum.GetValues(typeof(KeyToAction)).Length; i++)
+        for (int i = 0; i < keyData.Default.Count; i++)
         {
             int temp = i;
             Button button = Get<Button>(i);

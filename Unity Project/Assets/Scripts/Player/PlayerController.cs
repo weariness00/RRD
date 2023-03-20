@@ -15,30 +15,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyManager.Instance.InputAction(KeyToAction.MoveFront)))
-        //    Debug.Log(KeyToAction.MoveFront.ToString());
+        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveFront)))
+            Move(Vector3.forward);
+        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveBack)))
+            Move(Vector3.back);
+        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveLeft)))
+            Move(Vector3.left);
+        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveRight)))
+            Move(Vector3.right);
 
         if (Input.GetKeyDown(KeyCode.Q))
             skill?.Invoke();
     }
 
-    public void MoveFront()
+    void Move(Vector3 direction)
     {
-        Debug.Log("Character Is Move Front");
-    }
-
-    public void MoveBack()
-    {
-        Debug.Log("Character Is Move Back");
-    }
-
-    void MoveControl()
-    {
-
-        Vector3 moveVec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        transform.position += moveVec * status.speed * Time.deltaTime;
-
-        transform.LookAt(transform.position + moveVec);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+        transform.position += direction * status.speed * Time.deltaTime;
     }
 
 }
