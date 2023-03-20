@@ -49,11 +49,6 @@ public class Skill : MonoBehaviour
         Util.Instantiate(skillEffect, gameObject.transform);
     }
 
-    public virtual void FindTarget()
-    {
-        
-    }
-
     IEnumerator WaitCoolTime()
     {
         isOn = false;

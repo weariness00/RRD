@@ -32,13 +32,10 @@ public class Thunder : MonoBehaviour
         List<Collider> currentEnemys = new List<Collider>();
 
         enemy = Physics.OverlapSphere(transform.position, range, LayerMask);
-
         for(int i = 0; i < enemy.Length; i++)
         {
             //Instantiate(ThunderPrefab, enemy[i].transform.position + Vector3.up * 10, Quaternion.identity);  //1번째 인자는 오브젝트, 2번째 인자는 생성 위치, 3번째 인자는 회전
 
         }
-
-
     }
 }
