@@ -11,18 +11,36 @@ public class AttackInCamera : Skill
 
     public override void OnSkill()
     {
+        if (!isOn)
+            return;
+
         base.OnSkill();
+
         RaycastHit[] hits = Physics.BoxCastAll(playerTranform.position, boxSize, playerTranform.forward, playerTranform.rotation, 1000f, LayerMask.GetMask("Monster"));
 
         foreach (RaycastHit hit in hits)
         {
-            Vector3 direction = (hit.transform.position - playerTranform.position).normalized; // Player와 Monster의 방향
             RaycastHit lineHit;
-            Physics.Raycast(playerTranform.position, direction, out lineHit, 1000f);
-            //Debug.DrawRay(playerTranform.position, direction, Color.red, 3f);
+            Vector3[] directions = { // Player와 Monster의 방향
+                (hit.collider.bounds.min - playerTranform.position).normalized,
+                (hit.collider.bounds.center - playerTranform.position).normalized, 
+                (hit.collider.bounds.max - playerTranform.position).normalized };
 
-            if (lineHit.transform.gameObject.layer == 7) // 현재 찾아낸 Monster의 앞에 장애물이 있는지 없는지 체크
-                Managers.Damage.Attack(lineHit.transform.gameObject, status);
+            foreach (Vector3 direction in directions)
+            {
+                Physics.Raycast(playerTranform.position, direction, out lineHit, 1000f);
+                //Debug.DrawRay(playerTranform.position, direction * 10f, Color.red, 3f);
+
+                if (!lineHit.colliderInstanceID.Equals(hit.colliderInstanceID))
+                    continue;
+
+                if (lineHit.transform.gameObject.layer == 7) // 현재 찾아낸 Monster의 앞에 장애물이 있는지 없는지 체크
+                {
+                    Managers.Damage.Attack(lineHit.transform.gameObject, status);
+                    Util.Instantiate(targetEffect, lineHit.transform);
+                    break;
+                }
+            }
         }
     }
 }
