@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour
 
     protected Status status;
 
+
     [SerializeField] protected ParticleSystem skillEffect;
     [SerializeField] protected ParticleSystem targetEffect;
 

@@ -31,9 +31,17 @@ public class Thunder : Skill
         RaycastHit hit;
         Physics.SphereCast(transform.position, status.range, Vector3.up, out hit, 100f, layerMask);
 
+        foreach(Transform item in hit.transform)
         {
-
+            Instantiate(targetEffect, item.position + Vector3.up * 5, Quaternion.identity);  //이펙트 생성 높이 조절 필요
         }
+
+        Damage(hit);
+    }
+
+    void Damage(RaycastHit hit)
+    {
+        Managers.Damage.Attack(hit.transform.gameObject, status.damage);
     }
 
     public override void OnSkill()
