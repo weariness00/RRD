@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Character Is Move Back");
     }
-    Rigidbody rigid; //�̰� �̸� ��ĳ�ؾ����� �𸣰���
-    public LayerMask LayerMask;  //���� ����, enemy == 6��
+    Rigidbody rigid; 
+    public LayerMask LayerMask;  
 
     Vector3 moveVec;
     public float speed;
@@ -29,16 +29,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        Move();
-        Turn();
-
-        if (key_Q)
-        {
-        }
     }
 
 

@@ -6,14 +6,14 @@ public class ChainLighting : Skill
 {
     public Transform Target;
     public LayerMask LayerMask;
-    public GameObject Player;
 
     public float chainCount;
     public float projectileSpeed;
 
-    private void Awake()
+    private void Start()
     {
-        FindTarget();
+        //FindTarget();
+        player
     }
 
     private void Update()

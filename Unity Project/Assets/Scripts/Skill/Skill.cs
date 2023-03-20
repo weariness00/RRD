@@ -8,7 +8,7 @@ public class Skill : MonoBehaviour
     public float damage;
     public float range;
 
-    PlayerController player;
+    protected PlayerController player;
 
     // Start is called before the first frame update
     void Start()
