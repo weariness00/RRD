@@ -24,7 +24,7 @@ public class DamageManager
             }
 
             info.hp -= resultDamage.Value.damage;
-            Debug.Log($"\"{info.name}\" Under Attack");
+            Debug.Log($"\"{info.name}\" Under Attack ( Damage : {resultDamage.Value.damage} )");
         }
 
         resultDamageDictionary.Clear();
