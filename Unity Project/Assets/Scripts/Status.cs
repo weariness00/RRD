@@ -20,5 +20,6 @@ public class Status : MonoBehaviour
     {
         hp = maxHp; mp = maxMp;
         range = 1;
+        speed = 1;
     }
 }
