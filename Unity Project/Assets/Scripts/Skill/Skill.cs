@@ -41,7 +41,6 @@ public class Skill : MonoBehaviour
 
     }
 
-    // 스킬 사용시 이 메서드를 호출
     public virtual void OnSkill()
     {
         Debug.Log($"Use This Skill {name}");
@@ -50,7 +49,7 @@ public class Skill : MonoBehaviour
         Util.Instantiate(skillEffect, gameObject.transform);
     }
 
-    public virtual void FindTarget()  //적에게 도달했을 때 가장 가까운 적 탐색
+    public virtual void FindTarget()
     {
         
     }

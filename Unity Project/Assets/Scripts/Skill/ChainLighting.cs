@@ -21,7 +21,7 @@ public class ChainLighting : Skill
         chainCount--;
     }
 
-    public override void FindTarget()  //적에게 도달했을 때 가장 가까운 적 탐색
+    public override void FindTarget()  
     {
         Collider[] enemy = null;
         List<Collider> currentEnemys = new List<Collider>();
@@ -35,13 +35,13 @@ public class ChainLighting : Skill
 
         foreach (var item in enemy)
         {
-            if (Vector3.SqrMagnitude(item.transform.position - transform.position) > 2f)  //같은 적에게 계속 연쇄되는 것을 방지하기 위한 거리(후에 정확한 거리로 수정 필요)
+            if (Vector3.SqrMagnitude(item.transform.position - transform.position) > 2f)  
             {
                 currentEnemys.Add(item);
             }
         }
 
-        currentEnemys[0].gameObject.GetComponent<Renderer>().material.color = Color.red;  //타격이 들어갔는지 확인코드 추후 몬스터 스크립트에서 데미지를 입을 경우로 이동
+        currentEnemys[0].gameObject.GetComponent<Renderer>().material.color = Color.red; 
 
         target = currentEnemys[0].transform;
         Debug.Log(chainCount);
