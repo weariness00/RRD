@@ -51,7 +51,6 @@ public class Skill : MonoBehaviour
         Util.Instantiate(skillEffect, gameObject.transform);
     }
 
-
     IEnumerator WaitCoolTime()
     {
         isOn = false;

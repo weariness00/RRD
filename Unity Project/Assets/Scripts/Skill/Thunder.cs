@@ -14,7 +14,7 @@ public class Thunder : Skill
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, projectileSpeed);
 
-        if (Input.GetButtonDown("Jump"))  //sapce bar·Î ½ÇÇè
+        if (Input.GetButtonDown("Jump"))  //sapce barï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
             Attack();
         }
@@ -31,7 +31,6 @@ public class Thunder : Skill
         RaycastHit hit;
         Physics.SphereCast(transform.position, status.range, Vector3.up, out hit, 100f, layerMask);
 
-        foreach(var item in hit.transform)
         {
 
         }
@@ -42,5 +41,6 @@ public class Thunder : Skill
         if (!isOn)
             return;
         base.OnSkill();
+
     }
 }

@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
 
     void MoveControl()
     {
-        Vector3 moveVec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized; 
+
+        Vector3 moveVec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         transform.position += moveVec * status.speed * Time.deltaTime;
 
         transform.LookAt(transform.position + moveVec);
