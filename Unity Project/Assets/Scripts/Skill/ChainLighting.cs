@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ChainLighting : Skill
 {
-    public Transform target;
-    public LayerMask layerMask;
+    Transform target;
 
     public float chainCount;
     public float projectileSpeed;
+
+    private void Start()
+    {
+        FindTarget();
+    }
 
     private void Update()
     {
@@ -21,7 +25,7 @@ public class ChainLighting : Skill
         chainCount--;
     }
 
-    public override void FindTarget()  
+    public void FindTarget()  
     {
         Collider[] enemy = null;
         List<Collider> currentEnemys = new List<Collider>();
@@ -29,9 +33,7 @@ public class ChainLighting : Skill
         enemy = Physics.OverlapSphere(transform.position, status.range, layerMask);
 
         if (enemy == null || chainCount <= 0)
-        {
-            gameObject.SetActive(false);
-        }
+            Destroy(gameObject);
 
         foreach (var item in enemy)
         {

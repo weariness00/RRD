@@ -16,12 +16,14 @@ public class Skill : MonoBehaviour
 
     protected PlayerController player;
     protected Transform playerTranform;
+    protected LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponentInParent<PlayerController>();
         status = Util.GetORAddComponet<Status>(gameObject);
+        layerMask = LayerMask.GetMask("Monster");
 
         playerTranform = player.transform;
         coolTime = 1f;
@@ -49,10 +51,6 @@ public class Skill : MonoBehaviour
         Util.Instantiate(skillEffect, gameObject.transform);
     }
 
-    public virtual void FindTarget()
-    {
-        
-    }
 
     IEnumerator WaitCoolTime()
     {
