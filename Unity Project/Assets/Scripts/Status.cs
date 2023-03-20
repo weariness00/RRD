@@ -19,5 +19,6 @@ public class Status : MonoBehaviour
     private void Start()
     {
         hp = maxHp; mp = maxMp;
+        range = 1;
     }
 }

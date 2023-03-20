@@ -29,8 +29,6 @@ public class Skill : MonoBehaviour
         // temporary
         player.skill -= OnSkill;
         player.skill += OnSkill;
-
-        Instantiate
     }
 
     /// <summary>

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4898781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &347576932
 GameObject:
@@ -408,6 +408,9 @@ MonoBehaviour:
   maxHp: 0
   mp: 0
   maxMp: 0
+  damage: 0
+  speed: 0
+  range: 0
 --- !u!54 &363054630
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -598,6 +601,7 @@ GameObject:
   - component: {fileID: 1089846708}
   - component: {fileID: 1089846707}
   - component: {fileID: 1089846709}
+  - component: {fileID: 1089846710}
   m_Layer: 0
   m_Name: Chain Lighting
   m_TagString: Untagged
@@ -612,13 +616,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089846703}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.41, y: -0.835, z: 4.69}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1847129006}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &1089846707
 TrailRenderer:
@@ -753,15 +757,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac94551fb6cc4b44a04e9e6563fccd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  LayerMask:
+  isOn: 1
+  skillEffect: {fileID: 0}
+  targetEffect: {fileID: 0}
+  target: {fileID: 0}
+  layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  Player: {fileID: 0}
+    m_Bits: 128
   chainCount: 6
-  damage: 10
-  range: 1000
-  projectileSpeed: 0.02
+  projectileSpeed: 0.1
+--- !u!114 &1089846710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089846703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47bca85cd6738245a446c7ba92e3b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  maxHp: 0
+  mp: 0
+  maxMp: 0
+  damage: 0
+  speed: 0
+  range: 1
 --- !u!1 &1228620502
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +798,7 @@ GameObject:
   - component: {fileID: 1228620504}
   - component: {fileID: 1228620503}
   - component: {fileID: 1228620507}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy (2)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -859,7 +882,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1228620507
 Rigidbody:
@@ -890,7 +913,7 @@ GameObject:
   - component: {fileID: 1258699835}
   - component: {fileID: 1258699834}
   - component: {fileID: 1258699838}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -974,7 +997,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1258699838
 Rigidbody:
@@ -1005,7 +1028,7 @@ GameObject:
   - component: {fileID: 1529063005}
   - component: {fileID: 1529063004}
   - component: {fileID: 1529063008}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1089,7 +1112,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1529063008
 Rigidbody:
@@ -1250,10 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  speed: 5
+  status: {fileID: 0}
 --- !u!136 &1847129003
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1329,7 +1349,8 @@ Transform:
   m_LocalPosition: {x: 0.41, y: 2.3, z: -4.69}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1089846706}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

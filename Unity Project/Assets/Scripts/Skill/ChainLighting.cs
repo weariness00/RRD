@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class ChainLighting : Skill
 {
-    public Transform Target;
-    public LayerMask LayerMask;
-    public GameObject Player;
+    public Transform target;
+    public LayerMask layerMask;
 
     public float chainCount;
     public float projectileSpeed;
 
-    private void Awake()
-    {
-        FindTarget();
-    }
-
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, Target.position, projectileSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, projectileSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +26,7 @@ public class ChainLighting : Skill
         Collider[] enemy = null;
         List<Collider> currentEnemys = new List<Collider>();
 
-        enemy = Physics.OverlapSphere(transform.position, status.range, LayerMask);
+        enemy = Physics.OverlapSphere(transform.position, status.range, layerMask);
 
         if (enemy == null || chainCount <= 0)
         {
@@ -49,7 +43,7 @@ public class ChainLighting : Skill
 
         currentEnemys[0].gameObject.GetComponent<Renderer>().material.color = Color.red;  //타격이 들어갔는지 확인코드 추후 몬스터 스크립트에서 데미지를 입을 경우로 이동
 
-        Target = currentEnemys[0].transform;
+        target = currentEnemys[0].transform;
         Debug.Log(chainCount);
     }
 
