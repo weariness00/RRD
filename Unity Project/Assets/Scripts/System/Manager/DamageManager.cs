@@ -23,6 +23,8 @@ public class DamageManager
                 continue;
             }
 
+            CheckDebuff(info, resultDamage.Value);
+
             info.hp -= resultDamage.Value.damage;
             Debug.Log($"\"{info.name}\" Under Attack ( Damage : {resultDamage.Value.damage} )");
         }
@@ -30,14 +32,15 @@ public class DamageManager
         resultDamageDictionary.Clear();
     }
 
-    void AddObject(GameObject obj)
+    DamageInfo AddObject(GameObject obj)
     {
         if (resultDamageDictionary.ContainsKey(obj))
-            return;
+            return resultDamageDictionary[obj];
 
         DamageInfo info = new DamageInfo();
 
         resultDamageDictionary.Add(obj, info);
+        return info;
     }
 
     public void Attack(GameObject obj, int _Damage)
@@ -48,18 +51,33 @@ public class DamageManager
     }
 
     public void Attack(GameObject obj, Status status) { Attack(obj, status.damage); }
+
+    public void Debuff(GameObject obj, DebuffType debuffType)
+    {
+        DamageInfo dInfo = AddObject(obj);
+
+        if (!dInfo.debuffDictionary.ContainsKey(debuffType))
+            dInfo.debuffDictionary.Add(debuffType, 0);
+
+        dInfo.debuffDictionary[debuffType]++;
+    }
+
+    // 어떤 디버프가 들어왔냐에 따른 검사.
+    void CheckDebuff(Status status, DamageInfo dInfo)
+    {
+
+    }
 }
 
 class DamageInfo
 {
     public int damage;
     public int heal;
-    public bool[] isProperty = new bool[5]; // 1.불 2.물 3.흙 4.바람 5.번개
+    public Dictionary<DebuffType, int> debuffDictionary = new Dictionary<DebuffType, int>();    // 임시 // 디버프가 몇 중첩인지
 
     public DamageInfo()
     {
         damage = 0;
         heal = 0;
-        Array.Clear(isProperty, 0, 4);
     }
 }

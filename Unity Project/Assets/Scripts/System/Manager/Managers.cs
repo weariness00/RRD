@@ -11,11 +11,6 @@ public class Managers : MonoBehaviour
     DamageManager damageManager = new DamageManager();
     public static DamageManager Damage { get { return Instance.damageManager; } } // 임시 이름
 
-    void Awake()
-    {
-        Init();
-    }
-
     private void LateUpdate()
     {
         damageManager.LateUpdate();
@@ -30,10 +25,10 @@ public class Managers : MonoBehaviour
         {
             GameObject obj = GameObject.Find("Managers");
             if (obj == null)
-                obj = Resources.Load<GameObject>("Prefabs/Manager");
+                obj = Instantiate(new GameObject { name = "Managers" });
 
             //DontDestroyOnLoad(obj);
-            instance = obj.GetComponent<Managers>();
+            instance = Util.GetORAddComponet<Managers>(obj);
         }
     }
 }

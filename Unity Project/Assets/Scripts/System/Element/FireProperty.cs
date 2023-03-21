@@ -12,14 +12,19 @@ public class FireProperty : ElementalProperty
     public float dotDamageInterval = 1f;    // 데미지 간격
     public float dotDamgeTime = 3f; // 도트 데미지 지속 시간
 
+    public override void ApplyDebuff(GameObject target)
+    {
+        Managers.Damage.Debuff(target, DebuffType.Fire);
+
+        StartCoroutine(DotDamage(target));
+    }
+
     public override void ApplyEffect(GameObject target)
     {
         // 불 속성에 대한 구체적인 기능 구현
         unityEvent?.Invoke();   // 파티클 사운드 등의 효과
-        StartCoroutine(ReleaseTime());
 
         Managers.Damage.Attack(target, damage);
-        StartCoroutine(DotDamage(target));
     }
 
     public override void ReleaseEffect()

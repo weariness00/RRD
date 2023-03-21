@@ -8,6 +8,10 @@ using UnityEngine;
 /// </summary>
 public class ThunderProperty : ElementalProperty
 {
+    public override void ApplyDebuff(GameObject target)
+    {
+    }
+
     public override void ApplyEffect(GameObject _Object)
     {
         unityEvent?.Invoke();
@@ -28,4 +32,6 @@ public class ThunderProperty : ElementalProperty
         // 대상 Object의 Animation을 감전 Animaition으로 바꾸기
         Managers.Damage.Attack(_Object, damage);
 	}
+
+
 }
