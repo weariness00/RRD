@@ -8,6 +8,14 @@ using UnityEngine;
 /// </summary>
 public class ThunderProperty : ElementalProperty
 {
+    MonsterInfo monsterStatus;
+    public int percentage;
+
+    private void Start()
+    {
+        monsterStatus = GetComponent<MonsterInfo>();
+    }
+
     public override void ApplyEffect(GameObject _Object)
     {
         unityEvent?.Invoke();
@@ -24,8 +32,11 @@ public class ThunderProperty : ElementalProperty
     /// </summary>
     public void OnElectricShock(GameObject _Object)
 	{
-        // 대상 object의 모든 애니메이션을 정지 후
+        // 애니메이션 정지는 물속성(빙결)
         // 대상 Object의 Animation을 감전 Animaition으로 바꾸기
-        Managers.Damage.Attack(_Object, damage);
+
+        // 감전은 몬스터가 받는 피해 증가
+        if (monsterStatus.status == MonsterStatus.Lighting)
+            Managers.Damage.Attack(_Object, damage * percentage);
 	}
 }

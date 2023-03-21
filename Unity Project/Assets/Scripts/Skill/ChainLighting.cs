@@ -6,7 +6,7 @@ public class ChainLighting : Skill
 {
     Transform target;
 
-    public float chainCount;
+     public float chainCount;
     public float projectileSpeed;
 
     private void Update()

@@ -44,6 +44,8 @@ public class DamageManager
     {
         AddObject(obj);
 
+        //몬스터가 감전 상태일 경우 받는 피해 증폭
+
         resultDamageDictionary[obj].damage += _Damage;
     }
 

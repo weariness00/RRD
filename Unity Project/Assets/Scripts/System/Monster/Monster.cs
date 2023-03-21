@@ -19,6 +19,16 @@ public enum MonsterRate
 };
 
 [System.Serializable]
+public enum MonsterStatus
+{
+    Fire,
+    Lighting,
+    Water,
+    Earth,
+    Wind
+};
+
+[System.Serializable]
 public class MonsterInfo
 {
     public int id;
@@ -27,6 +37,7 @@ public class MonsterInfo
     [Space]
     public MonsterType type;
     public MonsterRate rate;
+    public MonsterStatus status;
 
     [Space]
     public float speed;
