@@ -15,13 +15,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveFront)))
+        if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)))
             Move(Vector3.forward);
-        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveBack)))
+        if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)))
             Move(Vector3.back);
-        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveLeft)))
+        if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)))
             Move(Vector3.left);
-        if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveRight)))
+        if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
             Move(Vector3.right);
 
         if (Input.GetKeyDown(KeyCode.Q))

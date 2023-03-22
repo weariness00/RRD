@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class MonsterSpawnManager : MonoBehaviour
 {
-    [HideInInspector]public static MonsterSpawnManager instance;
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
-
-    public static MonsterSpawnManager Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
+    [HideInInspector]public static MonsterSpawnManager Instance;
 
     public WaveNode waveNode;
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
+
+    private void Update()
+    {
+        if (!GameManager.Instance.isWaveStart)
+            return;
+
+        // 몬스터 소환 매커니즘
+    }
 }

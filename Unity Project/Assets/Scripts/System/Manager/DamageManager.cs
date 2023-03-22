@@ -10,6 +10,11 @@ public class DamageManager
 {
     Dictionary<GameObject, DamageInfo> resultDamageDictionary = new Dictionary<GameObject, DamageInfo>();
 
+    public DamageManager()
+    {
+        Managers.Instance.LateUpdateCall += LateUpdate;
+    }
+
     public void LateUpdate()
     {
         foreach (var resultDamage in resultDamageDictionary)

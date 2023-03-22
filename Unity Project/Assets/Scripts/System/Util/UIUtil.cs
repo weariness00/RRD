@@ -5,10 +5,9 @@ using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIUtil : MonoBehaviour
+public class UIUtil
 {
     Dictionary<Type, UnityEngine.Object[]> objectDictionary = new Dictionary<Type, UnityEngine.Object[]>();
-
 
     protected void Bind<T>(GameObject _Object, string[] names) where T : UnityEngine.Object
     {
@@ -39,8 +38,8 @@ public class UIUtil : MonoBehaviour
         }
     }
     protected void Bind<T>(GameObject _Object,Type type) where T : UnityEngine.Object  { Bind<T>(_Object, Enum.GetNames(type));  }
-    protected void Bind<T>(Type type) where T : UnityEngine.Object{ Bind<T>(gameObject, type); }
-    protected void Bind<T>(string[] names) where T : UnityEngine.Object{ Bind<T>(gameObject, names); }
+    //protected void Bind<T>(Type type) where T : UnityEngine.Object{ Bind<T>(gameObject, type); }
+    //protected void Bind<T>(string[] names) where T : UnityEngine.Object{ Bind<T>(gameObject, names); }
 
     protected T Get<T>(int index) where T : UnityEngine.Object
     {

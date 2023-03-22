@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using JetBrains.Annotations;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct MonsterNode
@@ -36,15 +37,17 @@ public class WaveGenrator : MonoBehaviour
     // 만들어진 웨이브를 버튼에 텍스쳐로 표시
     // 선택된 웨이브의 정보를 MonsterSpawnManager에 넘기기
 
-    private void Awake()
+    private void Start()
     {
-        gameObject.SetActive(false);
+        GameManager.Instance.StartWaveCall.AddListener(() => { waveList.Clear(); gameObject.SetActive(false); });
+        WaveGenerate();
     }
 
-    private void OnEnable()
+    public void WaveGenerate()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
+            buttons[i].GetComponent<Button>().onClick.AddListener(() => { SelcetWave(i); });
             TMP_Text text = buttons[i].GetComponentInChildren<TMP_Text>();
             text.text = "";
             MakeWaveNode(text);
@@ -80,9 +83,6 @@ public class WaveGenrator : MonoBehaviour
         }
 
         currentWaveNode = waveList[index - 1];
-        MonsterSpawnManager.instance.waveNode = currentWaveNode;
-        gameObject.SetActive(false);
-
-        waveList.Clear();
+        MonsterSpawnManager.Instance.waveNode = currentWaveNode;
     }
 }
