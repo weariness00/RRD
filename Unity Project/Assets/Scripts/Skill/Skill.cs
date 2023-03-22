@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,11 @@ using static UnityEngine.ParticleSystem;
 
 public class Skill : MonoBehaviour
 {
-    protected float coolTime;
+    public float coolTime;
     public bool isOn = true;    // true : can use skill, false : can't use skill
+    public bool? isGuide = null; // null : 아무것도 실행 안함, true : 타켓팅 형식의 스킬, false : 논타겟 형식의 스킬
 
-    protected Status status;
+    [HideInInspector] public Status status;
 
     [SerializeField] protected ParticleSystem skillEffect;
     [SerializeField] protected ParticleSystem targetEffect;
@@ -27,10 +29,28 @@ public class Skill : MonoBehaviour
 
         playerTranform = player.transform;
         coolTime = 1f;
+    }
 
-        // temporary
-        player.skill -= OnSkill;
-        player.skill += OnSkill;
+    private void Update()
+    {
+        if (isGuide == true)
+        {
+
+        }
+        else if(isGuide == false)
+        {
+            gameObject.transform.Translate(Vector3.forward * status.speed * Time.deltaTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+            return;
+
+        Debug.Log($"스킬 충돌 {gameObject.name}");
+        Managers.Damage.Attack(other.gameObject, status);
+        Util.Instantiate(targetEffect, other.gameObject.transform);
     }
 
     /// <summary>
