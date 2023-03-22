@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public Status status = null;
     public Action skill;
 
+    public Vector3 motionSpeed;
+
     void Start()
     {
         status = Util.GetORAddComponet<Status>(gameObject); // raping
@@ -16,13 +18,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveFront)))
-            Move(Vector3.forward);
+            Move(Vector3.forward - motionSpeed);
         if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveBack)))
-            Move(Vector3.back);
+            Move(Vector3.back - motionSpeed);
         if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveLeft)))
-            Move(Vector3.left);
+            Move(Vector3.left - motionSpeed);
         if (Input.GetKey(KeyManager.Instance.InputAction(KeyToAction.MoveRight)))
-            Move(Vector3.right);
+            Move(Vector3.right - motionSpeed);
 
         if (Input.GetKeyDown(KeyCode.Q))
             skill?.Invoke();

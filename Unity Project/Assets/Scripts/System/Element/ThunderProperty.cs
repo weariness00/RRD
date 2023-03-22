@@ -8,13 +8,7 @@ using UnityEngine;
 /// </summary>
 public class ThunderProperty : ElementalProperty
 {
-    MonsterInfo monsterStatus;
     public int percentage;
-
-    private void Start()
-    {
-        monsterStatus = GetComponent<MonsterInfo>();
-    }
 
     public override void ApplyEffect(GameObject _Object)
     {
@@ -36,7 +30,9 @@ public class ThunderProperty : ElementalProperty
         // 대상 Object의 Animation을 감전 Animaition으로 바꾸기
 
         // 감전은 몬스터가 받는 피해 증가
-        if (monsterStatus.status == MonsterStatus.Lighting)
-            Managers.Damage.Attack(_Object, damage * percentage);
+        /*if ( == MonsterStatus.Lighting)
+            Managers.Damage.Attack(_Object, damage * percentage);*/
+
+        _Object.GetComponent<MonsterInfo>().status = MonsterStatus.Lighting;
 	}
 }
