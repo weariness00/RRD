@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 637817781}
   - component: {fileID: 637817780}
   - component: {fileID: 637817785}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 1910550843}
   - component: {fileID: 1910550842}
   - component: {fileID: 1910550841}
+  - component: {fileID: 1910550844}
   m_Layer: 0
   m_Name: WindCutter
   m_TagString: Untagged
@@ -784,6 +785,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910550839}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1910550844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910550839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f8d399ec40a3a4bbe37aade0d291d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 1
+  skillEffect: {fileID: 0}
+  targetEffect: {fileID: 0}
+  cutterCount: 1
 --- !u!1 &2007914072
 GameObject:
   m_ObjectHideFlags: 0

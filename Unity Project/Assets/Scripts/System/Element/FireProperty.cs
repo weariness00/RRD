@@ -38,6 +38,8 @@ public class FireProperty : ElementalProperty
         for (int i = 0; i < dotDamgeTime; i++)
         {
             yield return new WaitForSeconds(dotDamageInterval);
+            if (target == null)
+                break;
             Managers.Damage.Attack(target, dotDamage);
         }
     }
