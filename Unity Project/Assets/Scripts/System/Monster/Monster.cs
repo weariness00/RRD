@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public enum MonsterType
@@ -29,18 +30,37 @@ public class MonsterInfo
     public MonsterRate rate;
 
     [Space]
-    public float speed;
-    public int damage;
     public int hp;
     public int mp;
+
+    [Space]
+    public int damage;
+    public float speed;
 }
 
 public class Monster : MonoBehaviour
 {
-    public MonsterInfo info;
+    public int id;
 
-    public virtual Monster Clone()
+    [Space]
+    public MonsterType type;
+    public MonsterRate rate;
+
+    [HideInInspector] public Status status;
+
+    // 받아온 데이터를 넣어준다.
+    public Monster(MonsterInfo info)
     {
-        return new Monster();
+        gameObject.AddComponent<FindToMove>();
+
+        status = Util.GetORAddComponet<Status>(gameObject);
+        name = info.name;
+
+        id = info.id;
+        type = info.type;
+        rate = info.rate;
+        status.hp = info.hp;
+        status.mp = info.mp;
+        status.damage = info.damage;
     }
 }

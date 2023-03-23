@@ -13,11 +13,36 @@ public class MonsterSpawnManager : MonoBehaviour
             Instance = this;
     }
 
-    private void Update()
+    public void Start()
     {
-        if (!GameManager.Instance.isWaveStart)
-            return;
+        GameManager.Instance.StartWaveCall.AddListener(Spawn);
+        GameManager.Instance.EndWaveCall.AddListener(StopSpawn);
+    }
 
-        // 몬스터 소환 매커니즘
+    void Spawn()
+    {
+        foreach(var monsterNode in waveNode.waveMonsterList)
+        {
+            StartCoroutine(monsterNodeSpawn(monsterNode));
+        }
+    }
+
+    void StopSpawn()
+    {
+        foreach (var monsterNode in waveNode.waveMonsterList)
+        {
+            StopCoroutine(monsterNodeSpawn(monsterNode));
+        }
+    }
+
+    IEnumerator monsterNodeSpawn(MonsterNode node)
+    {
+        WaitForSeconds waitSpawn = new WaitForSeconds(node.spawnTime);
+        while (true)
+        {
+            yield return waitSpawn;
+            GameObject obj = Util.Instantiate(node.monster);
+            Monster monster = Util.GetORAddComponet<Monster>(obj);
+        }
     }
 }

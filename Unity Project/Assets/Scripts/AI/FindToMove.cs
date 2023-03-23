@@ -9,17 +9,19 @@ using UnityEngine;
 /// </summary>
 public class FindToMove : MonoBehaviour
 {
-    public GameObject defultTarget;
+    public GameObject defaultTarget;
+
     [HideInInspector] public GameObject currentTarget;
     [HideInInspector] public int currentTargetPriority = -1;
     public float maxDistanceToTarget = 1f;
-    [Space]
-    [HideInInspector] public float speed = 1f;
 
-    private void Awake()
+    [Space]
+    [HideInInspector] public Status status;
+
+    private void Start()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.material.color = Color.gray;
+        defaultTarget = GameObject.FindGameObjectWithTag("Player");
+        status = Util.GetORAddComponet<Status>(gameObject);
     }
 
     private void Update()
@@ -27,22 +29,21 @@ public class FindToMove : MonoBehaviour
         MoveToTarget();
     }
 
-    private void OnEnable()
-    {
-        currentTarget = defultTarget;
-        currentTargetPriority = -1;
-    }
-
     void MoveToTarget()
     {
-        if (currentTarget != defultTarget)
-        {
-            float distance = (transform.position - currentTarget.transform.position).magnitude;
-            if (distance > maxDistanceToTarget)
-                currentTarget = defultTarget;
-        }
+        // 현재 타겟과의 거리
+        float distance = (transform.position - currentTarget.transform.position).magnitude;
 
-        transform.LookAt(currentTarget.transform);
-        transform.position += (currentTarget.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        // 사거리보다 작으면 움직임을 멈춘다
+        if (distance < status.range)
+            return;
+
+        // 사거리보다 길면 기본 타겟으로 변경한다.
+        if (distance > status.range + 3f)
+            currentTarget = defaultTarget;
+
+        Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+        transform.position += direction * status.speed * Time.deltaTime;
     }
 }
