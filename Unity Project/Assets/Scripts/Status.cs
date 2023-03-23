@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Status : MonoBehaviour
     [Space]
 
     public int damage;
+    public int strike;
+    Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
 
     public float speed;

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹ø°³ ¼Ó¼º
+/// ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½
 /// 
 /// </summary>
 public class ThunderProperty : ElementalProperty
 {
     public int percentage;
+    public override void ApplyDebuff(GameObject target)
+    {
+    }
 
     public override void ApplyEffect(GameObject _Object)
     {
@@ -22,17 +25,19 @@ public class ThunderProperty : ElementalProperty
     }
 
     /// <summary>
-    /// ¹Ì¿Ï¼º
+    /// ï¿½Ì¿Ï¼ï¿½
     /// </summary>
     public void OnElectricShock(GameObject _Object)
 	{
-        // ¾Ö´Ï¸ÞÀÌ¼Ç Á¤Áö´Â ¹°¼Ó¼º(ºù°á)
-        // ´ë»ó ObjectÀÇ AnimationÀ» °¨Àü AnimaitionÀ¸·Î ¹Ù²Ù±â
+        // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¼ï¿½(ï¿½ï¿½ï¿½ï¿½)
+        // ï¿½ï¿½ï¿½ Objectï¿½ï¿½ Animationï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Animaitionï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½
 
-        // °¨ÀüÀº ¸ó½ºÅÍ°¡ ¹Þ´Â ÇÇÇØ Áõ°¡
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         /*if ( == MonsterStatus.Lighting)
             Managers.Damage.Attack(_Object, damage * percentage);*/
 
         _Object.GetComponent<MonsterInfo>().status = MonsterStatus.Lighting;
 	}
+
+
 }

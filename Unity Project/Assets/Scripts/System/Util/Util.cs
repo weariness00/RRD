@@ -56,9 +56,11 @@ public class Util
 
         return null;
     }
-    
+
     // 생성하려는 오브젝트가 존재하지 않으면 생성해주지 않음
-    public static T Instantiate<T>(T _Object, Transform parant) where T : UnityEngine.Object
+    // _Object = 생성할 오브젝트
+    // parant = 생성한 객체의 부모 객체
+    public static T Instantiate<T>(T _Object, Transform parant = null) where T : UnityEngine.Object
     {
         if (_Object == null)
         {

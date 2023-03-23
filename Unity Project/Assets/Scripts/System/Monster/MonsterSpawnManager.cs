@@ -4,25 +4,45 @@ using UnityEngine;
 
 public class MonsterSpawnManager : MonoBehaviour
 {
-    [HideInInspector]public static MonsterSpawnManager instance;
+    [HideInInspector]public static MonsterSpawnManager Instance;
 
+    public WaveNode waveNode;
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+            Instance = this;
     }
 
-    public static MonsterSpawnManager Instance
+    public void Start()
     {
-        get
+        GameManager.Instance.StartWaveCall.AddListener(Spawn);
+        GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
+    }
+
+    void Spawn()
+    {
+        foreach(var monsterNode in waveNode.waveMonsterList)
         {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
+            StartCoroutine(monsterNodeSpawn(monsterNode));
         }
     }
 
-    public WaveNode waveNode;
+    void StopSpawn()
+    {
+        foreach (var monsterNode in waveNode.waveMonsterList)
+        {
+            StopCoroutine(monsterNodeSpawn(monsterNode));
+        }
+    }
+
+    IEnumerator monsterNodeSpawn(MonsterNode node)
+    {
+        WaitForSeconds waitSpawn = new WaitForSeconds(node.spawnTime);
+        while (true)
+        {
+            yield return waitSpawn;
+            GameObject obj = Util.Instantiate(node.monster);
+            Monster monster = Util.GetORAddComponet<Monster>(obj);
+        }
+    }
 }

@@ -6,34 +6,59 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
 	static Managers instance = null;
-	public static Managers Instance { get { Init(); return instance; } }
+	public static Managers Instance { get { return instance; } }
 
-    DamageManager damageManager = new DamageManager();
-    public static DamageManager Damage { get { return Instance.damageManager; } } // 임시 이름
+    DamageManager damageManager;
+    KeyManager keyManager;
+    public static DamageManager Damage { get { return Instance.damageManager; } }
+    public static KeyManager Key { get { return Instance.keyManager; } }
 
-    void Awake()
+    public Action StartCall;
+    public Action UpdateCall;
+    public Action LateUpdateCall;
+    public Action OnGUICall;
+
+    private void Awake()
     {
         Init();
+        damageManager = new DamageManager();
+        keyManager = new KeyManager(Util.FindChild(gameObject, "KeyManager"));
+    }
+
+    private void Start()
+    {
+        StartCall?.Invoke();
+    }
+
+    private void Update()
+    {
+        UpdateCall?.Invoke();
     }
 
     private void LateUpdate()
     {
-        damageManager.LateUpdate();
+        LateUpdateCall?.Invoke();
+    }
+
+    private void OnGUI()
+    {
+        OnGUICall?.Invoke();
     }
 
     /// <summary>
     /// Prefab으로 Manager을 만들고 이 스크립트 넣기 
     /// </summary>
-    static void Init()
+    void Init()
     {
         if (instance == null)
         {
             GameObject obj = GameObject.Find("Managers");
-            if (obj == null)
-                obj = Resources.Load<GameObject>("Prefabs/Manager");
 
-            //DontDestroyOnLoad(obj);
-            instance = obj.GetComponent<Managers>();
+            if (obj == null)
+                obj = Instantiate(new GameObject { name = "Managers" });
+
+            DontDestroyOnLoad(obj);
+            instance = Util.GetORAddComponet<Managers>(obj);
         }
     }
 }

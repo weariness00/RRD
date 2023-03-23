@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class FireBall : FireProperty
+/// <summary>
+/// Non Target
+/// </summary>
+public class FireBall : Skill
 {
+    FireProperty property;
     private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        transform.Translate(Vector3.forward * Time.deltaTime * status.speed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -14,9 +19,9 @@ public class FireBall : FireProperty
         if (other.tag == "Player")
             return;
 
-        ApplyEffect(other.gameObject);
-        Debug.Log("Ãæµ¹");
-
-        gameObject.SetActive(false);
+        property = Util.GetORAddComponet<FireProperty>(gameObject);
+        property.damage = status.damage;
+        property.ApplyEffect(other.gameObject);
+        property.ApplyDebuff(other.gameObject);
     }
 }

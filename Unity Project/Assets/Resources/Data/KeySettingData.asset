@@ -21,3 +21,5 @@ MonoBehaviour:
     Action: 2
   - Key: 100
     Action: 3
+  - Key: 116
+    Action: 4
