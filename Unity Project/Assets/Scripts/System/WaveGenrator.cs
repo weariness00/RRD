@@ -36,7 +36,6 @@ public class WaveGenrator : MonoBehaviour
     // 몬스터 List 에서 랜덤한 몬스터를 가져와 3개의 wave를 만들기
     // 만들어진 웨이브를 버튼에 텍스쳐로 표시
     // 선택된 웨이브의 정보를 MonsterSpawnManager에 넘기기
-
     private void Start()
     {
         GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
@@ -67,10 +66,11 @@ public class WaveGenrator : MonoBehaviour
 
             text.text += "Name : " + monsterNode.monster.name + "\n";
             text.text += "SpawnCount : " + monsterNode.spawnCount + "\n";
-            text.text += "SpawnTime : " + monsterNode.spawnTime + "\n";        
+            //text.text += "SpawnTime : " + monsterNode.spawnTime + "\n";        
 
             waveNode.waveMonsterList.Add(monsterNode);
         }
+        text.text += $"Reward : {waveNode.award}";
 
         waveList.Add(waveNode);
     }

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance;
 
+    public PlayerController Player;
+
     public bool isWave = false;
     public float waveTime = 60f;
 
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     public void StartWave()

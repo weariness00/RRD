@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public int hp;
-    public int maxHp;
-    public int mp;
-    public int maxMp;
+    public float hp;
+    public float maxHp;
+    public float mp;
+    public float maxMp;
     [Space]
 
-    public int damage;
+    public float damage;
     public int strike;
     Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
@@ -22,7 +22,7 @@ public class Status : MonoBehaviour
     private void Start()
     {
         hp = maxHp; mp = maxMp;
-        range = 1;
-        speed = 1;
+        range = 1f;
+        speed = 1f;
     }
 }

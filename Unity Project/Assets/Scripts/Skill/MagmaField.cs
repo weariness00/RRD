@@ -8,7 +8,6 @@ public class MagmaField : Skill
 
     public float ticCoolTime;
     public float duration;
-
     
     void Start()
     {

@@ -46,13 +46,13 @@ public class DamageManager
         return info;
     }
 
-    public void Attack(GameObject obj, int _Damage)
+    public void Attack(GameObject obj, float _Damage)
     {
         AddObject(obj);
 
         //몬스터가 감전 상태일 경우 받는 피해 증폭
         if (obj.GetComponent<MonsterStatus>() == MonsterStatus.Lighting)
-            //resultDamageDictionary[obj].damage += _Damage * 1.15f;  // 나중에 수치 조절 필요
+            resultDamageDictionary[obj].damage += _Damage * 1.15f;  // 나중에 수치 조절 필요
         else
             resultDamageDictionary[obj].damage += _Damage;
     }
@@ -78,13 +78,13 @@ public class DamageManager
 
 class DamageInfo
 {
-    public int damage;
-    public int heal;
+    public float damage;
+    public float heal;
     public Dictionary<DebuffType, int> debuffDictionary = new Dictionary<DebuffType, int>();    // 임시 // 디버프가 몇 중첩인지
 
     public DamageInfo()
     {
-        damage = 0;
-        heal = 0;
+        damage = 0f;
+        heal = 0f;
     }
 }

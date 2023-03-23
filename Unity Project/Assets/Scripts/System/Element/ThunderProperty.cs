@@ -36,7 +36,9 @@ public class ThunderProperty : ElementalProperty
         /*if ( == MonsterStatus.Lighting)
             Managers.Damage.Attack(_Object, damage * percentage);*/
 
-        _Object.GetComponent<MonsterInfo>().status = MonsterStatus.Lighting;
+        Status status = Util.GetORAddComponet<Status>(_Object);
+
+        //MonsterStatus.Lighting;
 	}
 
 

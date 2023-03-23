@@ -20,7 +20,7 @@ public abstract class ElementalProperty : MonoBehaviour
     public float releaseTime = 1f;
     [Space]
 
-    public int damage;
+    public float damage;
     public float durationTime;
     public float speed = 1f;
     public bool isCrowdController;
