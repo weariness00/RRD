@@ -17,7 +17,7 @@ public class GameTimer : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.isWaveStart)
+        if (!GameManager.Instance.isWave)
             return;
 
         currentTime += Time.deltaTime;

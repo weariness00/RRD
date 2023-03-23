@@ -39,7 +39,7 @@ public class WaveGenrator : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.StartWaveCall.AddListener(() => { waveList.Clear(); gameObject.SetActive(false); });
+        GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
         WaveGenerate();
     }
 
@@ -47,7 +47,8 @@ public class WaveGenrator : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i].GetComponent<Button>().onClick.AddListener(() => { SelcetWave(i); });
+            int temp = i;
+            buttons[i].GetComponent<Button>().onClick.AddListener(() => { SelcetWave(temp); });
             TMP_Text text = buttons[i].GetComponentInChildren<TMP_Text>();
             text.text = "";
             MakeWaveNode(text);
@@ -82,7 +83,7 @@ public class WaveGenrator : MonoBehaviour
             return;
         }
 
-        currentWaveNode = waveList[index - 1];
+        currentWaveNode = waveList[index];
         MonsterSpawnManager.Instance.waveNode = currentWaveNode;
     }
 }

@@ -16,7 +16,7 @@ public class MonsterSpawnManager : MonoBehaviour
     public void Start()
     {
         GameManager.Instance.StartWaveCall.AddListener(Spawn);
-        GameManager.Instance.EndWaveCall.AddListener(StopSpawn);
+        GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
     }
 
     void Spawn()
