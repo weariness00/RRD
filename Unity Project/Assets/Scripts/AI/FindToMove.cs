@@ -22,10 +22,15 @@ public class FindToMove : MonoBehaviour
     {
         defaultTarget = GameObject.FindGameObjectWithTag("Player");
         status = Util.GetORAddComponet<Status>(gameObject);
+
+        currentTarget = defaultTarget;
     }
 
     private void Update()
     {
+        if (currentTarget == null)
+            return;
+
         MoveToTarget();
     }
 

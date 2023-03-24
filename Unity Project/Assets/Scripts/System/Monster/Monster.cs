@@ -60,7 +60,7 @@ public class Monster : MonoBehaviour
     [HideInInspector] public Status status;
 
     // 받아온 데이터를 넣어준다.
-    public Monster(MonsterInfo info)
+    public void Init(MonsterInfo info)
     {
         gameObject.AddComponent<FindToMove>();
 
