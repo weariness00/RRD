@@ -12,7 +12,7 @@ public class GameTimer : MonoBehaviour
     private void Start()
     {
         text = Util.GetORAddComponet<TMP_Text>(gameObject);
-        GameManager.Instance.StartWaveCall.AddListener(WaveStart);
+        GameManager.Instance.StartWaveCall.AddListener(() => { currentTime = 0f; });
     }
 
     private void Update()
@@ -24,10 +24,5 @@ public class GameTimer : MonoBehaviour
         int minTime = (int)currentTime / 60;
         int secondTime = (int)currentTime % 60;
         text.text = $"{minTime} : {secondTime}";
-    }
-
-    public void WaveStart()
-    {
-        currentTime = 0f;
     }
 }
