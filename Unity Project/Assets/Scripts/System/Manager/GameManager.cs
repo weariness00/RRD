@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour
     public UnityEvent StartWaveCall;
     public UnityEvent StopWaveCall;
 
+    public int alivePlayerCount = 0;
+
     private void Awake()
     {
         Instance = this;
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        alivePlayerCount++;
     }
 
     public void StartWave()

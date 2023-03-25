@@ -74,4 +74,15 @@ public class Monster : MonoBehaviour
         status.mp = info.mp;
         status.damage = info.damage;
     }
+
+    public void Dead()
+    {
+        // 죽을때 애니메이션
+        // 만약 필요하다면 파티클도
+        // 아이템 루팅도 추가
+        // 킬 카운트에 포함
+        MonsterSpawnManager.Instance.aliveMonsterCount--;
+        // 다 끝난후 객체 소멸시키기
+        Destroy(gameObject);
+    }
 }

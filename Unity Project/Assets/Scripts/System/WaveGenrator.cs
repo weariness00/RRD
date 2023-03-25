@@ -40,11 +40,13 @@ public class WaveGenrator : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
+        GameManager.Instance.StopWaveCall.AddListener(WaveGenerate);
         WaveGenerate();
     }
 
     public void WaveGenerate()
     {
+        gameObject.SetActive(true);
         for (int i = 0; i < buttons.Length; i++)
         {
             int temp = i;

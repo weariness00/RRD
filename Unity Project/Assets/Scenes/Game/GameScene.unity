@@ -337,13 +337,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   isWave: 0
-  waveTime: 60
+  waveTime: 2
   StartWaveCall:
     m_PersistentCalls:
       m_Calls: []
   StopWaveCall:
     m_PersistentCalls:
       m_Calls: []
+  alivePlayerCount: 0
 --- !u!1 &1081742727
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   radius: 1
+  isMask: 1
 --- !u!1001 &1475779830
 PrefabInstance:
   m_ObjectHideFlags: 0
