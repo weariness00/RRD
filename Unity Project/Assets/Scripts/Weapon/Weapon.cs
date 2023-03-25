@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour
 
     public UnityEvent unityEvent;
 
+    GameObject currentEquipWeapon;
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.A))
