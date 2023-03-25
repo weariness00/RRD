@@ -18,11 +18,6 @@ public class MonsterList : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        
-    }
-
     public MonsterInfo GetMonsterData(int index) { return monsterData.data[index]; }
     public MonsterInfo GetMonsterData(string monsterName)
     {

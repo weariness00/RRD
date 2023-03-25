@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public float hp;
+    public float hp = 10f;
     public float maxHp;
-    public float mp;
+    public float mp = 1f;
     public float maxMp;
     [Space]
 

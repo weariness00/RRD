@@ -59,6 +59,12 @@ public class Monster : MonoBehaviour
 
     [HideInInspector] public Status status;
 
+    private void Update()
+    {
+        if (status.hp <= 0)
+            Dead();
+    }
+
     // 받아온 데이터를 넣어준다.
     public void Init(MonsterInfo info)
     {
@@ -71,7 +77,9 @@ public class Monster : MonoBehaviour
         type = info.type;
         rate = info.rate;
         status.hp = info.hp;
+        status.maxHp = info.hp;
         status.mp = info.mp;
+        status.maxMp = info.mp;
         status.damage = info.damage;
     }
 
