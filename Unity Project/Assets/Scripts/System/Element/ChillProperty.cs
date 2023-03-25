@@ -30,4 +30,9 @@ public class ChillProperty : ElementalProperty
         yield return new WaitForSeconds(durationTime);
         // º¹±¸
     }
+
+    public override void ApplyDebuff(GameObject target)
+    {
+        
+    }
 }
