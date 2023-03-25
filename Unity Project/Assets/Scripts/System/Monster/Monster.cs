@@ -59,8 +59,14 @@ public class Monster : MonoBehaviour
 
     [HideInInspector] public Status status;
 
+    private void Update()
+    {
+        if (status.hp <= 0)
+            Dead();
+    }
+
     // 받아온 데이터를 넣어준다.
-    public Monster(MonsterInfo info)
+    public void Init(MonsterInfo info)
     {
         gameObject.AddComponent<FindToMove>();
 
@@ -71,7 +77,20 @@ public class Monster : MonoBehaviour
         type = info.type;
         rate = info.rate;
         status.hp = info.hp;
+        status.maxHp = info.hp;
         status.mp = info.mp;
+        status.maxMp = info.mp;
         status.damage = info.damage;
+    }
+
+    public void Dead()
+    {
+        // 죽을때 애니메이션
+        // 만약 필요하다면 파티클도
+        // 아이템 루팅도 추가
+        // 킬 카운트에 포함
+        MonsterSpawnManager.Instance.aliveMonsterCount--;
+        // 다 끝난후 객체 소멸시키기
+        Destroy(gameObject);
     }
 }

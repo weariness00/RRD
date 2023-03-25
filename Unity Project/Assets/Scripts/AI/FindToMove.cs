@@ -22,10 +22,15 @@ public class FindToMove : MonoBehaviour
     {
         defaultTarget = GameObject.FindGameObjectWithTag("Player");
         status = Util.GetORAddComponet<Status>(gameObject);
+
+        currentTarget = defaultTarget;
     }
 
     private void Update()
     {
+        if (currentTarget == null)
+            return;
+
         MoveToTarget();
     }
 
@@ -39,7 +44,7 @@ public class FindToMove : MonoBehaviour
             return;
 
         // 사거리보다 길면 기본 타겟으로 변경한다.
-        if (distance > status.range + 3f)
+        if (distance > status.range + 10f)
             currentTarget = defaultTarget;
 
         Vector3 direction = (currentTarget.transform.position - transform.position).normalized;

@@ -8,32 +8,26 @@ using UnityEngine;
 /// </summary>
 public class MonsterList : MonoBehaviour
 {
-    public static MonsterList instance = null;
+    public static MonsterList Instance = null;
 
     public MonsterData monsterData;
     public List<GameObject> monsterList;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        Instance = this;
     }
 
-    private void Start()
+    public MonsterInfo GetMonsterData(int index) { return monsterData.data[index]; }
+    public MonsterInfo GetMonsterData(string monsterName)
     {
-        
-    }
-
-    public static MonsterList Instance
-    {
-        get
+        foreach (var data in monsterData.data)
         {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
+            if (data.name.Equals(monsterName))
+                return data;
         }
+
+        return null;
     }
 
     public GameObject RandomMonster()

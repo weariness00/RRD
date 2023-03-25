@@ -36,7 +36,7 @@ public class Util
         {
             for (int i = 0; i < _Object.transform.childCount; i++)
             {
-                Transform trasform = _Object.transform.GetChild(0);
+                Transform trasform = _Object.transform.GetChild(i);
                 if (string.IsNullOrEmpty(name) || trasform.name == name)
                 {
                     T component = trasform.GetComponent<T>();
@@ -69,6 +69,24 @@ public class Util
         }
 
         return UnityEngine.Object.Instantiate(_Object, parant);
+    }
+    public static GameObject[] GetChildren(GameObject _Object)
+    {
+        GameObject[] objs = new GameObject[_Object.transform.childCount];
+        int i = 0;
+        foreach (var transform in GetChildren<Transform>(_Object))
+            objs[i++] = transform.gameObject;
+
+        return objs;
+    }
+
+    public static T[] GetChildren<T>(GameObject _Object) where T : UnityEngine.Object
+    {
+        T[] children = new T[_Object.transform.childCount];
+        for (int i = 0; i < _Object.transform.childCount; i++)
+            children[i] = _Object.transform.GetChild(i).GetComponent<T>();
+        
+        return children;
     }
 }
 

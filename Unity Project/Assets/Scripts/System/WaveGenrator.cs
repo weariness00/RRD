@@ -15,14 +15,15 @@ public struct MonsterNode
 }
 
 [System.Serializable]
-public class WaveNode
+public struct WaveNode
 {
-    public List<MonsterNode> waveMonsterList;
+    public List<MonsterNode> monsterNodeList;
     public string award;
 
-    public WaveNode()
+    public void Init()
     {
-        waveMonsterList = new List<MonsterNode>();
+        monsterNodeList = new List<MonsterNode>();
+        award = "";
     }
 }
 
@@ -39,11 +40,13 @@ public class WaveGenrator : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
+        GameManager.Instance.StopWaveCall.AddListener(WaveGenerate);
         WaveGenerate();
     }
 
     public void WaveGenerate()
     {
+        gameObject.SetActive(true);
         for (int i = 0; i < buttons.Length; i++)
         {
             int temp = i;
@@ -57,10 +60,11 @@ public class WaveGenrator : MonoBehaviour
     public void MakeWaveNode(TMP_Text text)
     {
         WaveNode waveNode = new WaveNode();
+        waveNode.Init();
         for (int i = 0; i < buttons.Length; i++)
         {
             MonsterNode monsterNode = new MonsterNode();
-            monsterNode.monster = MonsterList.instance.RandomMonster();
+            monsterNode.monster = MonsterList.Instance.RandomMonster();
             monsterNode.spawnCount = Random.Range(5, 10);
             monsterNode.spawnTime = Random.Range(8f, 12f);
 
@@ -68,7 +72,7 @@ public class WaveGenrator : MonoBehaviour
             text.text += "SpawnCount : " + monsterNode.spawnCount + "\n";
             //text.text += "SpawnTime : " + monsterNode.spawnTime + "\n";        
 
-            waveNode.waveMonsterList.Add(monsterNode);
+            waveNode.monsterNodeList.Add(monsterNode);
         }
         text.text += $"Reward : {waveNode.award}";
 
