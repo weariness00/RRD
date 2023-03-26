@@ -18,6 +18,9 @@ public class Status : MonoBehaviour
 
     public float speed;
     public float range;
+    [Space]
+
+    public bool dead;
 
     private void Start()
     {
