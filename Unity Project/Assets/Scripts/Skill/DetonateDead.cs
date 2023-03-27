@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DetonateDead: Skill
 {
-    Monster deadBody;
+    List<Monster> deadBody;
     GameObject target;
     Vector3 skillPos;
 
+    int explosiveCount;
+
     private void Start()
     {
-        deadBody = Util.GetORAddComponet<Monster>(gameObject);
         FindDeadBody();
         StartCoroutine("SkillCoolTime");
         Explosive();
@@ -19,16 +20,27 @@ public class DetonateDead: Skill
     void FindDeadBody()
     {
         skillPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-        RaycastHit hit;
-        Physics.SphereCast(skillPos, status.range, Vector3.up, out hit, 1f, layerMask);
-        deadBody.transform.position = hit.transform.position;
-        
+        RaycastHit[] hits;
+        hits = Physics.SphereCastAll(skillPos, status.range, Vector3.up, 1f, layerMask);
+        foreach(var hit in hits)
+        {
+            Monster monster = hit.transform.GetComponent<Monster>();
+            if (monster.status.dead)
+            {
+                deadBody.Add(monster);
+            }
+        }
+       
     }
 
     void Explosive()
     {
-        Instantiate(gameObject, deadBody.transform.position, Quaternion.identity);
-        Destroy(deadBody.gameObject);
+        //가장 가까운 시체를 explosiveCount 개수만큼 폭파
+        for (int i = 0; i < explosiveCount; i++)
+        {
+            Instantiate(gameObject, deadBody[i].transform.position, Quaternion.identity);
+            Destroy(deadBody[i].gameObject);
+        }
     }
 
     IEnumerator SkillCoolTime()

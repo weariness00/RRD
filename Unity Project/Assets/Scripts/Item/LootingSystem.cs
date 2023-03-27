@@ -5,20 +5,18 @@ using UnityEngine;
 public class LootingSystem : MonoBehaviour
 {
     List<GameObject> itemList;
-    Transform dropPos;
     GameObject itemPrefab;
 
     private void Start()
     {
         //itemList = Util.GetORAddComponet<ItemData>(gameObject);
-        dropPos = Util.GetORAddComponet<Monster>(gameObject).transform;
     }
 
     private void Update()
     {
         foreach (GameObject item in itemList)
         {
-            Instantiate(item, dropPos.position, Quaternion.identity);
+            Instantiate(item, transform.position, Quaternion.identity);
         }
         gameObject.SetActive(false);
         //루팅 종료? 
