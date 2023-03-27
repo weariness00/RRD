@@ -337,7 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   isWave: 0
-  waveTime: 30
+  waveTime: 3
   StartWaveCall:
     m_PersistentCalls:
       m_Calls: []
@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8078620735416361301, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8078620735416361305, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
       propertyPath: m_Pivot.x
@@ -694,7 +694,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8078620735416361304, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
 --- !u!1 &1418656502 stripped
 GameObject:

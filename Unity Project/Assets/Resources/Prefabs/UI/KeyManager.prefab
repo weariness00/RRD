@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8078620735416361302}
   - component: {fileID: 8078620735416361303}
   - component: {fileID: 8078620735416361300}
-  - component: {fileID: 8078620735416361304}
   m_Layer: 5
   m_Name: KeyManager
   m_TagString: Untagged
@@ -103,20 +102,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8078620735416361304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078620735416361301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 241ebd2610e54f245bda277547619ee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyFieldObject: {fileID: 8259012628890039136, guid: c9dc667e8c67ae741ba441985e24697d, type: 3}
-  keyData: {fileID: 11400000, guid: 756e6038811fc2042bdf3e595aa0d183, type: 2}
 --- !u!1 &8078620735751816189
 GameObject:
   m_ObjectHideFlags: 0
