@@ -27,8 +27,9 @@ public class PlayerController : MonoBehaviour
 
         dictionaryState.Add(PlayerFSM.State.Idle, new Idle());
         dictionaryState.Add(PlayerFSM.State.Walk, new Walk());
-        dictionaryState.Add(PlayerFSM.State.Walk, new Attack());
-        dictionaryState.Add(PlayerFSM.State.Walk, new Dead());
+        dictionaryState.Add(PlayerFSM.State.Run, new Run());
+        dictionaryState.Add(PlayerFSM.State.Attack, new Attack());
+        dictionaryState.Add(PlayerFSM.State.Dead, new Dead());
 
         currentState = dictionaryState[PlayerFSM.State.Idle];
         stateStack.Push(currentState);
