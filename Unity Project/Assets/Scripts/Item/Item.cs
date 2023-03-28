@@ -13,21 +13,19 @@ public enum ItemType
 [System.Serializable]
 public enum ItemRate
 {
-    Nomal,
+    Normal,
     Magic,
-    Unique
+    Unique,
+    Legendry
 };
 
+[System.Serializable]
 public class ItemInfo
 {
     public int id;
     public string name;
-
-    [Space]
     public ItemType type;
     public ItemRate rate;
-
-    [Space]
     public float dropChance;
 }
 
