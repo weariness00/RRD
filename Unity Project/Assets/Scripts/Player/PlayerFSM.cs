@@ -9,22 +9,31 @@ namespace PlayerFSM
         Idle,
         Walk,
         Run,
-        Attak,
+        Attack,
+        Dead,
     }
 
     public class Idle : IState
     {
-        PlayerController controller;
+        PlayerController pc;
 
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
-            controller = component as PlayerController;
-            controller.animator.SetFloat("Speed", 0f);
+            pc = component as PlayerController;
+            pc.animator.SetFloat("Speed", 0f);
         }
 
         public void StateExit()
         {
 
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
         }
 
         public void StateUpdate()
@@ -33,38 +42,112 @@ namespace PlayerFSM
                 Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)) ||
                 Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)) ||
                 Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
-                controller.ChangeState(State.Walk);
+                pc.PushState(State.Walk);
         }
     }
 
     public class Walk : IState
     {
-        PlayerController controller;
+        PlayerController pc;
 
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
-            controller = component as PlayerController;
-            controller.animator.SetFloat("Speed", 1f);
+            pc = component as PlayerController;
+            pc.animator.SetFloat("Speed", 1f);
         }
 
         public void StateExit()
         {
+            pc.animator.SetFloat("Speed", 0f);
+        }
 
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+            pc.animator.SetFloat("Speed", 1f);
         }
 
         public void StateUpdate()
         {
             if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)))
-                controller.Move(Vector3.forward);
+                pc.Move(Vector3.forward);
             if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)))
-                controller.Move(Vector3.back);
+                pc.Move(Vector3.back);
             if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)))
-                controller.Move(Vector3.left);
+                pc.Move(Vector3.left);
             if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
-                controller.Move(Vector3.right);
+                pc.Move(Vector3.right);
 
             if (!Input.anyKey)
-                controller.ChangeState(State.Idle);
+                pc.ChangeState(State.Idle);
+        }
+    }
+
+    public class Attack : IState
+    {
+        PlayerController pc;
+
+        public void StateEnter<T>(T component) where T : Component
+        {
+            pc = component as PlayerController;
+            pc.AttackCall?.Invoke();
+        }
+
+        public void StateExit()
+        {
+            // 애니메이션 중지
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+            // 만약 공격 도중 다른 키를 누르면 공격 취소
+            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)) ||
+                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)) ||
+                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)) ||
+                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
+                pc.PopState();
+            // 애니메이션
+        }
+    }
+
+    public class Dead : IState
+    {
+        PlayerController pc;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            pc = component as PlayerController;
+
+            int count = GameManager.Instance.alivePlayerCount--;
+            if (count <= 0)
+                GameManager.Instance.GameOver();
+            // 사망 애니메이션 호출
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
         }
     }
 }

@@ -5,17 +5,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 using PlayerFSM;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
     public Action skill;
     public Vector3 motionSpeed;
+    [HideInInspector] public UnityEvent AttackCall;
 
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
 
     Dictionary<PlayerFSM.State, IState> dictionaryState = new Dictionary<PlayerFSM.State, IState>();
-    public IState currentState { get; private set; }
+    [HideInInspector] public Stack<IState> stateStack = new Stack<IState>();
+    [HideInInspector] public IState currentState {  get; private set; }
 
     private void Start()
     {
@@ -24,8 +27,11 @@ public class PlayerController : MonoBehaviour
 
         dictionaryState.Add(PlayerFSM.State.Idle, new Idle());
         dictionaryState.Add(PlayerFSM.State.Walk, new Walk());
+        dictionaryState.Add(PlayerFSM.State.Walk, new Attack());
+        dictionaryState.Add(PlayerFSM.State.Walk, new Dead());
 
         currentState = dictionaryState[PlayerFSM.State.Idle];
+        stateStack.Push(currentState);
         currentState.StateEnter(this);
     }
     private void Update()
@@ -44,11 +50,27 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.alivePlayerCount++;
     }
 
-    public void Dead()
+    public void PushState(PlayerFSM.State state)
     {
-        int count = GameManager.Instance.alivePlayerCount--;
-        if (count <= 0)
-            GameManager.Instance.GameOver();
+        if (dictionaryState[state] == currentState)
+            return;
+
+        currentState.StatePause();
+        currentState = dictionaryState[state];
+        stateStack.Push(currentState);
+        currentState.StateEnter(this);
+    }
+
+    public void PopState()
+    {
+        currentState.StateExit();
+        stateStack.Pop();
+
+        if (stateStack.Count.Equals(0))
+            stateStack.Push(dictionaryState[PlayerFSM.State.Idle]);
+
+        currentState = stateStack.Peek();
+        currentState.StateResum();
     }
 
     public void ChangeState(PlayerFSM.State state)
@@ -57,7 +79,10 @@ public class PlayerController : MonoBehaviour
             return;
 
         currentState.StateExit();
+        stateStack.Clear();
+
         currentState = dictionaryState[state];
+        stateStack.Push(currentState);
         currentState.StateEnter(this);
     }
 }
