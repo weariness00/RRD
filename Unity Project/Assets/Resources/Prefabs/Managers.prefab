@@ -125,10 +125,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: KeyManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8078620735416361301, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8078620735416361305, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -213,8 +209,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8078620735416361304, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b385f239394d91b4d8c55f491c8f653b, type: 3}
 --- !u!224 &6480934039784124312 stripped
 RectTransform:

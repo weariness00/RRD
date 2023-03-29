@@ -23,9 +23,9 @@ public enum KeyToAction
 
     Run,
 
-    KeyManager,
+    Inventory,
 
-    Skill_Q,
+    KeyManager,
 }
 
 /// <summary>
@@ -78,13 +78,13 @@ public class KeyManager : UIUtil
         GameObject keyFieldObject = Resources.Load("Prefabs/UI/KeyField") as GameObject;
         KeySettingData keyData = Resources.Load("Data/KeySettingData") as KeySettingData;
 
-        GameObject scrollContants = GameObject.Find("KeyScrollView").transform.GetChild(0).gameObject;  // 맵핑을 하기위한 오브젝트 로드
+        GameObject contents = GameObject.Find("KeyScrollView").transform.GetChild(0).GetChild(0).gameObject;  // 맵핑을 하기위한 오브젝트 로드
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
             keyDictionary.Add(keyData.Default[i].Action, keyData.Default[i].Key);
 
-            GameObject obj = Util.Instantiate(keyFieldObject, scrollContants.transform);
+            GameObject obj = Util.Instantiate(keyFieldObject, contents.transform);
             obj.name = keyData.Default[i].Action.ToString();
             obj.transform.GetChild(0).name = obj.name;
 
@@ -93,7 +93,7 @@ public class KeyManager : UIUtil
             Get<TMP_Text>(i * 2).text = keyData.Default[i].Action.ToString();   
             Get<TMP_Text>(i * 2 + 1).text = keyData.Default[i].Key.ToString();
         }
-		Bind<Button>(scrollContants, typeof(KeyToAction));  // 맵핑
+		Bind<Button>(contents, typeof(KeyToAction));  // 맵핑
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
