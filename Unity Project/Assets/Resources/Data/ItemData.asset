@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12,24 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804d4426e8a95294a9e9f1852d49c22b, type: 3}
   m_Name: ItemData
   m_EditorClassIdentifier: 
-  ItemSheet:
-  - id: 1
-    name: Iron Sword
-    type: 0
-    rate: 0
-    dropChance: 1
-  - id: 2
-    name: Iron Sword
-    type: 0
-    rate: 1
-    dropChance: 2
-  - id: 3
-    name: Iron Sword
-    type: 0
-    rate: 2
-    dropChance: 3
-  - id: 4
-    name: Iron Sword
-    type: 0
-    rate: 3
-    dropChance: 4

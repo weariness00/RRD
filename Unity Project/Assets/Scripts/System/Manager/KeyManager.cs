@@ -21,6 +21,8 @@ public enum KeyToAction
     MoveLeft,
     MoveRight,
 
+    Run,
+
     KeyManager,
 
     Skill_Q,
