@@ -8,10 +8,11 @@ public class MstItemEntity
 {
 	public int id;
 	public string name;
+	public string type;
+	public string rate;
 	public int price;
 	public bool isNotForSale;
-	public float rate;
-	public MstItemCategory category;
+	public MstItemCategory category;  //속성?
 }
 
 public enum MstItemCategory
