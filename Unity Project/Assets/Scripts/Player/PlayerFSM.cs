@@ -11,6 +11,7 @@ namespace PlayerFSM
         Run,
         Attack,
         Dead,
+        LevelUp,
     }
 
     public class Idle : IState
@@ -199,6 +200,36 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
+        }
+    }
+
+    public class LevelUp : IState
+    {
+        PlayerController pc;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            pc = component as PlayerController;
+            
+            //레벨업 애니메이션 실행
+            // 혹은 파티클 켜주기
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+            if(Input.anyKey)
+                pc.PopState();
         }
     }
 }

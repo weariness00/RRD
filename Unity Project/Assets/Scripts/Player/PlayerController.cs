@@ -6,38 +6,41 @@ using UnityEngine;
 
 using PlayerFSM;
 using UnityEngine.Events;
+using System.Security.Cryptography;
 
 public class PlayerController : MonoBehaviour
 {
-    public Action skill;
-    public Vector3 motionSpeed;
-    [HideInInspector] public UnityEvent AttackCall;
-
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
+    public Action skill;
+    public Vector3 motionSpeed;
 
-    Dictionary<PlayerFSM.State, IState> dictionaryState = new Dictionary<PlayerFSM.State, IState>();
-    [HideInInspector] public Stack<IState> stateStack = new Stack<IState>();
-    [HideInInspector] public IState currentState {  get; private set; }
+    [HideInInspector] public UnityEvent InitDataCall;
+    [HideInInspector] public UnityEvent AttackCall;
+    [HideInInspector] public UnityEvent LevelUpCall;
 
-    private void Start()
+    private void Awake()
     {
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
+    }
 
-        dictionaryState.Add(PlayerFSM.State.Idle, new Idle());
-        dictionaryState.Add(PlayerFSM.State.Walk, new Walk());
-        dictionaryState.Add(PlayerFSM.State.Run, new Run());
-        dictionaryState.Add(PlayerFSM.State.Attack, new Attack());
-        dictionaryState.Add(PlayerFSM.State.Dead, new Dead());
-
-        currentState = dictionaryState[PlayerFSM.State.Idle];
-        stateStack.Push(currentState);
-        currentState.StateEnter(this);
+    private void Start()
+    {
+        InitState();
+        SetData();
     }
     private void Update()
     {
         currentState.StateUpdate();
+
+        if(status.LevelUP())
+            LevelUpCall?.Invoke();
+    }
+
+    void SetData(/*데이터 받아오기*/)
+    {
+        InitDataCall?.Invoke();
     }
 
     public void Move(Vector3 direction)
@@ -49,6 +52,26 @@ public class PlayerController : MonoBehaviour
     public void ReSpawn()
     {
         GameManager.Instance.alivePlayerCount++;
+    }
+
+
+    #region 상태 머신
+
+    Dictionary<PlayerFSM.State, IState> dictionaryState = new Dictionary<PlayerFSM.State, IState>();
+    [HideInInspector] public Stack<IState> stateStack = new Stack<IState>();
+    [HideInInspector] public IState currentState { get; private set; }
+    void InitState()
+    {
+        dictionaryState.Add(PlayerFSM.State.Idle, new Idle());
+        dictionaryState.Add(PlayerFSM.State.Walk, new Walk());
+        dictionaryState.Add(PlayerFSM.State.Run, new Run());
+        dictionaryState.Add(PlayerFSM.State.Attack, new Attack());
+        dictionaryState.Add(PlayerFSM.State.Dead, new Dead());
+        dictionaryState.Add(PlayerFSM.State.LevelUp, new LevelUp());
+
+        currentState = dictionaryState[PlayerFSM.State.Idle];
+        stateStack.Push(currentState);
+        currentState.StateEnter(this);
     }
 
     public void PushState(PlayerFSM.State state)
@@ -86,5 +109,7 @@ public class PlayerController : MonoBehaviour
         stateStack.Push(currentState);
         currentState.StateEnter(this);
     }
+
+    #endregion
 }
 
