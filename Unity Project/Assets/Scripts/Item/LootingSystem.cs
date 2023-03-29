@@ -4,30 +4,24 @@ using UnityEngine;
 
 public class LootingSystem : MonoBehaviour
 {
-    List<GameObject> itemList;
-    GameObject itemPrefab;
+    public static LootingSystem Instance;
+    public ItemData itemData;
+    public List<ItemInfo> itemList;
+    public GameObject itemPrefab;
 
-    private void Start()
+    private void Awake()
     {
-        //itemList = Util.GetORAddComponet<ItemData>(gameObject);
+        Instance = this;
+        Util.GetORAddComponet<Item>(itemPrefab);
     }
 
-    private void Update()
-    {
-        foreach (GameObject item in itemList)
-        {
-            Instantiate(item, transform.position, Quaternion.identity);
-        }
-        gameObject.SetActive(false);
-        //루팅 종료? 
-    }
+    
 
-    void Loot()
+    public void Loot()
     {
-        int clacDropChance = Random.Range(0, 1000);
-        foreach(var item in itemList)
+        foreach (var item in itemData.ItemSheet)  //여기 그냥 리스트 길이만 알아도 될거 같기도 하고
         {
-            //if (item.dropChance < clacDropChance and item.type == ?)
+            Instantiate(itemPrefab, transform.position, Quaternion.identity);
         }
     }
 }

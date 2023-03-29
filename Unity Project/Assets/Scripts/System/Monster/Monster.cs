@@ -91,6 +91,6 @@ public class Monster : MonoBehaviour
         // 킬 카운트에 포함
         MonsterSpawnManager.Instance.aliveMonsterCount--;
         // 다 끝난후 객체 소멸시키기
-        Destroy(gameObject);
+        Destroy(gameObject, 30f);
     }
 }
