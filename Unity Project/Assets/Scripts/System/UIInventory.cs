@@ -5,50 +5,43 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public struct ItemNode
-{
-	public Image icon;
-	public int id;
-	public int count;
-}
-
 public class UIInventory : MonoBehaviour
 {
-	public List<ItemNode> blocks = new List<ItemNode>();
+	public List<Item> items = new List<Item>();
+	public List<Item> itemssssss;
 
 	GameObject content;
+
+	[SerializeField] GameObject itemUIPrefab;
 
     private void Start()
 	{
 		content = Util.FindChild<ScrollRect>(gameObject).content.gameObject;
+		SetInventory(itemssssss);	// 임시용
+    }
 
-		//임시용
-		foreach (var block in Util.GetChildren(content))
-		{
-            ItemNode newBlock = new ItemNode { icon = block.GetComponent<Image>() };
-            blocks.Add(newBlock);
-		}
-	}
-
-	public void AddItem(ItemNode block)
+    public void AddItem(Item item)
 	{
-		if(blocks.Contains(block))
+		if(items.Contains(item))
 		{
 			// 중복 소지시 어떻게 할지
+			int index = items.FindIndex((_Item) => { return _Item == item; });
+			items[index].amount += item.amount;
 		}
 		else
 		{
-			blocks.Add(block);
-            blocks.Sort((a, b) => { return a.id < b.id ? -1 : 1; });
+			items.Add(item);
+            items.Sort((a, b) => { return a.id < b.id ? -1 : 1; });
 
-			Instantiate(block.icon, content.transform);
-			content.transform.SetSiblingIndex(blocks.IndexOf(block));
+			GameObject itemNode = Instantiate(itemUIPrefab, content.transform);
+			Util.FindChild<Image>(itemNode, "Icon").GetComponent<Image>().sprite = item.icon;
+			content.transform.SetSiblingIndex(items.IndexOf(item));
         }
     }
 
 	public void RemoveItem(int index)
 	{
-		blocks.RemoveAt(index);
+		items.RemoveAt(index);
 		Destroy(content.transform.GetChild(index).gameObject);
 	}
 
@@ -58,8 +51,8 @@ public class UIInventory : MonoBehaviour
 	}
 
 	// 이 인벤에 대한 정보가 있을경우 그 정보로 인벤토리 재생성
-	public void SetInventory()
+	public void SetInventory(List<Item> _Items)
 	{
-
-	}
+        _Items.ForEach((item) => { AddItem(item); });
+    }
 }
