@@ -20,9 +20,9 @@ public class UIInventory : MonoBehaviour
 		SetInventory(itemssssss);	// 임시용
     }
 
-    public void AddItem(Item item)
+	public void AddItem(Item item)
 	{
-		if(items.Contains(item))
+		if (items.Exists(_Item => {return item.id == _Item.id; } ))
 		{
 			// 중복 소지시 어떻게 할지
 			int index = items.FindIndex((_Item) => { return _Item == item; });
@@ -45,9 +45,14 @@ public class UIInventory : MonoBehaviour
 		Destroy(content.transform.GetChild(index).gameObject);
 	}
 
-	public void UseItem()
+	public void UseItem(Item item)
 	{
-
+		item.amount--;
+		if(item.amount.Equals(0))
+		{
+			RemoveItem(items.FindIndex(_Item => { return item.id == _Item.id; }));
+			return;
+		}	
 	}
 
 	// 이 인벤에 대한 정보가 있을경우 그 정보로 인벤토리 재생성
