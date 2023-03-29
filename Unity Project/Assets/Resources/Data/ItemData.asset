@@ -17,19 +17,23 @@ MonoBehaviour:
     name: Iron Sword
     type: 0
     rate: 0
+    dropMonster: Orc
     dropChance: 1
   - id: 2
     name: Iron Sword
     type: 0
     rate: 1
+    dropMonster: Goblin
     dropChance: 2
   - id: 3
     name: Iron Sword
     type: 0
     rate: 2
+    dropMonster: Orc
     dropChance: 3
   - id: 4
     name: Iron Sword
     type: 0
     rate: 3
+    dropMonster: Orc
     dropChance: 4

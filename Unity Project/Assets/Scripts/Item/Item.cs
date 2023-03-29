@@ -26,12 +26,14 @@ public class ItemInfo
     public string name;
     public ItemType type;
     public ItemRate rate;
+    public string dropMonster;
     public float dropChance;
 }
 
 public class Item : MonoBehaviour
 {
     public int id;
+    public string dropMonster;
     public float dropChance;
 
     [Space]
@@ -42,6 +44,7 @@ public class Item : MonoBehaviour
     {
         id = info.id;
         name = info.name;
+        dropMonster = info.dropMonster;
         dropChance = info.dropChance;
     }
     
