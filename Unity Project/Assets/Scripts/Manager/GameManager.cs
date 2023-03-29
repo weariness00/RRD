@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,9 @@ public class GameManager : MonoBehaviour
     public bool isWave = false;
     public float waveTime = 60f;
 
-    public UnityEvent StartWaveCall;
-    public UnityEvent StopWaveCall;
+    [HideInInspector] public UnityEvent SetDataCall;
+    [HideInInspector] public UnityEvent StartWaveCall;
+    [HideInInspector] public UnityEvent StopWaveCall;
 
     public int alivePlayerCount = 0;
 
@@ -21,7 +23,12 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        waitWaveTime = new WaitForSeconds(waveTime);
+
         alivePlayerCount++;
+
+        StartCoroutine(InitData());
     }
 
     public void StartWave()
@@ -43,9 +50,16 @@ public class GameManager : MonoBehaviour
         // 게임 오버 씬으로 전환
     }
 
+    WaitForSeconds waitWaveTime;
     IEnumerator WatiStopWave()
     {
-        yield return new WaitForSeconds(waveTime);
+        yield return waitWaveTime;
         StopWave();
     }
+
+    IEnumerator InitData()
+    {
+        yield return new WaitForSeconds(1f);
+        SetDataCall?.Invoke();
+    } 
 }

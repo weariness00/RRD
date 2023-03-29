@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public Action skill;
     public Vector3 motionSpeed;
 
-    [HideInInspector] public UnityEvent InitDataCall;
     [HideInInspector] public UnityEvent AttackCall;
     [HideInInspector] public UnityEvent LevelUpCall;
 
@@ -28,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InitState();
-        SetData();
     }
     private void Update()
     {
@@ -36,11 +34,6 @@ public class PlayerController : MonoBehaviour
 
         if(status.LevelUP())
             LevelUpCall?.Invoke();
-    }
-
-    void SetData(/*데이터 받아오기*/)
-    {
-        InitDataCall?.Invoke();
     }
 
     public void Move(Vector3 direction)

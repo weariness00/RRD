@@ -20,7 +20,7 @@ public class LevelUpUI : MonoBehaviour
         pc = GameManager.Instance.Player;
         status = Util.GetORAddComponet<Status>(pc.gameObject);
 
-        pc.InitDataCall.AddListener(LevelUp);
+        GameManager.Instance.SetDataCall.AddListener(LevelUp);
         pc.LevelUpCall.AddListener(LevelUp);
     }
 
