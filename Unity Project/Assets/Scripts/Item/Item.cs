@@ -41,6 +41,8 @@ public class Item : ScriptableObject
     public float dropChance;
     public int amount;
 
+    public string dropMonster;
+
     [Space]
     public ItemType type;
     public ItemRate rate;

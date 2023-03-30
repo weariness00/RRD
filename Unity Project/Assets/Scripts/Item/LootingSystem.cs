@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
-
+class etc: Component { }
 
 public class LootingSystem : MonoBehaviour
 {
@@ -23,10 +24,10 @@ public class LootingSystem : MonoBehaviour
     {
         for (int i = 0; i < itemPrefab.Count; ++i)
         {
-            Util.GetORAddComponet<Item>(itemPrefab[i]);
-            for (int index = 0; index < itemList.Count; index++)
+            ItemDropTable idt = Util.GetORAddComponet<ItemDropTable>(itemPrefab[i]);
+            for (int index = 0; index < idt.items.Length; index++)
             {
-                if (itemPrefab[i].GetComponent<Item>() == itemList[index])
+                if (itemList.Contains(idt.items[index]))
                     Instantiate(itemPrefab[i], transform.position, Quaternion.identity);
             }
         }
