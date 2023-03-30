@@ -9,6 +9,8 @@ public class SceneManagerEx
 
 	public void LoadScene(SceneType type)
 	{
+		Managers.Sound.Clear();
+
 		CurrenScene.Clear();
 		SceneManager.LoadScene($"{type.ToString()}Scene");
 	}
