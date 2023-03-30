@@ -36,9 +36,9 @@ public class KeyManager : UIUtil
     public GameObject keyObject;
 	public Dictionary<KeyToAction, KeyCode> keyDictionary = new Dictionary<KeyToAction, KeyCode>();
 
-    public KeyManager(GameObject keyobj)
+    public KeyManager()
     {
-        keyObject = keyobj;
+        keyObject = Util.FindChild(Managers.Instance.gameObject, "KeyManager");
         Managers.Instance.StartCall += DefulatKeySetting;
         Managers.Instance.OnGUICall += OnGUI;
         Managers.Instance.UpdateCall += OnOff;

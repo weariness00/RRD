@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene
 {
+
+    public void Login()
+    {
+        Managers.Scene.LoadScene(SceneType.Game);
+    }
+
     protected override void Init()
     {
         base.Init();
@@ -12,5 +19,6 @@ public class LoginScene : BaseScene
     }
     public override void Clear()
     {
+        Debug.Log($"{Type}Scene Clear");
     }
 }
