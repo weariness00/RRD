@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Unity Project/Assets/Resources/Data/ItemData.asset.meta
+guid: e81da7e3e35e5c14aba4c3b116dab484
+NativeFormatImporter:
+========
+guid: 73daa2c7bbf6c084f962b72b93a6bf8d
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> main:Unity Project/Assets/Scripts/FSM.meta
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

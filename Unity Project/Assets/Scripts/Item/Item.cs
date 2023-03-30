@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public enum ItemType
@@ -30,11 +31,15 @@ public class ItemInfo
     public float dropChance;
 }
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/Item", order = int.MaxValue)]
+public class Item : ScriptableObject
 {
     public int id;
-    public string dropMonster;
+    public GameObject prefab;
+    public Sprite icon;
+
     public float dropChance;
+    public int amount;
 
     [Space]
     public ItemType type;

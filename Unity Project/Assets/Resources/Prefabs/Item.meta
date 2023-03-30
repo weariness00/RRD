@@ -1,7 +1,12 @@
 fileFormatVersion: 2
-guid: f2fc450b2fec5b243bcbc6716e1a01b7
+<<<<<<<< HEAD:Unity Project/Assets/Resources/Prefabs/Item/Sword(Normal).prefab.meta
+guid: 99363b14df644b145b665f859a2dfdf0
+PrefabImporter:
+========
+guid: 7a281f47bf6ceed49a3a5004d016bb5b
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> main:Unity Project/Assets/Resources/Prefabs/Item.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

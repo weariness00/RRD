@@ -4743,7 +4743,7 @@ GameObject:
   - component: {fileID: 2002187540012669550}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4775,7 +4775,7 @@ Animator:
   m_GameObject: {fileID: 2002187540012637578}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8f0565f23a2b58541a475bd3c1393052, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d90a4ee5fc0a4a34dafaee8d81bf63fc, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -4798,7 +4798,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  motionSpeed: {x: 0, y: 0, z: 0}
+  AttackCall:
+    m_PersistentCalls:
+      m_Calls: []
   status: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &2002187540012637580
 GameObject:
   m_ObjectHideFlags: 0
