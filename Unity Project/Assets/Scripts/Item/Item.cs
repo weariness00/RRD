@@ -14,22 +14,12 @@ public enum ItemType
 [System.Serializable]
 public enum ItemRate
 {
+    Random,
     Normal,
     Magic,
     Unique,
     Legendry
 };
-
-[System.Serializable]
-public class ItemInfo
-{
-    public int id;
-    public string name;
-    public ItemType type;
-    public ItemRate rate;
-    public string dropMonster;
-    public float dropChance;
-}
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/Item", order = int.MaxValue)]
 public class Item : ScriptableObject
@@ -38,21 +28,14 @@ public class Item : ScriptableObject
     public GameObject prefab;
     public Sprite icon;
 
-    public float dropChance;
     public int amount;
-
-    public string dropMonster;
 
     [Space]
     public ItemType type;
     public ItemRate rate;
 
-    public Item(ItemInfo info)
+    public Item(ItemDropInfo info)
     {
-        id = info.id;
         name = info.name;
-        dropMonster = info.dropMonster;
-        dropChance = info.dropChance;
     }
-    
 }

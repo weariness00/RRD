@@ -13,27 +13,23 @@ MonoBehaviour:
   m_Name: ItemData
   m_EditorClassIdentifier: 
   ItemSheet:
-  - id: 1
-    name: Iron Sword
-    type: 0
+  - name: Iron Sword
     rate: 0
+    monsterRate: 0
     dropMonster: Orc
-    dropChance: 1
-  - id: 2
-    name: Iron Sword
-    type: 0
-    rate: 1
+    dropChance: 100
+  - name: Iron Sword
+    rate: 0
+    monsterRate: 0
     dropMonster: Goblin
     dropChance: 2
-  - id: 3
-    name: Iron Sword
-    type: 0
-    rate: 2
+  - name: Iron Sword
+    rate: 0
+    monsterRate: 0
     dropMonster: Orc
     dropChance: 3
-  - id: 4
-    name: Iron Sword
-    type: 0
-    rate: 3
+  - name: Iron Sword
+    rate: 0
+    monsterRate: 0
     dropMonster: Orc
     dropChance: 4
