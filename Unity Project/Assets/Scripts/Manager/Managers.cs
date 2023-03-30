@@ -12,10 +12,11 @@ public class Managers : MonoBehaviour
     DamageManager damageManager;
     KeyManager keyManager;
     SceneManagerEx sceneManagerEx;
+    SoundManager soundManager;
     public static DamageManager Damage { get { return Instance.damageManager; } }
     public static KeyManager Key { get { return Instance.keyManager; } }
     public static SceneManagerEx Scene { get { return Instance.sceneManagerEx; } }
-
+    public static SoundManager Sound { get { return Instance.soundManager; } }
 
     public Action StartCall;
     public Action UpdateCall;
@@ -27,6 +28,7 @@ public class Managers : MonoBehaviour
         damageManager = new DamageManager();
         keyManager = new KeyManager();
         sceneManagerEx = new SceneManagerEx();
+        soundManager = new SoundManager();
 
         StartCall?.Invoke();
     }
