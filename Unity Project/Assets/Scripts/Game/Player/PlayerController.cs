@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
 {
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public Weapon WeaponEquipment;
+
+    [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject rightHand;
+
     public Action skill;
     public Vector3 motionSpeed;
 
