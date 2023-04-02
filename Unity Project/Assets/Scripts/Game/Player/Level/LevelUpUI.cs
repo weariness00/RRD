@@ -17,10 +17,14 @@ public class LevelUpUI : MonoBehaviour
         bar = Util.FindChild<Scrollbar>(gameObject);
         text = Util.FindChild<TMP_Text>(gameObject);
 
+        // 이거 씬이나 그냥 Managers 쪽에서 수정이 되도록 해야할 듯
         pc = GameManager.Instance.Player;
+        if (pc == null)
+            pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         status = Util.GetORAddComponet<Status>(pc.gameObject);
 
-        GameManager.Instance.SetDataCall.AddListener(LevelUp);
+        // 이거 씬이나 그냥 Managers 쪽에서 수정이 되도록 해야할 듯
+        //GameManager.Instance.SetDataCall.AddListener(LevelUp);
         pc.LevelUpCall.AddListener(LevelUp);
     }
 

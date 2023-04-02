@@ -51,10 +51,12 @@ public class DamageManager
         AddObject(obj);
 
         //몬스터가 감전 상태일 경우 받는 피해 증폭
-        if (obj.GetComponent<MonsterStatus>() == MonsterStatus.Lighting)
-            resultDamageDictionary[obj].damage += _Damage * 1.15f;  // 나중에 수치 조절 필요
-        else
-            resultDamageDictionary[obj].damage += _Damage;
+        //if (obj.GetComponent<MonsterStatus>() == MonsterStatus.Lighting)
+        //    resultDamageDictionary[obj].damage += _Damage * 1.15f;  // 나중에 수치 조절 필요
+        //else
+        //    resultDamageDictionary[obj].damage += _Damage;
+
+        resultDamageDictionary[obj].damage += _Damage;
     }
 
     public void Attack(GameObject obj, Status status) { Attack(obj, status.damage); }

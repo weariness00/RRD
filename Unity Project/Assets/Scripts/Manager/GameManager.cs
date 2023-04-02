@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-	public static GameManager Instance;
+    static GameManager instance;
+	public static GameManager Instance { get { Init(); return instance; } }
 
     public PlayerController Player;
 
@@ -21,7 +22,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         waitWaveTime = new WaitForSeconds(waveTime);
@@ -29,6 +29,18 @@ public class GameManager : MonoBehaviour
         alivePlayerCount++;
 
         StartCoroutine(InitData());
+    }
+
+    static void Init()
+    {
+        if(instance == null)
+        {
+            GameObject obj = GameObject.Find("GameManager");
+            if(obj == null)
+                obj = new GameObject { name = "GameManager" };
+
+            instance = Util.GetORAddComponet<GameManager>(obj);
+        }
     }
 
     public void StartWave()

@@ -41,6 +41,8 @@ public class UIInventory : MonoBehaviour
 
 	public void RemoveItem(int index)
 	{
+		if (items.Count.Equals(0))
+			return;
 		items.RemoveAt(index);
 		Destroy(content.transform.GetChild(index).gameObject);
 	}

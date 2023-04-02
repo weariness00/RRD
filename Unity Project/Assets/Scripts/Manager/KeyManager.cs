@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -48,7 +49,7 @@ public class KeyManager : UIUtil
 
     public void OnOff()
     {
-        if (InputAction(KeyToAction.KeyManager))
+        if (InputActionDown(KeyToAction.KeyManager))
             keyObject.SetActive(!keyObject.activeSelf);
     }
 
@@ -110,6 +111,14 @@ public class KeyManager : UIUtil
         }
 
         keyObject.SetActive(false);
+    }
+
+    public bool InputActionDown(KeyToAction action)
+    {
+        if (!keyDictionary.ContainsKey(action))
+            return false;
+
+        return Input.GetKeyDown(keyDictionary[action]);
     }
 
     public bool InputAction(KeyToAction action)
