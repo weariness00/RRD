@@ -23,6 +23,8 @@ public enum KeyToAction
 
     Run,
 
+    Attack,
+
     Inventory,
 
     KeyManager,
@@ -46,7 +48,7 @@ public class KeyManager : UIUtil
 
     public void OnOff()
     {
-        if (Input.GetKeyDown(InputAction(KeyToAction.KeyManager)))
+        if (InputAction(KeyToAction.KeyManager))
             keyObject.SetActive(!keyObject.activeSelf);
     }
 
@@ -82,18 +84,22 @@ public class KeyManager : UIUtil
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
-            keyDictionary.Add(keyData.Default[i].Action, keyData.Default[i].Key);
+            KeyCode key = keyData.Default[i].Key;
+            KeyToAction action = keyData.Default[i].Action;
+
+            keyDictionary.Add(action, key);
 
             GameObject obj = Util.Instantiate(keyFieldObject, contents.transform);
-            obj.name = keyData.Default[i].Action.ToString();
+            obj.name = action.ToString();
             obj.transform.GetChild(0).name = obj.name;
 
             Bind<TMP_Text>(obj, new string[] { "Action" });	// 맵핑
             Bind<TMP_Text>(obj, new string[] { "Key" });	// 맵핑
-            Get<TMP_Text>(i * 2).text = keyData.Default[i].Action.ToString();   
-            Get<TMP_Text>(i * 2 + 1).text = keyData.Default[i].Key.ToString();
+            Get<TMP_Text>(i * 2).text = action.ToString();
+            Get<TMP_Text>(i * 2 + 1).text = key.ToString();
+            Bind<Button>(contents, new string[] { action.ToString() });  // 맵핑
         }
-		Bind<Button>(contents, typeof(KeyToAction));  // 맵핑
+        //Bind<Button>(contents, typeof(KeyToAction));  // 맵핑
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
@@ -106,7 +112,25 @@ public class KeyManager : UIUtil
         keyObject.SetActive(false);
     }
 
-    public KeyCode InputAction(KeyToAction action) { return keyDictionary[action]; }
+    public bool InputAction(KeyToAction action)
+    {
+        if (!keyDictionary.ContainsKey(action))
+            return false;
+
+        return Input.GetKey(keyDictionary[action]);
+    }
+    public bool InputAnyKey 
+    {
+        get
+        {
+            foreach (KeyCode key in keyDictionary.Values)
+            {
+                if (Input.GetKey(key))
+                    return true;
+            }
+            return false;
+        }
+    }
 
     /// <summary>
     /// 버튼을 눌렀을때 어떤 버튼을 눌렀는지에 대한 메서드 index는 KeyToAction을 정수로 치환한 것이다.

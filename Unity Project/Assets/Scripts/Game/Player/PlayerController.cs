@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 using PlayerFSM;
+
 using UnityEngine.Events;
-using System.Security.Cryptography;
 
 public class PlayerController : MonoBehaviour
 {
@@ -37,7 +35,10 @@ public class PlayerController : MonoBehaviour
     {
         currentState.StateUpdate();
 
-        if(status.LevelUP())
+        if (Managers.Key.InputAction(KeyToAction.Attack))
+            ChangeState(State.Attack);
+
+        if (status.LevelUP())
             LevelUpCall?.Invoke();
     }
 
@@ -55,17 +56,17 @@ public class PlayerController : MonoBehaviour
 
     #region 상태 머신
 
-    Dictionary<PlayerFSM.State, IState> dictionaryState = new Dictionary<PlayerFSM.State, IState>();
+    Dictionary<State, IState> dictionaryState = new Dictionary<State, IState>();
     [HideInInspector] public Stack<IState> stateStack = new Stack<IState>();
     [HideInInspector] public IState currentState { get; private set; }
     void InitState()
     {
-        dictionaryState.Add(PlayerFSM.State.Idle, new Idle());
-        dictionaryState.Add(PlayerFSM.State.Walk, new Walk());
-        dictionaryState.Add(PlayerFSM.State.Run, new Run());
-        dictionaryState.Add(PlayerFSM.State.Attack, new Attack());
-        dictionaryState.Add(PlayerFSM.State.Dead, new Dead());
-        dictionaryState.Add(PlayerFSM.State.LevelUp, new LevelUp());
+        dictionaryState.Add(State.Idle, new Idle());
+        dictionaryState.Add(State.Walk, new Walk());
+        dictionaryState.Add(State.Run, new Run());
+        dictionaryState.Add(State.Attack, new Attack());
+        dictionaryState.Add(State.Dead, new Dead());
+        dictionaryState.Add(State.LevelUp, new LevelUp());
 
         currentState = dictionaryState[PlayerFSM.State.Idle];
         stateStack.Push(currentState);
@@ -89,13 +90,13 @@ public class PlayerController : MonoBehaviour
         stateStack.Pop();
 
         if (stateStack.Count.Equals(0))
-            stateStack.Push(dictionaryState[PlayerFSM.State.Idle]);
+            stateStack.Push(dictionaryState[State.Idle]);
 
         currentState = stateStack.Peek();
         currentState.StateResum();
     }
 
-    public void ChangeState(PlayerFSM.State state)
+    public void ChangeState(State state)
     {
         if (dictionaryState[state] == currentState)
             return;

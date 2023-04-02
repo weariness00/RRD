@@ -39,12 +39,12 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
+            if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
+                Managers.Key.InputAction(KeyToAction.MoveBack) ||
+                Managers.Key.InputAction(KeyToAction.MoveLeft) ||
+                Managers.Key.InputAction(KeyToAction.MoveRight))
             {
-                if(Input.GetKey(Managers.Key.InputAction(KeyToAction.Run)))
+                if(Managers.Key.InputAction(KeyToAction.Run))
                     pc.PushState(State.Run);
                 else
                     pc.PushState(State.Walk);
@@ -78,19 +78,19 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.Run)))
+            if (Managers.Key.InputAction(KeyToAction.Run))
                 pc.PushState(State.Run);
 
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)))
+            if (Managers.Key.InputAction(KeyToAction.MoveFront))
                 pc.Move(Vector3.forward);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)))
+            if (Managers.Key.InputAction(KeyToAction.MoveBack))
                 pc.Move(Vector3.back);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)))
+            if (Managers.Key.InputAction(KeyToAction.MoveLeft))
                 pc.Move(Vector3.left);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
+            if (Managers.Key.InputAction(KeyToAction.MoveRight))
                 pc.Move(Vector3.right);
 
-            if (!Input.anyKey)
+            if (!Managers.Key.InputAnyKey)
                 pc.PopState();
         }
     }
@@ -121,19 +121,19 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)))
+            if (Managers.Key.InputAction(KeyToAction.MoveFront))
                 pc.Move(Vector3.forward);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)))
+            if (Managers.Key.InputAction(KeyToAction.MoveBack))
                 pc.Move(Vector3.back);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)))
+            if (Managers.Key.InputAction(KeyToAction.MoveLeft))
                 pc.Move(Vector3.left);
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
+            if (Managers.Key.InputAction(KeyToAction.MoveRight))
                 pc.Move(Vector3.right);
 
-            if (!Input.anyKey)
+            if (!Managers.Key.InputAnyKey)
                 pc.ChangeState(State.Idle);
 
-            if (!Input.GetKey(Managers.Key.InputAction(KeyToAction.Run)))
+            if (!Managers.Key.InputAction(KeyToAction.Run))
                 pc.PopState();
         }
     }
@@ -164,10 +164,10 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             // 만약 공격 도중 다른 키를 누르면 공격 취소
-            if (Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveFront)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveBack)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveLeft)) ||
-                Input.GetKey(Managers.Key.InputAction(KeyToAction.MoveRight)))
+            if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
+                Managers.Key.InputAction(KeyToAction.MoveBack) ||
+                Managers.Key.InputAction(KeyToAction.MoveLeft) ||
+                Managers.Key.InputAction(KeyToAction.MoveRight))
                 pc.PopState();
             // 애니메이션
         }
