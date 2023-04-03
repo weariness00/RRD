@@ -16,7 +16,10 @@ public class InteractionManager : MonoBehaviour
         //RaycastHit[] hits;
         if (gameObject.tag == "NPC")
         {
-            //ªÛ¡° UI
+            switch (gameObject.name)
+            {
+                
+            }
         }
 
 
