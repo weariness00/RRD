@@ -20,7 +20,7 @@ public class LevelUpUI : MonoBehaviour
         // 이거 씬이나 그냥 Managers 쪽에서 수정이 되도록 해야할 듯
         pc = GameManager.Instance.Player;
         if (pc == null)
-            pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            pc = Util.FindChild<PlayerController>(GameObject.FindWithTag("Player"));
         status = Util.GetORAddComponet<Status>(pc.gameObject);
 
         // 이거 씬이나 그냥 Managers 쪽에서 수정이 되도록 해야할 듯
