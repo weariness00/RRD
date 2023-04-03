@@ -21,7 +21,7 @@ public class ItemDropInfo
 public class LootingSystem : MonoBehaviour
 {
     public static LootingSystem Instance;
-    public ItemData itemDropData;
+    public ItemDropData itemDropData;
 
     private void Awake()
     {

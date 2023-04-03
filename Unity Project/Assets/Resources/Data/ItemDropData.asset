@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 804d4426e8a95294a9e9f1852d49c22b, type: 3}
-  m_Name: ItemData
+  m_Name: ItemDropData
   m_EditorClassIdentifier: 
   ItemSheet:
   - name: Iron Sword
