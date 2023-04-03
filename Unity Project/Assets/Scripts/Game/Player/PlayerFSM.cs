@@ -17,11 +17,13 @@ namespace PlayerFSM
     public class Idle : IState
     {
         PlayerController pc;
+        float prevSpeed;
 
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
-            pc.animator.SetFloat("Speed", 0f);
+            prevSpeed = pc.animator.GetFloat("Speed");
+            //pc.animator.SetFloat("Speed", 0f);
         }
 
         public void StateExit()
@@ -49,6 +51,8 @@ namespace PlayerFSM
                 else
                     pc.PushState(State.Walk);
             }
+
+            pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
         }
     }
 
@@ -59,12 +63,12 @@ namespace PlayerFSM
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
-            pc.animator.SetFloat("Speed", 1f);
+            //pc.animator.SetFloat("Speed", 1f);
         }
 
         public void StateExit()
         {
-            pc.animator.SetFloat("Speed", 0f);
+            //pc.animator.SetFloat("Speed", 0f);
         }
 
         public void StatePause()
@@ -73,7 +77,7 @@ namespace PlayerFSM
 
         public void StateResum()
         {
-            pc.animator.SetFloat("Speed", 1f);
+            //pc.animator.SetFloat("Speed", 1f);
         }
 
         public void StateUpdate()
@@ -92,6 +96,8 @@ namespace PlayerFSM
 
             if (!Managers.Key.InputAnyKey)
                 pc.PopState();
+
+            pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 1f, Time.deltaTime));
         }
     }
 
@@ -102,7 +108,7 @@ namespace PlayerFSM
         public void StateEnter<T>(T component) where T : Component
         {
             pc = component as PlayerController;
-            pc.animator.SetFloat("Speed", 2f);
+            //pc.animator.SetFloat("Speed", 2f);
             pc.status.speed += 1f;
         }
 
@@ -135,6 +141,8 @@ namespace PlayerFSM
 
             if (!Managers.Key.InputAction(KeyToAction.Run))
                 pc.PopState();
+
+            pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 2f, Time.deltaTime * pc.status.speed));
         }
     }
 
@@ -144,13 +152,15 @@ namespace PlayerFSM
 
         public void StateEnter<T>(T component) where T : Component
         {
-            pc = component as PlayerController;
+            pc = component as PlayerController;    
+            pc.animator.SetBool("Attack", true);
             pc.AttackCall?.Invoke();
         }
 
         public void StateExit()
         {
             // 애니메이션 중지
+            pc.animator.SetBool("Attack", false);
         }
 
         public void StatePause()
