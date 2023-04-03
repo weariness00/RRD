@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool isWave = false;
     public float waveTime = 60f;
 
+    [HideInInspector] public UnityEvent UpdateCall;
     [HideInInspector] public UnityEvent SetDataCall;
     [HideInInspector] public UnityEvent StartWaveCall;
     [HideInInspector] public UnityEvent StopWaveCall;
@@ -29,6 +30,11 @@ public class GameManager : MonoBehaviour
         alivePlayerCount++;
 
         StartCoroutine(InitData());
+    }
+
+    private void Update()
+    {
+        UpdateCall?.Invoke();
     }
 
     static void Init()

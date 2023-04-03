@@ -22,13 +22,13 @@ public enum KeyToAction
     MoveLeft,
     MoveRight,
 
-    Run,
-
     Attack,
+    Run,
 
     Inventory,
 
     KeyManager,
+    MonsterSpawnManager,
 }
 
 /// <summary>
@@ -81,7 +81,8 @@ public class KeyManager : UIUtil
         GameObject keyFieldObject = Resources.Load("Prefabs/UI/KeyField") as GameObject;
         KeySettingData keyData = Resources.Load("Data/KeySettingData") as KeySettingData;
 
-        GameObject contents = GameObject.Find("KeyScrollView").transform.GetChild(0).GetChild(0).gameObject;  // 맵핑을 하기위한 오브젝트 로드
+        RectTransform viewRect = GameObject.Find("KeyScrollView").GetComponent<RectTransform>();
+        RectTransform contentsRect = viewRect.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();  // 맵핑을 하기위한 오브젝트 로드
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
@@ -90,7 +91,7 @@ public class KeyManager : UIUtil
 
             keyDictionary.Add(action, key);
 
-            GameObject obj = Util.Instantiate(keyFieldObject, contents.transform);
+            GameObject obj = Util.Instantiate(keyFieldObject, contentsRect.transform);
             obj.name = action.ToString();
             obj.transform.GetChild(0).name = obj.name;
 
@@ -98,9 +99,14 @@ public class KeyManager : UIUtil
             Bind<TMP_Text>(obj, new string[] { "Key" });	// 맵핑
             Get<TMP_Text>(i * 2).text = action.ToString();
             Get<TMP_Text>(i * 2 + 1).text = key.ToString();
-            Bind<Button>(contents, new string[] { action.ToString() });  // 맵핑
+            Bind<Button>(contentsRect.gameObject, new string[] { action.ToString() });  // 맵핑
         }
-        //Bind<Button>(contents, typeof(KeyToAction));  // 맵핑
+
+        // 버튼을 동적 할당 했기에 사이즈를 조정해줘야함
+        contentsRect.sizeDelta = new Vector2(
+            contentsRect.rect.width,
+            (keyData.Default.Count + 1) * keyFieldObject.GetComponent<RectTransform>().sizeDelta.y - viewRect.rect.height
+            );
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
@@ -147,5 +153,5 @@ public class KeyManager : UIUtil
     int currentKeyIndex = -1;
     TMP_Text buttonText = null;
     public void OnKeyIndex(int keyIndex) { currentKeyIndex = keyIndex; Debug.Log(keyIndex); }
-    public void OnKeyButton(TMP_Text text) { buttonText = text; }
+    public void OnKeyButton(TMP_Text text) { buttonText = text;}
 }

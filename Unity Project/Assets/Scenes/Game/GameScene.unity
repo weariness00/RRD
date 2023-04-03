@@ -656,6 +656,9 @@ MonoBehaviour:
   Player: {fileID: 0}
   isWave: 0
   waveTime: 3
+  UpdateCall:
+    m_PersistentCalls:
+      m_Calls: []
   SetDataCall:
     m_PersistentCalls:
       m_Calls: []
@@ -1179,7 +1182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265911, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         currentState.StateUpdate();
 
-        if (Managers.Key.InputAction(KeyToAction.Attack))
+        if (Managers.Key.InputActionDown(KeyToAction.Attack))
             ChangeState(State.Attack);
 
         if (status.LevelUP())
