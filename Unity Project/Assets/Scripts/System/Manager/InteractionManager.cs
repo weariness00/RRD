@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
+    //필요없는데 혹시 몰라서 일단 남겨둠
     public static InteractionManager Instance;
 
     private void Awake()
@@ -21,8 +22,6 @@ public class InteractionManager : MonoBehaviour
                 
             }
         }
-
-
     }
 
     public void NPCInteraction(Camera camera)

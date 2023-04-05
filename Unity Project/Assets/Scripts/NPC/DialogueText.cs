@@ -30,7 +30,7 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
 
     private void Update()
     {
-        if(dialogue.text == currentSentence)  //dialogue.text.Equals(currentSentence)로 쓰는 이유가 뭐임?
+        if(dialogue.text == currentSentence)
         {
             nextDialogue.SetActive(true);            
             isTyping = false;
@@ -73,15 +73,6 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
         {
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            //플레이어가 가까이 다가가면 대사
-            transform.LookAt(other.transform);
         }
     }
 
