@@ -25,12 +25,13 @@ public class NPCManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
             transform.LookAt(other.transform);
             isInteraction = true;
+            Debug.Log("상호작용 가능");
         }
     }
 
