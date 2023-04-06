@@ -21,7 +21,13 @@ MonoBehaviour:
     Action: 2
   - Key: 100
     Action: 3
-  - Key: 116
-    Action: 5
-  - Key: 304
+  - Key: 32
     Action: 4
+  - Key: 304
+    Action: 5
+  - Key: 105
+    Action: 6
+  - Key: 116
+    Action: 7
+  - Key: 112
+    Action: 8
