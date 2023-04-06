@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         InitState();
     }
+
     private void Update()
     {
         currentState.StateUpdate();
@@ -111,4 +112,3 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 }
-

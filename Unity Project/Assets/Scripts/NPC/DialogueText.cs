@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -37,6 +38,14 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    //이 스크립트를 가지고 있는 오브젝트를 클릭했을 때 이벤트 발생
+    //이 부분을 다가갔을 때 머리위에 텍스트를 표시하면 말풍선으로 변함
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (!isTyping)
+            NextSentence();
+    }
+
     public void Ondialogue(string[] lines)
     {
         sentences.Clear();
@@ -51,14 +60,20 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
 
     public void NextSentence()
     {
-        if(sentences.Count != 0)
+        if (currentTyping != null)
+            StopCoroutine(currentTyping);
+
+        if (sentences.Count != 0)
         {
+            dialogue.text = "";
+
             currentSentence = sentences.Dequeue();
             isTyping = true;
             nextDialogue.SetActive(false);
-            StartCoroutine(Typing(currentSentence));
-        }
 
+            currentTyping = Typing(currentSentence);
+            StartCoroutine(currentTyping);
+        }
         else
         {
             dialogueGroup.alpha = 0;
@@ -66,6 +81,7 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    IEnumerator currentTyping = null;
     IEnumerator Typing(string line)
     {
         dialogue.text = "";
@@ -74,13 +90,5 @@ public class DialogueText : MonoBehaviour, IPointerDownHandler
             dialogue.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-    }
-
-    //이 스크립트를 가지고 있는 오브젝트를 클릭했을 때 이벤트 발생
-    //이 부분을 다가갔을 때 머리위에 텍스트를 표시하면 말풍선으로 변함
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if(!isTyping)
-            NextSentence();
     }
 }

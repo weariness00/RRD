@@ -1121,6 +1121,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: WaveGenrator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570014163238589, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: WaveGenrator, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
 --- !u!1 &1666995813
