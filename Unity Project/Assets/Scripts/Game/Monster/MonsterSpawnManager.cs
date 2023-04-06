@@ -78,8 +78,11 @@ public class MonsterSpawnManager : MonoBehaviour
             {             
                 GameObject obj = Util.Instantiate(node.monster, monsterUnion.transform);
                 Monster monster = Util.GetORAddComponet<Monster>(obj);
-                monster.Init(MonsterList.Instance.GetMonsterData(node.monster.name));
+                ItemDropTable idt = Util.GetORAddComponet<ItemDropTable>(obj);
 
+                monster.Init(MonsterList.Instance.GetMonsterData(node.monster.name));
+                idt.SetDropItem(LootingSystem.Instance.SetDropTable(monster));
+         
                 float radian = Mathf.Deg2Rad * UnityEngine.Random.Range(-180, 180);
                 obj.transform.position = new Vector3(spawnDistance * Mathf.Sin(radian), 0, spawnDistance * Mathf.Cos(radian));
 

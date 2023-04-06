@@ -59,6 +59,11 @@ public class Monster : MonoBehaviour
 
     [HideInInspector] public Status status;
 
+    private void Awake()
+    {
+        status = Util.GetORAddComponet<Status>(gameObject);
+    }
+
     private void Update()
     {
         if (status.hp <= 0)
@@ -89,8 +94,8 @@ public class Monster : MonoBehaviour
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
-        MonsterSpawnManager.Instance.aliveMonsterCount--;
+        //MonsterSpawnManager.Instance.aliveMonsterCount--;
         // 다 끝난후 객체 소멸시키기
-        Destroy(gameObject);
+        Destroy(gameObject, 30f);
     }
 }

@@ -2,32 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct DropTable
+{
+    public Item item;
+    public float chance;
+}
+
+[System.Serializable]
+public class ItemDropInfo
+{
+    public string name;
+    public ItemRate rate;
+    public MonsterRate monsterRate;
+    public string dropMonster;
+    public float dropChance;
+}
+
 public class LootingSystem : MonoBehaviour
 {
-    List<GameObject> itemList;
-    GameObject itemPrefab;
+    public static LootingSystem Instance;
+    public ItemDropData itemDropData;
 
-    private void Start()
+    private void Awake()
     {
-        //itemList = Util.GetORAddComponet<ItemData>(gameObject);
+        Instance = this;
     }
 
-    private void Update()
+    public Item CheckDropChance(DropTable table)
     {
-        foreach (GameObject item in itemList)
-        {
-            Instantiate(item, transform.position, Quaternion.identity);
-        }
-        gameObject.SetActive(false);
-        //루팅 종료? 
+        int chance = Random.Range(0, 100);
+        if (table.chance >= chance)
+            return table.item;
+
+        return null;
     }
 
-    void Loot()
+    public List<Item> SetDropTable(Monster monster)
     {
-        int clacDropChance = Random.Range(0, 1000);
-        foreach(var item in itemList)
+        List<Item> items = new List<Item>();
+
+        for (int i = 0; i < itemDropData.ItemSheet.Count; ++i)
         {
-            //if (item.dropChance < clacDropChance and item.type == ?)
+            if (itemDropData.ItemSheet[i].dropMonster == monster.name &&
+                itemDropData.ItemSheet[i].monsterRate == monster.rate)  //이 부분 검사를 어떻게 할지가 정말 애매한거같은데
+            {
+                DropTable dt = new DropTable();
+                dt.item = ItemList.Instance.GetItem(itemDropData.ItemSheet[i].name); // 임시
+                dt.chance = itemDropData.ItemSheet[i].dropChance;
+
+                Item item = CheckDropChance(dt);
+                if(item != null)
+                    items.Add(item);
+            }
         }
+
+        return items;
     }
 }
