@@ -8,7 +8,7 @@ public class LoginScene : BaseScene
 
     public void Login()
     {
-        Managers.Scene.LoadScene(SceneType.Game);
+        Managers.Scene.LoadScene(SceneType.Lobby);
     }
 
     protected override void Init()
