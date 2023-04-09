@@ -9,4 +9,12 @@ public class Define
 		Warrier,
 		Gunner,
 	}
+
+	public enum ItemTear
+	{
+		Tear1,
+		Tear2,
+		Tear3,
+		Boss,
+	}
 }
