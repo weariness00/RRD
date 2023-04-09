@@ -16,7 +16,8 @@ public class Status : MonoBehaviour
     [Space]
 
     public float damage;
-    public int strike;
+    public float criticalProbability;   // 치명타 확률
+    public float criticalDamagePower;   // 치명태 배율
     Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
 
