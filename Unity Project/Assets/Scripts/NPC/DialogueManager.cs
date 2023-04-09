@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
-public class DialogueText : MonoBehaviour, IPointerDownHandler
+public class DialogueManager : MonoBehaviour, IPointerDownHandler
 {
-    public static DialogueText Instance;
+    public static DialogueManager Instance;
 
-    public Text dialogue;
+    public TMP_Text dialogue;
     public GameObject nextDialogue;
     public CanvasGroup dialogueGroup;
 

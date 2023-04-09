@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCManager : MonoBehaviour
+public class NPCController : MonoBehaviour
 {
     public string[] sentence;
     public bool isInteraction;
@@ -11,8 +11,8 @@ public class NPCManager : MonoBehaviour
     {
         if (isInteraction && Input.GetKeyDown(KeyCode.E))
         {
-            if (DialogueText.Instance.dialogueGroup.alpha == 0)
-                DialogueText.Instance.Ondialogue(sentence);
+            if (DialogueManager.Instance.dialogueGroup.alpha == 0)
+                DialogueManager.Instance.Ondialogue(sentence);
         }
     }
 
@@ -20,8 +20,8 @@ public class NPCManager : MonoBehaviour
     {
         if (isInteraction)
         {
-            if (DialogueText.Instance.dialogueGroup.alpha == 0)
-                DialogueText.Instance.Ondialogue(sentence);
+            if (DialogueManager.Instance.dialogueGroup.alpha == 0)
+                DialogueManager.Instance.Ondialogue(sentence);
         }
     }
 
