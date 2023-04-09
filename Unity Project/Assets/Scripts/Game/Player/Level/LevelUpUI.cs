@@ -26,6 +26,7 @@ public class LevelUpUI : MonoBehaviour
         // 이거 씬이나 그냥 Managers 쪽에서 수정이 되도록 해야할 듯
         //GameManager.Instance.SetDataCall.AddListener(LevelUp);
         pc.LevelUpCall.AddListener(LevelUp);
+
     }
 
     private void LateUpdate()
@@ -43,4 +44,5 @@ public class LevelUpUI : MonoBehaviour
     {
         text.text = status.level.ToString();
     }
+
 }

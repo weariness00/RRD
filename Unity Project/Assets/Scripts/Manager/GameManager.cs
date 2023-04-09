@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public UnityEvent StartWaveCall;
     [HideInInspector] public UnityEvent StopWaveCall;
 
+    [HideInInspector] public UnityEvent PauseCall;
+
     public int alivePlayerCount = 0;
 
     private void Awake()
@@ -35,6 +37,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         UpdateCall?.Invoke();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+            PauseCall?.Invoke();
+        }
     }
 
     static void Init()
@@ -47,6 +55,11 @@ public class GameManager : MonoBehaviour
 
             instance = Util.GetORAddComponet<GameManager>(obj);
         }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
     }
 
     public void StartWave()

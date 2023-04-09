@@ -497,6 +497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 6480934039784124308, guid: 7d2e799570d29e44d94d9fd83beacc5d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d2e799570d29e44d94d9fd83beacc5d, type: 3}
 --- !u!1 &1120503455
@@ -847,6 +851,9 @@ MonoBehaviour:
   dialogue: {fileID: 471055985}
   nextDialogue: {fileID: 1235196299}
   dialogueGroup: {fileID: 1376998352}
+  UICall:
+    m_PersistentCalls:
+      m_Calls: []
   currentSentence: 
   typingSpeed: 0.2
   isTyping: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,16 @@ public class NPCController : MonoBehaviour
     public string[] sentence;
     public bool isInteraction;
 
+    public Action call;
+
     private void Update()
     {
         if (isInteraction && Input.GetKeyDown(KeyCode.E))
         {
-            if (DialogueManager.Instance.dialogueGroup.alpha == 0)
-                DialogueManager.Instance.Ondialogue(sentence);
+            if (DialogueText.Instance.dialogueGroup.alpha == 0)
+                DialogueText.Instance.Ondialogue(sentence);
+            else
+                DialogueText.Instance.NextSentence();
         }
     }
 
@@ -31,7 +36,7 @@ public class NPCController : MonoBehaviour
         {
             transform.LookAt(other.transform);
             isInteraction = true;
-            Debug.Log("»óÈ£ÀÛ¿ë °¡´É");
+            Debug.Log("ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½");
         }
     }
 
