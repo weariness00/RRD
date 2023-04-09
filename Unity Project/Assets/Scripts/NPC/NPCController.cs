@@ -14,10 +14,10 @@ public class NPCController : MonoBehaviour
     {
         if (isInteraction && Input.GetKeyDown(KeyCode.E))
         {
-            if (DialogueText.Instance.dialogueGroup.alpha == 0)
-                DialogueText.Instance.Ondialogue(sentence);
+            if (DialogueManager.Instance.dialogueGroup.alpha == 0)
+                DialogueManager.Instance.Ondialogue(sentence);
             else
-                DialogueText.Instance.NextSentence();
+                DialogueManager.Instance.NextSentence();
         }
     }
 
@@ -36,7 +36,7 @@ public class NPCController : MonoBehaviour
         {
             transform.LookAt(other.transform);
             isInteraction = true;
-            Debug.Log("��ȣ�ۿ� ����");
+            Debug.Log("상호 작용 가능");
         }
     }
 
