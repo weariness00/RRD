@@ -12,8 +12,6 @@ using System;
 public class ItemGenerator : MonoBehaviour
 {
     public ItemList itemListScript;
-
-    public GameObject AbilityNodeObject;
     [Space]
 
     public GameObject currentItemObject;
@@ -24,22 +22,14 @@ public class ItemGenerator : MonoBehaviour
     string currentItemName;
 
     [Space]
-    public Dropdown tearDropdown;
+    public TMP_Dropdown tearDropdown;
 
+    [Space]
     public string path = "Resources/Data/Item";
 
-    Image[] abilityNodes;
 
     private void Awake()
     {
-        abilityNodes = Util.GetChildren<Image>(AbilityNodeObject);
-
-        foreach (var abilityNode in abilityNodes)
-        {
-            Util.GetORAddComponet<CanvasGroup>(abilityNode.gameObject);
-            Util.GetORAddComponet<AbilityNode>(abilityNode.gameObject).canvas = GetComponent<Canvas>();
-        }
-
         itemNameField.onValueChanged.AddListener((text) => { currentItemName = text; });
     }
 
@@ -53,7 +43,7 @@ public class ItemGenerator : MonoBehaviour
         SelectTear(scriptableObject);
 
         Status itemStatus = Util.GetORAddComponet<Status>(scriptableObject.prefab);
-        scriptableObject.AbilityCall.AddListener(() => { Critical(itemStatus, 1.0f); }); // 임시
+        //scriptableObject.AbilityCall.AddListener(() => { Critical(itemStatus, 1.0f); }); // 임시
 
         string curPath = $"{path}/{currentItemName}.asset";
 
@@ -73,10 +63,5 @@ public class ItemGenerator : MonoBehaviour
     public void SelectTear(Item item)
     {
         item.tear = (Define.ItemTear)tearDropdown.value;
-    }
-
-    public void Critical(Status status, float value)
-    {
-        status.criticalProbability += value;
     }
 }
