@@ -12,6 +12,15 @@ public class UIEventHandler : MonoBehaviour, IPointerClickHandler, IPointerUpHan
     public UnityEvent<PointerEventData> OnPointerExitCall = new UnityEvent<PointerEventData>();
     public UnityEvent<PointerEventData> OnPointerUpCall = new UnityEvent<PointerEventData>();
 
+    public void RemoveAllEvent()
+    {
+        OnDragCall.RemoveAllListeners();
+        OnPointerClickCall.RemoveAllListeners();
+        OnPointerDownCall.RemoveAllListeners();
+        OnPointerExitCall.RemoveAllListeners();
+        OnPointerUpCall.RemoveAllListeners();
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         OnDragCall?.Invoke(eventData);
