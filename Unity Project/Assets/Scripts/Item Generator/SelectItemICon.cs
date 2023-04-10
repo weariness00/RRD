@@ -29,7 +29,8 @@ public class SelectItemICon : MonoBehaviour, IPointerClickHandler
             Image newImage = obj.AddComponent<Image>();
             newImage.sprite = icon;
             newImage.name = icon.name;
-            
+            newImage.transform.localScale = Vector3.one;
+
             UIEventHandler uIEventHandler = Util.GetORAddComponet<UIEventHandler>(obj);
             EvenetHandleIcon(uIEventHandler);
         }
