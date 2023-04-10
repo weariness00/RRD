@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.Events;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using System;
 
 public class ItemGenerator : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class ItemGenerator : MonoBehaviour
     [Space]
     public TMP_InputField itemNameField;
     string currentItemName;
+
+    [Space]
+    public Dropdown tearDropdown;
 
     public string path = "Resources/Data/Item";
 
@@ -39,11 +43,14 @@ public class ItemGenerator : MonoBehaviour
         itemNameField.onValueChanged.AddListener((text) => { currentItemName = text; });
     }
 
+    public Action<Item> createCall;
     public void CreateItem()
     {
         Item scriptableObject = ScriptableObject.CreateInstance<Item>();
 
         scriptableObject.id = itemListScript.itemList.Count;
+        createCall?.Invoke(scriptableObject);
+        SelectTear(scriptableObject);
 
         Status itemStatus = Util.GetORAddComponet<Status>(scriptableObject.prefab);
         scriptableObject.AbilityCall.AddListener(() => { Critical(itemStatus, 1.0f); }); // юс╫ц
@@ -56,6 +63,16 @@ public class ItemGenerator : MonoBehaviour
         itemListScript.itemList.Add(scriptableObject);
 
         Debug.Log($"Create Item : {curPath}");
+    }
+
+    public void SelectGameObect(Item item)
+    {
+
+    }
+
+    public void SelectTear(Item item)
+    {
+        item.tear = (Define.ItemTear)tearDropdown.value;
     }
 
     public void Critical(Status status, float value)
