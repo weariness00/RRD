@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class UIEventHandler : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IDragHandler, IPointerExitHandler
+public class UIEventHandler : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler, IDragHandler, IPointerExitHandler 
 {
     public UnityEvent<PointerEventData> OnDragCall = new UnityEvent<PointerEventData>();
     public UnityEvent<PointerEventData> OnPointerClickCall = new UnityEvent<PointerEventData>();

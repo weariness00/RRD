@@ -11,9 +11,13 @@ using System;
 
 public class ItemGenerator : MonoBehaviour
 {
+    static public ItemGenerator Instance;
+
     public ItemList itemListScript;
+    public ItemGeneratorEditor editor;
     [Space]
 
+    [HideInInspector] public Canvas canvas;
     public GameObject currentItemObject;
     public TMP_Text valueText;
 
@@ -30,6 +34,9 @@ public class ItemGenerator : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
+        canvas = transform.root.GetComponent<Canvas>();
         itemNameField.onValueChanged.AddListener((text) => { currentItemName = text; });
     }
 

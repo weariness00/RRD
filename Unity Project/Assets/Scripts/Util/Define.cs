@@ -17,4 +17,10 @@ public class Define
 		Tear3,
 		Boss,
 	}
+
+	public enum CodeBlockType
+	{
+		CodeBlock,
+		AddBlockSpace,
+	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class AbilityBlockList : MonoBehaviour
+public class BlockList : MonoBehaviour
 {
     [SerializeField] protected ScrollRect editor;
 
@@ -16,6 +16,7 @@ public class AbilityBlockList : MonoBehaviour
     {
         scrollView = GetComponent<ScrollRect>();
 
+        // 클릭시 editor에 소환되도록 하기
         foreach (GameObject node in Util.GetChildren(scrollView.content.gameObject))
         {
             UIEventHandler handler = Util.GetORAddComponet<UIEventHandler>(node);
@@ -25,7 +26,7 @@ public class AbilityBlockList : MonoBehaviour
         }
     }
 
-    protected void AddNodeInEditor(GameObject node)
+    protected virtual void AddNodeInEditor(GameObject node)
     {
         GameObject obj = Instantiate(node, editor.content.transform);
         obj.name = node.name;
