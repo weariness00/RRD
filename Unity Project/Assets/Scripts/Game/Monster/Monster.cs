@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,4 +99,9 @@ public class Monster : MonoBehaviour
         // 다 끝난후 객체 소멸시키기
         Destroy(gameObject, 30f);
     }
+
+    [HideInInspector] public StateEvent Idle;
+    [HideInInspector] public StateEvent Patrol;
+    [HideInInspector] public StateEvent Attack;
+    [HideInInspector] public StateEvent Die;
 }
