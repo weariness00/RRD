@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static System.Net.WebRequestMethods;
 
 [System.Serializable]
 public enum MonsterType
@@ -59,6 +60,10 @@ public class Monster : MonoBehaviour
     public MonsterRate rate;
 
     [HideInInspector] public Status status;
+    public Animator animator;
+
+    public FSMStructer<Monster> fsm;
+    public FindToMove ftm;
 
     private void Awake()
     {
@@ -74,7 +79,7 @@ public class Monster : MonoBehaviour
     // 받아온 데이터를 넣어준다.
     public void Init(MonsterInfo info)
     {
-        gameObject.AddComponent<FindToMove>();
+        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
 
         status = Util.GetORAddComponet<Status>(gameObject);
         name = info.name;
@@ -99,9 +104,4 @@ public class Monster : MonoBehaviour
         // 다 끝난후 객체 소멸시키기
         Destroy(gameObject, 30f);
     }
-
-    [HideInInspector] public StateEvent Idle;
-    [HideInInspector] public StateEvent Patrol;
-    [HideInInspector] public StateEvent Attack;
-    [HideInInspector] public StateEvent Die;
 }
