@@ -14,11 +14,64 @@ public interface IState
     void StateResum();
 }
 
-public struct StateEvent
+public class FSMStructer<T> where T : UnityEngine.Component
 {
-    public UnityEvent Enter;
-    public UnityEvent Exit;
-    public UnityEvent Pause;
-    public UnityEvent Resum;
-    public UnityEvent Update;
+    public T component;
+
+    public FSMStructer(T _Component)
+    {
+        component = _Component;
+    }
+
+    public IState DefaultState;
+    public IState CurrentState;
+    Stack<IState> StackState = new Stack<IState>();
+
+    public void Update()
+    {
+        CurrentState?.StateUpdate();
+    }
+
+    public void SetDefaultState(IState state)
+    {
+        DefaultState = state;
+        PushState(DefaultState);
+    }
+
+    public void PushState(IState state)
+    {
+        CurrentState?.StatePause();
+
+        CurrentState = state;
+        CurrentState.StateEnter(component);
+        StackState.Push(CurrentState);
+    }
+
+    public void PopState()
+    {
+        CurrentState?.StateExit();
+        if(StackState.TryPop(out CurrentState))
+        {
+            CurrentState.StateResum();
+        }
+        else
+        {
+            CurrentState = DefaultState;
+            CurrentState.StateEnter(component);
+            StackState.Push(CurrentState);
+        }
+    }
+
+    public void ChangeState(IState state)
+    {
+        while(StackState.TryPop(out CurrentState))
+        {
+            CurrentState.StateResum();
+            CurrentState.StateExit();
+        }
+
+        CurrentState = state;
+        CurrentState.StateEnter(component);
+        StackState.Push(CurrentState);
+    }
 }
