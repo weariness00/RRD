@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IState
+public interface IStateMachine
 {
     void StateEnter<T>(T component) where T : UnityEngine.Component;
     void StateUpdate();
@@ -23,22 +23,22 @@ public class FSMStructer<T> where T : UnityEngine.Component
         component = _Component;
     }
 
-    public IState DefaultState;
-    public IState CurrentState;
-    Stack<IState> StackState = new Stack<IState>();
+    public IStateMachine DefaultState;
+    public IStateMachine CurrentState;
+    Stack<IStateMachine> StackState = new Stack<IStateMachine>();
 
     public void Update()
     {
         CurrentState?.StateUpdate();
     }
 
-    public void SetDefaultState(IState state)
+    public void SetDefaultState(IStateMachine state)
     {
         DefaultState = state;
         PushState(DefaultState);
     }
 
-    public void PushState(IState state)
+    public void PushState(IStateMachine state)
     {
         CurrentState?.StatePause();
 
@@ -62,7 +62,7 @@ public class FSMStructer<T> where T : UnityEngine.Component
         }
     }
 
-    public void ChangeState(IState state)
+    public void ChangeState(IStateMachine state)
     {
         while(StackState.TryPop(out CurrentState))
         {

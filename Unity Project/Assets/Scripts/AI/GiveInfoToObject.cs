@@ -38,10 +38,8 @@ public class GiveInfoToObject : MonoBehaviour
         foreach (RaycastHit hit in hits)
         {
             FindToMove ftm = hit.collider.gameObject.GetComponent<FindToMove>();
-            if (ftm == null)
-                continue;
-            if (ftm.currentTargetPriority > priority)
-                continue;
+            if (ftm == null) continue;
+            if (ftm.currentTargetPriority > priority) continue;
 
             ftm.currentTarget = gameObject;
             ftm.currentTargetPriority = priority;

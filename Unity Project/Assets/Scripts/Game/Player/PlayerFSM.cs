@@ -14,7 +14,7 @@ namespace PlayerFSM
         LevelUp,
     }
 
-    public class Idle : IState
+    public class Idle : IStateMachine
     {
         PlayerController pc;
         float prevSpeed;
@@ -56,7 +56,7 @@ namespace PlayerFSM
         }
     }
 
-    public class Walk : IState
+    public class Walk : IStateMachine
     {
         PlayerController pc;
 
@@ -101,7 +101,7 @@ namespace PlayerFSM
         }
     }
 
-    public class Run : IState
+    public class Run : IStateMachine
     {
         PlayerController pc;
 
@@ -146,7 +146,7 @@ namespace PlayerFSM
         }
     }
 
-    public class Attack : IState
+    public class Attack : IStateMachine
     {
         PlayerController pc;
 
@@ -183,7 +183,7 @@ namespace PlayerFSM
         }
     }
 
-    public class Dead : IState
+    public class Dead : IStateMachine
     {
         PlayerController pc;
         public void StateEnter<T>(T component) where T : Component
@@ -213,7 +213,7 @@ namespace PlayerFSM
         }
     }
 
-    public class LevelUp : IState
+    public class LevelUp : IStateMachine
     {
         PlayerController pc;
         public void StateEnter<T>(T component) where T : Component

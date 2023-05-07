@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
 
     #region 상태 머신
 
-    Dictionary<State, IState> dictionaryState = new Dictionary<State, IState>();
-    [HideInInspector] public Stack<IState> stateStack = new Stack<IState>();
-    [HideInInspector] public IState currentState { get; private set; }
+    Dictionary<State, IStateMachine> dictionaryState = new Dictionary<State, IStateMachine>();
+    [HideInInspector] public Stack<IStateMachine> stateStack = new Stack<IStateMachine>();
+    [HideInInspector] public IStateMachine currentState { get; private set; }
     void InitState()
     {
         dictionaryState.Add(State.Idle, new Idle());

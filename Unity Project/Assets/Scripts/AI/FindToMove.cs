@@ -10,13 +10,14 @@ using UnityEngine;
 public class FindToMove : MonoBehaviour
 {
     public GameObject defaultTarget;
-
-    [HideInInspector] public GameObject currentTarget;
+    public GameObject currentTarget;
     [HideInInspector] public int currentTargetPriority = -1;
     public float maxDistanceToTarget = 1f;
 
     [Space]
     [HideInInspector] public Status status;
+
+    public bool isOnMove = false;
 
     private void Start()
     {
@@ -36,6 +37,8 @@ public class FindToMove : MonoBehaviour
 
     void MoveToTarget()
     {
+        if (!isOnMove) return;
+
         // 현재 타겟과의 거리
         float distance = (transform.position - currentTarget.transform.position).magnitude;
 

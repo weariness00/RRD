@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static System.Net.WebRequestMethods;
@@ -53,6 +54,8 @@ public class MonsterInfo
 
 public class Monster : MonoBehaviour
 {
+    static public bool isOnIdle = false;
+
     public int id;
 
     [Space]
@@ -67,6 +70,7 @@ public class Monster : MonoBehaviour
 
     private void Awake()
     {
+        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
         status = Util.GetORAddComponet<Status>(gameObject);
     }
 
@@ -79,8 +83,6 @@ public class Monster : MonoBehaviour
     // 받아온 데이터를 넣어준다.
     public void Init(MonsterInfo info)
     {
-        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
-
         status = Util.GetORAddComponet<Status>(gameObject);
         name = info.name;
 
@@ -92,6 +94,26 @@ public class Monster : MonoBehaviour
         status.mp = info.mp;
         status.maxMp = info.mp;
         status.damage = info.damage;
+    }
+
+    public float? MoveToTarget()
+    {
+        if (ftm.currentTarget == null) return null;
+
+        // 현재 타겟과의 거리
+        float distance = (transform.position - ftm.currentTarget.transform.position).magnitude;
+
+        // 사거리보다 작으면 움직임을 멈춘다
+        if (distance < status.range) return null;
+
+        // 사거리보다 길면 기본 타겟으로 변경한다.
+        if (distance > status.range + 10f) ftm.currentTarget = ftm.defaultTarget;
+
+        Vector3 direction = (ftm.currentTarget.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+        transform.position += direction * status.speed * Time.deltaTime;
+
+        return distance;
     }
 
     public void Dead()
