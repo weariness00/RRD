@@ -1229,7 +1229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: monsterList.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: monsterList.Array.data[2]

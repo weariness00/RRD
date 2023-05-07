@@ -16,6 +16,8 @@ public class MonsterList : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        InitList();
     }
 
     public MonsterInfo GetMonsterData(int index) { return monsterData.data[index]; }
@@ -35,26 +37,17 @@ public class MonsterList : MonoBehaviour
         return monsterList[Random.Range(0, monsterList.Count)];
     }
 
-    public void SortMonsterList()
+    public void InitList()
     {
-        int count = 0;
-        while(true)
+        monsterList.Clear();
+
+        GameObject[] objs = Resources.LoadAll<GameObject>("Prefabs/Monster");
+        foreach (var obj in objs)
         {
-            for (int i = 0; i < monsterData.data.Count; i++)
-            {
-                if (monsterData.data[count].name.Equals(monsterList[i].name))
-                {
-                    GameObject temp = monsterList[i];                
-                    monsterList[i] = monsterList[count];
-                    monsterList[count] = temp;
-
-                    count++;
-                    break;
-                }
-            }
-
-            if (count.Equals(monsterData.data.Count))
-                return;
+            int id = monsterData.data.Find((info) => info.name.Equals(obj.name)).id;
+            monsterList.Insert(id, obj);
         }
+
+        SortMonsterList();
     }
 }

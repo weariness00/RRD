@@ -12,15 +12,10 @@ public class MonsterListEditor : Editor
         GUILayout.FlexibleSpace();
 
         MonsterList monsterListScript = (MonsterList)target;
-        if (GUILayout.Button("Sort List", GUILayout.Width(100),GUILayout.Height(25)))
-        {
-            if(monsterListScript.monsterList.Count != monsterListScript.monsterData.data.Count)
-            {
-                Debug.LogError("Diffrent Number in List and data");
-                return;
-            }
 
-            monsterListScript.SortMonsterList();
+        if (GUILayout.Button("Init List", GUILayout.Width(100), GUILayout.Height(25)))
+        {
+            monsterListScript.InitList();
         }
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
