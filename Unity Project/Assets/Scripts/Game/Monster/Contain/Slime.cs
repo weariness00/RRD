@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Monsters
 {
     using SlimeFSM;
+    using static System.Net.WebRequestMethods;
 
     public class Slime : Monster
     {
@@ -66,11 +67,13 @@ namespace Monsters
         public class Patrol : IStateMachine
         {
             Monster monster;
-            float? distance;
+            Vector3 direction;
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as Monster;
                 monster.animator.SetBool("Patrol", true);
+
+                direction = Random.insideUnitSphere.normalized;
             }
 
             public void StateExit()
@@ -90,7 +93,7 @@ namespace Monsters
 
             public void StateUpdate()
             {
-                if (monster.ftm.currentTarget != null && distance == null)
+                if (monster.ftm.currentTarget != null)
                 {
                     monster.fsm.PushState(new Attack());
                     return;
@@ -99,10 +102,14 @@ namespace Monsters
                 float aniClipTime = Time.deltaTime + monster.animator.GetFloat("fPatrolTime");
                 if (aniClipTime > 10.0f) aniClipTime = 0.0f;
                 monster.animator.SetFloat("fPatrolTime", aniClipTime);
+                if (aniClipTime > 7.0f)
+                {
+                    direction = Random.insideUnitSphere.normalized;
+                    return;
+                }
 
-                if (aniClipTime > 7.0f) return;
-
-                distance = monster.MoveToTarget();
+                monster.transform.rotation = Quaternion.Slerp(monster.transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+                monster.transform.position += direction * monster.status.speed * Time.deltaTime;
             }
         }
 
@@ -131,6 +138,10 @@ namespace Monsters
             public void StateUpdate()
             {
                 if (monster.ftm.currentTarget == null) monster.fsm.PopState();
+
+                monster.ftm.MoveToTarget();
+                if(monster.ftm.distance < monster.status.range) monster.animator.SetBool("isAttackInside", true);
+                else monster.animator.SetBool("isAttackInside", false);
             }
         }
 
