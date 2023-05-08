@@ -44,6 +44,11 @@ public class Item : ScriptableObject
     }
 }
 
+
+
+
+
+
 //public class Item : MonoBehaviour
 //{
 //    static protected int idCount = 0;

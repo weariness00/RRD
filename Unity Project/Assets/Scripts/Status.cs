@@ -3,41 +3,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct StatusValue
+{
+    public float value;     //증가(깡스탯)
+    public float percent;       //증폭
+
+    public float Cal()
+    {
+        return value * (1.0f + percent);
+    }
+}
+
 public class Status : MonoBehaviour
 {
     public int level = 1;
-    public float experience = 0f;
+    public float experience;
+    public float experiencePercent;     //얘는 몬스터가 죽을 때 더해지는 값에 곱해야함
     [Space]
 
-    public float hp = 10f;
-    public float maxHp;
-    public float mp = 1f;
-    public float maxMp;
+    public StatusValue hp;
+    public StatusValue maxHp;
+    public StatusValue mp;
+    public StatusValue maxMp;
     [Space]
 
-    public float damage;
-    public float criticalProbability;   // 치명타 확률
-    public float criticalDamagePower;   // 치명태 배율
+    public StatusValue damage;
+    public StatusValue attackSpeed;
+    public StatusValue criticalProbability;   // 치명타 확률
+    public StatusValue criticalDamagePower;   // 치명태 배율       
     Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
 
-    public float speed;
-    public float range;
+    public StatusValue speed;
+    public StatusValue range;
     [Space]
 
     public bool dead;
 
     private void Start()
     {
+        maxHp.value = 100f;
+        maxMp.value = 100f;
         hp = maxHp; mp = maxMp;
-        range = 1f;
-        speed = 1f;
+        range.value = 1f;
+        speed.value = 1f;
     }
 
     public bool LevelUP()
     {
         float needExp = level * 35f;
-        if(needExp < experience)
+        if (needExp < experience)
         {
             level++;
             experience -= needExp;
