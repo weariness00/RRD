@@ -47,7 +47,5 @@ public class MonsterList : MonoBehaviour
             int id = monsterData.data.Find((info) => info.name.Equals(obj.name)).id;
             monsterList.Insert(id, obj);
         }
-
-        SortMonsterList();
     }
 }
