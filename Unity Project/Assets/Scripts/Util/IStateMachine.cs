@@ -50,7 +50,8 @@ public class FSMStructer<T> where T : UnityEngine.Component
     public void PopState()
     {
         CurrentState?.StateExit();
-        if(StackState.TryPop(out CurrentState))
+        StackState.Pop();
+        if (StackState.TryPop(out CurrentState))
         {
             CurrentState.StateResum();
         }
@@ -66,7 +67,6 @@ public class FSMStructer<T> where T : UnityEngine.Component
     {
         while(StackState.TryPop(out CurrentState))
         {
-            CurrentState.StateResum();
             CurrentState.StateExit();
         }
 
