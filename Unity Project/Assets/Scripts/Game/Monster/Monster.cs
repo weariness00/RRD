@@ -102,7 +102,7 @@ public class Monster : MonoBehaviour
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
-        //MonsterSpawnManager.Instance.aliveMonsterCount--;
+        MonsterSpawnManager.Instance.aliveMonsterCount--;
         // 다 끝난후 객체 소멸시키기
         Destroy(gameObject, 30f);
     }
