@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace PlayerFSM
 {
@@ -47,9 +48,11 @@ namespace PlayerFSM
                 Managers.Key.InputAction(KeyToAction.MoveRight))
             {
                 if(Managers.Key.InputAction(KeyToAction.Run))
-                    pc.PushState(State.Run);
+                    pc.fsm.PushState(new Run());
                 else
-                    pc.PushState(State.Walk);
+                    pc.fsm.PushState(new Walk());
+
+                return;
             }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
@@ -63,6 +66,7 @@ namespace PlayerFSM
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
+            pc.status.speed = 1.0f;
             //pc.animator.SetFloat("Speed", 1f);
         }
 
@@ -83,7 +87,7 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             if (Managers.Key.InputAction(KeyToAction.Run))
-                pc.PushState(State.Run);
+                pc.fsm.PushState(new Run());
 
             if (Managers.Key.InputAction(KeyToAction.MoveFront))
                 pc.Move(Vector3.forward);
@@ -95,7 +99,10 @@ namespace PlayerFSM
                 pc.Move(Vector3.right);
 
             if (!Managers.Key.InputAnyKey)
-                pc.PopState();
+            {
+                pc.fsm.PopState();
+                return;
+            }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 1f, Time.deltaTime));
         }
@@ -119,6 +126,7 @@ namespace PlayerFSM
 
         public void StatePause()
         {
+
         }
 
         public void StateResum()
@@ -137,10 +145,16 @@ namespace PlayerFSM
                 pc.Move(Vector3.right);
 
             if (!Managers.Key.InputAnyKey)
-                pc.ChangeState(State.Idle);
+            {
+                pc.fsm.ChangeState(new Idle());
+                return;
+            }
 
             if (!Managers.Key.InputAction(KeyToAction.Run))
-                pc.PopState();
+            {
+                pc.fsm.PopState();
+                return;
+            }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 2f, Time.deltaTime * pc.status.speed));
         }
@@ -149,18 +163,18 @@ namespace PlayerFSM
     public class Attack : IStateMachine
     {
         PlayerController pc;
-
         public void StateEnter<T>(T component) where T : Component
         {
-            pc = component as PlayerController;    
-            pc.animator.SetBool("Attack", true);
+            pc = component as PlayerController;
+            pc.animator.ResetTrigger("EndAttack");
+            pc.animator.SetTrigger("StartAttack");
             pc.AttackCall?.Invoke();
+
+            pc.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
-            // 애니메이션 중지
-            pc.animator.SetBool("Attack", false);
         }
 
         public void StatePause()
@@ -178,8 +192,28 @@ namespace PlayerFSM
                 Managers.Key.InputAction(KeyToAction.MoveBack) ||
                 Managers.Key.InputAction(KeyToAction.MoveLeft) ||
                 Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.PopState();
+            {
+                pc.animator.SetTrigger("EndAttack");
+                pc.StopCoroutine(EndAttack());
+                pc.fsm.PopState();
+                return;
+            }
+
             // 애니메이션
+        }
+
+        IEnumerator EndAttack()
+        {
+            AnimatorStateInfo clip;
+            while(true)
+            {
+                yield return null;
+                clip = pc.animator.GetCurrentAnimatorStateInfo(0);
+                if (clip.IsName("Attack")) break;
+            }
+
+            yield return new WaitForSeconds(clip.length);
+            pc.fsm.PopState();
         }
     }
 
@@ -239,7 +273,10 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             if(Input.anyKey)
-                pc.PopState();
+            {
+                pc.fsm.PopState();
+                return;
+            }
         }
     }
 }
