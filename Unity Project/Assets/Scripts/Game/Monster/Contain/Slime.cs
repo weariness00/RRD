@@ -139,7 +139,7 @@ namespace Monsters
             {
                 if (monster.ftm.currentTarget == null) monster.fsm.PopState();
 
-                monster.ftm.MoveToTarget();
+                monster.ftm.V2MoveToTarget();
                 if(monster.ftm.distance < monster.status.range) monster.animator.SetBool("isAttackInside", true);
                 else monster.animator.SetBool("isAttackInside", false);
             }

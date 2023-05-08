@@ -26,18 +26,32 @@ public class FindToMove : MonoBehaviour
         currentTarget = defaultTarget;
     }
 
-    public void MoveToTarget()
+    bool CheckDistance()
     {
-        // 현재 타겟과의 거리
         distance = (transform.position - currentTarget.transform.position).magnitude;
-
         // 사거리보다 작으면 움직임을 멈춘다
-        if (distance < status.range) return;
-
+        if (distance < status.range) return false;
         // 사거리보다 길면 기본 타겟으로 변경한다.
         if (distance > status.range + 10f) currentTarget = defaultTarget;
 
+        return true;
+    }
+
+    public void V3MoveToTarget()
+    {
+        if (!CheckDistance()) return;
+        if (currentTarget == null) return;
         Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+        transform.position += direction * status.speed * Time.deltaTime;
+    }
+
+    public void V2MoveToTarget()
+    {
+        if (!CheckDistance()) return;
+        if (currentTarget == null) return;
+        Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+        direction.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
         transform.position += direction * status.speed * Time.deltaTime;
     }
