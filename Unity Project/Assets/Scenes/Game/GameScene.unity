@@ -280,6 +280,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110901552}
   m_CullTransparentMesh: 1
+--- !u!1 &157960590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2002187540012637378, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+  m_PrefabInstance: {fileID: 2002187541015274424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &229437043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1173,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7536235577664078177, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
   m_PrefabInstance: {fileID: 2002187541015274424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1474167297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474167290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5ca62ca45d7324b8d34792a515fa19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waepon: {fileID: 8623270529099630138, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
 --- !u!1001 &1475779830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2051,6 +2069,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: waepon
+      value: 
+      objectReference: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+    - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 157960590}
+    - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: waeponObject
+      value: 
+      objectReference: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
     - target: {fileID: 1474167296, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: m_Avatar
       value: 

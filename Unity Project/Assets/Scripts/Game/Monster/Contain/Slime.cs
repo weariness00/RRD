@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Monsters
 {
     using SlimeFSM;
-    using static System.Net.WebRequestMethods;
 
     public class Slime : Monster
     {
@@ -24,6 +23,15 @@ namespace Monsters
         {
             fsm.Update();
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.tag == "Weapon")
+            {
+                Debug.Log($"{name}은 Damage를 입었다.");
+                fsm.ChangeState(new Hit());
+            }
+        }
     }
 
     namespace SlimeFSM
@@ -33,6 +41,7 @@ namespace Monsters
             Idle,
             Patrol,
             Attack,
+            Hit,
             Die,
         }
         public class Idle : IStateMachine
@@ -142,6 +151,36 @@ namespace Monsters
                 monster.ftm.V2MoveToTarget();
                 if(monster.ftm.distance < monster.status.range) monster.animator.SetBool("isAttackInside", true);
                 else monster.animator.SetBool("isAttackInside", false);
+            }
+        }
+
+        public class Hit : IStateMachine
+        {
+            Monster monster;
+
+            public void StateEnter<T>(T component) where T : Component
+            {
+                monster = component as Monster;
+
+                monster.animator.SetTrigger("Hit");
+            }
+
+            public void StateExit()
+            {
+            }
+
+            public void StatePause()
+            {
+            }
+
+            public void StateResum()
+            {
+            }
+
+            public void StateUpdate()
+            {
+                if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                    monster.fsm.ChangeState(new Patrol());
             }
         }
 
