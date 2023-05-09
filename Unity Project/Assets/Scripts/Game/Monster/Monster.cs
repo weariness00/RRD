@@ -74,12 +74,6 @@ public class Monster : MonoBehaviour, IDamage
         status = Util.GetORAddComponet<Status>(gameObject);
     }
 
-    private void Update()
-    {
-        if (status.hp <= 0)
-            Dead();
-    }
-
     // 받아온 데이터를 넣어준다.
     public void Init(MonsterInfo info)
     {
