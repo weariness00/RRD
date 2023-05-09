@@ -22,8 +22,8 @@ public enum ItemRate
     Legendry
 };
 
-[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/Item", order = int.MaxValue)]
-public class Item : ScriptableObject
+[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/ItemData", order = int.MaxValue)]
+public class ItemData : ScriptableObject
 {
     public int id;
     public GameObject prefab;
@@ -38,7 +38,7 @@ public class Item : ScriptableObject
 
     public UnityEvent AbilityCall;
 
-    public Item(ItemDropInfo info)
+    public ItemData(ItemDropInfo info)
     {
         name = info.name;
     }

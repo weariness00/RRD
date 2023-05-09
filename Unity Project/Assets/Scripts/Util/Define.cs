@@ -10,7 +10,16 @@ public class Define
 		Gunner,
 	}
 
-	public enum ItemTear
+    public enum WeaponType
+    {
+		None,		// 주먹
+		Sword,		// 한손검
+		TwoHandSword, // 양손검
+		Bow,		// 활
+		Wand,		// 지팡이
+    }
+
+    public enum ItemTear
 	{
 		Tear1,
 		Tear2,

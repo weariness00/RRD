@@ -24,13 +24,11 @@ namespace Monsters
             fsm.Update();
         }
 
-        private void OnTriggerEnter(Collider other)
+        new public void Hit(float damage)
         {
-            if(other.tag == "Weapon")
-            {
-                Debug.Log($"{name}은 Damage를 입었다.");
-                fsm.ChangeState(new Hit());
-            }
+            base.Hit(damage);
+
+            fsm.ChangeState(new Hit());           
         }
     }
 
@@ -190,26 +188,24 @@ namespace Monsters
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as Monster;
-                monster.animator.SetBool("Die", true);
+                monster.animator.SetTrigger("Die");
             }
 
             public void StateExit()
             {
-                monster.animator.SetBool("Die", false);
             }
 
             public void StatePause()
             {
-                monster.animator.SetBool("Die", false);
             }
 
             public void StateResum()
             {
-                monster.animator.SetBool("Die", true);
             }
 
             public void StateUpdate()
             {
+                monster.Dead();
             }
         }
     }

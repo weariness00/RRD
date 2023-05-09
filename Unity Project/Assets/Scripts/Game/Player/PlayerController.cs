@@ -12,10 +12,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public Weapon WeaponEquipment;
-
-    [SerializeField] GameObject leftHand;
-    [SerializeField] GameObject rightHand;
+    public Equipment equipment;
 
     public Action skill;
     public Vector3 motionSpeed;
@@ -32,11 +29,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         fsm.SetDefaultState(new Idle());
-    }
-
-    private void Start()
-    {
-        Instantiate(animationController.waepon, rightHand.transform);
     }
 
     private void Update()

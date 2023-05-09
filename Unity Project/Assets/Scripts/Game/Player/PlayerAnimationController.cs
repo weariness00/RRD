@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-	Animator animaor;
+	PlayerController playerController;
+
 	public GameObject waepon;
 
 	protected void Init()
 	{
-		animaor = GetComponent<Animator>();
+        playerController = GetComponent<PlayerController>();
 	}
 
 	void Attack()
 	{
 		Debug.Log("╬Нец!");
-	}
+    }
 }

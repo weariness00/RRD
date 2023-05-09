@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Weapon : Equipment
+public class Weapon : MonoBehaviour
 {
-    public Status status;
+    public ItemData itemData;
+    [HideInInspector] public Status status;
 
-    public UnityEvent unityEvent;
+    public Define.WeaponType type;
 
     private void Start()
     {
-        equipmenetType = EquipmentType.Weapon;
+        status = Util.GetORAddComponet<Status>(gameObject);
     }
 }

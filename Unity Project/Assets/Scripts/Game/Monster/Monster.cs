@@ -52,7 +52,7 @@ public class MonsterInfo
     public float speed;
 }
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IDamage
 {
     static public bool isOnIdle = false;
 
@@ -96,14 +96,24 @@ public class Monster : MonoBehaviour
         status.damage = info.damage;
     }
 
+    public bool CheckDie()
+    {
+        if (status.hp > 0) return false;
+        return true;
+    }
+
     public void Dead()
     {
-        // 죽을때 애니메이션
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
         MonsterSpawnManager.Instance.aliveMonsterCount--;
         // 다 끝난후 객체 소멸시키기
-        Destroy(gameObject, 30f);
+        Destroy(gameObject, 3f);
+    }
+
+    public void Hit(float damage)
+    {
+        status.hp -= damage;
     }
 }

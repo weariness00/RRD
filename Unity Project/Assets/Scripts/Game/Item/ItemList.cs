@@ -6,23 +6,23 @@ public class ItemList : MonoBehaviour
 {
     public static ItemList Instance;
     
-    public List<Item> itemList;
+    public List<ItemData> itemList;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public Item GetItem(string name)
+    public ItemData GetItem(string name)
     {
-        foreach(Item item in itemList)
+        foreach(ItemData itemData in itemList)
         {
-            if (item.name.Equals(name))
-                return item;
+            if (itemData.name.Equals(name))
+                return itemData;
         }
 
         return null;
     }
 
-    public Item GetItme(int index) { return itemList[index]; }
+    public ItemData GetItme(int index) { return itemList[index]; }
 }

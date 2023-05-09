@@ -8,6 +8,8 @@ TagManager:
   - NPC
   - AddBlockSpace
   - CodeBlock
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

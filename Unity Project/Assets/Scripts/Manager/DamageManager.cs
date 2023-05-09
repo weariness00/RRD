@@ -19,6 +19,7 @@ public class DamageManager
     {
         foreach (var resultDamage in resultDamageDictionary)
         {
+            IDamage iDamage = resultDamage.Value as IDamage;
             Status info = resultDamage.Key.GetComponent<Status>();
             if(!info)
             {
@@ -28,7 +29,7 @@ public class DamageManager
 
             CheckDebuff(info, resultDamage.Value);
 
-            info.hp -= resultDamage.Value.damage;
+            iDamage.Hit(resultDamage.Value.damage);
             Debug.Log($"\"{info.name}\" Under Attack ( Damage : {resultDamage.Value.damage} )");
         }
 
@@ -89,4 +90,9 @@ class DamageInfo
         damage = 0f;
         heal = 0f;
     }
+}
+
+public interface IDamage
+{
+    public void Hit(float damage);
 }

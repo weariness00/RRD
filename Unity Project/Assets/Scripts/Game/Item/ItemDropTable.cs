@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class ItemDropTable : MonoBehaviour
 {
-	public List<Item> items;
+	public List<ItemData> itemDatas;
 
-	public void SetDropItem(List<Item> _Items)
+	public void SetDropItem(List<ItemData> _ItemDatas)
     {
-        items = _Items;
+        itemDatas = _ItemDatas;
     }
 
     public void Loot()
     {
-        items.ForEach((item) => { Instantiate(item.prefab); });
+        itemDatas.ForEach((itemData) => { Instantiate(itemData.prefab); });
     }
 
     public void TestLoot()
     {
-        items = LootingSystem.Instance.SetDropTable(gameObject.GetComponent<Monster>());
+        itemDatas = LootingSystem.Instance.SetDropTable(gameObject.GetComponent<Monster>());
     }
 }
