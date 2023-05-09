@@ -9,6 +9,7 @@ using PlayerFSM;
 public class PlayerController : MonoBehaviour
 {
     [HideInInspector] public FSMStructer<PlayerController> fsm;
+    [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
     [HideInInspector] public Weapon WeaponEquipment;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         fsm = new FSMStructer<PlayerController>(this);
+        animationController = GetComponent<PlayerAnimationController>();
 
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
@@ -34,20 +36,19 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //InitState();
+        Instantiate(animationController.waepon, rightHand.transform);
     }
 
     private void Update()
     {
-        //currentState.StateUpdate();
         fsm.Update();
 
         if (Managers.Key.InputActionDown(KeyToAction.Attack))
             fsm.ChangeState(new Attack());
-            //ChangeState(State.Attack);
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();
+
     }
 
     public void Move(Vector3 direction)
