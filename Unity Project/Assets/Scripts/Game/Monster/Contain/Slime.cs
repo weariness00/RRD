@@ -24,6 +24,12 @@ namespace Monsters
             fsm.Update();
         }
 
+        // 애니메이션 이벤트임
+        void Attack()
+        {
+            Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage);
+        }
+
         public override void Hit(float damage)
         {
             base.Hit(damage);
@@ -128,7 +134,6 @@ namespace Monsters
             {
                 monster = component as Monster;
                 monster.animator.SetTrigger("Attack");
-
             }
 
             public void StateExit()
