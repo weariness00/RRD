@@ -775,7 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   isWave: 0
-  waveTime: 3
+  waveTime: 30
   UpdateCall:
     m_PersistentCalls:
       m_Calls: []
@@ -2072,6 +2072,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 20375250, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474167292, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474167293, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
