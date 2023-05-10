@@ -24,7 +24,7 @@ namespace Monsters
             fsm.Update();
         }
 
-        new public void Hit(float damage)
+        public override void Hit(float damage)
         {
             base.Hit(damage);
 

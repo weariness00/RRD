@@ -106,7 +106,7 @@ public class Monster : MonoBehaviour, IDamage
         Destroy(gameObject, 3f);
     }
 
-    public void Hit(float damage)
+    public virtual void Hit(float damage)
     {
         status.hp -= damage;
     }
