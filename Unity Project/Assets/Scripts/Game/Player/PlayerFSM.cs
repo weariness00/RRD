@@ -89,14 +89,16 @@ namespace PlayerFSM
             if (Managers.Key.InputAction(KeyToAction.Run))
                 pc.fsm.PushState(new Run());
 
+            Vector3 dir = Vector3.zero;
+
             if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                pc.Move(Vector3.forward);
+                dir += Vector3.forward;
             if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                pc.Move(Vector3.back);
+                dir += Vector3.back;
             if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                pc.Move(Vector3.left);
+                dir += Vector3.left;
             if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.Move(Vector3.right);
+                dir += Vector3.right;
 
             if (!Managers.Key.InputAnyKey)
             {
@@ -104,6 +106,7 @@ namespace PlayerFSM
                 return;
             }
 
+            pc.Move(dir);
             pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 1f, Time.deltaTime));
         }
     }
@@ -135,14 +138,25 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
+            Vector3 dir = Vector3.zero;
+
             if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                pc.Move(Vector3.forward);
+                dir += Vector3.forward;
             if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                pc.Move(Vector3.back);
+                dir += Vector3.back;
             if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                pc.Move(Vector3.left);
+                dir += Vector3.left;
             if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.Move(Vector3.right);
+                dir += Vector3.right;
+
+            if (dir.Equals(Vector3.zero))
+            {
+                pc.fsm.PopState();
+                return;
+            }
+
+            pc.Move(dir);
+
 
             if (!Managers.Key.InputAnyKey)
             {
