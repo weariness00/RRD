@@ -28,7 +28,8 @@ namespace Monsters
         {
             base.Hit(damage);
 
-            fsm.ChangeState(new Hit());           
+            if (CheckDie()) fsm.ChangeState(new Die());
+            else fsm.ChangeState(new Hit());           
         }
     }
 
@@ -127,6 +128,7 @@ namespace Monsters
             {
                 monster = component as Monster;
                 monster.animator.SetTrigger("Attack");
+
             }
 
             public void StateExit()
@@ -189,6 +191,8 @@ namespace Monsters
             {
                 monster = component as Monster;
                 monster.animator.SetTrigger("Die");
+
+                monster.Dead();
             }
 
             public void StateExit()
@@ -205,7 +209,6 @@ namespace Monsters
 
             public void StateUpdate()
             {
-                monster.Dead();
             }
         }
     }

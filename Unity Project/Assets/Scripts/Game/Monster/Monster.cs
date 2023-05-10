@@ -98,6 +98,7 @@ public class Monster : MonoBehaviour, IDamage
 
     public void Dead()
     {
+        GetComponent<BoxCollider>().enabled = false;
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
