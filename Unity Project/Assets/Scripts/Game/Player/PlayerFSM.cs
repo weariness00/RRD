@@ -100,7 +100,7 @@ namespace PlayerFSM
             if (Managers.Key.InputAction(KeyToAction.MoveRight))
                 dir += Vector3.right;
 
-            if (!Managers.Key.InputAnyKey)
+            if (!Managers.Key.InputAnyKey || dir.Equals(Vector3.zero))
             {
                 pc.fsm.PopState();
                 return;
