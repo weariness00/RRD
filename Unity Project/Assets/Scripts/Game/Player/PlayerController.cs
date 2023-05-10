@@ -40,7 +40,14 @@ public class PlayerController : MonoBehaviour
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Monster")
+        {
+            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage + equipment.weapon.status.damage);
+        }
     }
 
     // 확인용 임시 메서드
