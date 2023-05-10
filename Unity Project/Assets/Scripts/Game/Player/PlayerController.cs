@@ -43,6 +43,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // 확인용 임시 메서드
+    public void CreateWeapon()
+    {
+        int layer = (int)equipment.Equip(Instantiate(equipment.weapon));
+        animator.SetInteger("Layer", layer);
+        animator.SetLayerWeight(layer, 1);
+    }
+
     public void Move(Vector3 direction)
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);

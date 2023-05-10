@@ -2087,6 +2087,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
     - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: equipment.weapon
+      value: 
+      objectReference: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+    - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: equipment.leftHand
       value: 
       objectReference: {fileID: 157960590}
@@ -2094,6 +2098,10 @@ PrefabInstance:
       propertyPath: equipment.rightHand
       value: 
       objectReference: {fileID: 1923862584}
+    - target: {fileID: 1474167295, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: equipment.equipmentWeapon
+      value: 
+      objectReference: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
     - target: {fileID: 1474167296, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: m_Avatar
       value: 

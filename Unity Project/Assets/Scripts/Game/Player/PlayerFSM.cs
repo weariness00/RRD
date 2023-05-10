@@ -175,6 +175,7 @@ namespace PlayerFSM
 
         public void StateExit()
         {
+            pc.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
         }
 
         public void StatePause()
@@ -208,7 +209,7 @@ namespace PlayerFSM
             while(true)
             {
                 yield return null;
-                clip = pc.animator.GetCurrentAnimatorStateInfo(0);
+                clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
                 if (clip.IsName("Attack")) break;
             }
 

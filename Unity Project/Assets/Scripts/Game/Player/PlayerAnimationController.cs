@@ -8,13 +8,16 @@ public class PlayerAnimationController : MonoBehaviour
 
 	public GameObject waepon;
 
-	protected void Init()
+	private void Start()
 	{
         playerController = GetComponent<PlayerController>();
 	}
 
+	// 무기의 콜라이더를 활성화 해야함
 	void Attack()
 	{
-		Debug.Log("어택!");
+        playerController.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
+
+        Debug.Log("어택!");
     }
 }
