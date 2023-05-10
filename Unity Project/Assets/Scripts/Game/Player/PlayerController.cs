@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 using PlayerFSM;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [HideInInspector] public FSMStructer<PlayerController> fsm;
     [HideInInspector] public PlayerAnimationController animationController;
@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour
 
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
+    }
 
+    private void Start()
+    {
         fsm.SetDefaultState(new Idle());
     }
 
@@ -67,5 +70,12 @@ public class PlayerController : MonoBehaviour
     public void ReSpawn()
     {
         GameManager.Instance.alivePlayerCount++;
+    }
+
+    public void Hit(float damage)
+    {
+        status.hp -= damage;
+
+        fsm.PushState(new Hit());
     }
 }

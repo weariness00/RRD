@@ -11,6 +11,7 @@ namespace PlayerFSM
         Walk,
         Run,
         Attack,
+        Hit,
         Dead,
         LevelUp,
     }
@@ -157,7 +158,6 @@ namespace PlayerFSM
 
             pc.Move(dir);
 
-
             if (!Managers.Key.InputAnyKey)
             {
                 pc.fsm.ChangeState(new Idle());
@@ -190,6 +190,7 @@ namespace PlayerFSM
         public void StateExit()
         {
             pc.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
+            pc.animator.SetTrigger("EndAttack");
         }
 
         public void StatePause()
@@ -208,7 +209,6 @@ namespace PlayerFSM
                 Managers.Key.InputAction(KeyToAction.MoveLeft) ||
                 Managers.Key.InputAction(KeyToAction.MoveRight))
             {
-                pc.animator.SetTrigger("EndAttack");
                 pc.StopCoroutine(EndAttack());
                 pc.fsm.PopState();
                 return;
@@ -225,6 +225,56 @@ namespace PlayerFSM
                 yield return null;
                 clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
                 if (clip.IsName("Attack")) break;
+            }
+
+            yield return new WaitForSeconds(clip.length);
+            pc.fsm.PopState();
+        }
+    }
+
+    public class Hit : IStateMachine
+    {
+        PlayerController pc;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            pc = component as PlayerController;
+            pc.animator.SetTrigger("Hit");
+            pc.StartCoroutine(EndHit());
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+            if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
+                Managers.Key.InputAction(KeyToAction.MoveBack) ||
+                Managers.Key.InputAction(KeyToAction.MoveLeft) ||
+                Managers.Key.InputAction(KeyToAction.MoveRight))
+            {
+                pc.StopCoroutine(EndHit());
+                pc.fsm.PopState();
+                return;
+            }
+        }
+
+        IEnumerator EndHit()
+        {
+            AnimatorStateInfo clip;
+            while (true)
+            {
+                yield return null;
+                clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
+                if (clip.IsName("Hit")) break;
             }
 
             yield return new WaitForSeconds(clip.length);

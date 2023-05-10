@@ -47,4 +47,4 @@ public class Status : MonoBehaviour
 
         return false;
     }
-}
+    }
