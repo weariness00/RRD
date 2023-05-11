@@ -12,6 +12,15 @@ public struct StatusValue
     {
         return value * (1.0f + percent);
     }
+
+    public bool ItemChance()
+    {
+        float chance = UnityEngine.Random.Range(0.0f, 100.0f);
+        if (value <= chance)
+            return true;
+
+        return false;
+    }
 }
 
 public class Status : MonoBehaviour
@@ -25,17 +34,19 @@ public class Status : MonoBehaviour
     public StatusValue maxHp;
     public StatusValue mp;
     public StatusValue maxMp;
+    public StatusValue BlockChance;
     [Space]
 
     public StatusValue damage;
     public StatusValue attackSpeed;
-    public StatusValue criticalProbability;   // 치명타 확률
+    public StatusValue criticalProbability;   // 치명타 확률 -> 이거 0~100으로 
     public StatusValue criticalDamagePower;   // 치명태 배율       
     Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
 
     public StatusValue speed;
     public StatusValue range;
+    public int jumpCount;
     [Space]
 
     public bool dead;
@@ -47,6 +58,7 @@ public class Status : MonoBehaviour
         hp = maxHp; mp = maxMp;
         range.value = 1f;
         speed.value = 1f;
+        jumpCount = 1;
     }
 
     public bool LevelUP()

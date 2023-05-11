@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3 direction)
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
-        transform.position += direction * status.speed * Time.deltaTime;
+        transform.position += direction * status.speed.Cal() * Time.deltaTime;
     }
 
     public void ReSpawn()
