@@ -93,7 +93,7 @@ namespace Monsters
             {
                 if (monster.ftm.currentTarget != null)
                 {
-                    monster.fsm.PushState(new Attack());
+                    monster.fsm.PushState(new Target());
                     return;
                 }
 
@@ -111,52 +111,87 @@ namespace Monsters
             }
         }
 
+        public class Target : IStateMachine
+        {
+            TurtleShell monster;
+            public void StateEnter<T>(T component) where T : Component
+            {
+                monster = component as TurtleShell;
+                monster.animator.SetBool("Target", true);
+            }
+
+            public void StateExit()
+            {
+                monster.animator.SetBool("Target", false);
+            }
+
+            public void StatePause()
+            {
+                monster.animator.SetBool("Target", false);
+            }
+
+            public void StateResum()
+            {
+                monster.animator.SetBool("Target", true);
+            }
+
+            public void StateUpdate()
+            {
+                monster.ftm.V2MoveToTarget();
+                if (monster.ftm.distance < monster.status.range) monster.fsm.PushState(new Attack());
+                else if (monster.isDefend && monster.ftm.distance < monster.status.range + 2.0f) monster.fsm.PushState(new Defend());
+            }
+        }
+
         public class Attack : IStateMachine
         {
             TurtleShell monster;
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as TurtleShell;
-                monster.animator.SetTrigger("Attack");
 
-                monster.StartCoroutine(SpecialAttack());
+                monster.animator.SetFloat("Attack Type", SetAttackType());
+
+                monster.animator.SetTrigger("Attack");
+                monster.StartCoroutine(EndAttack());
             }
 
             public void StateExit()
             {
-                monster.StopCoroutine(SpecialAttack());
+                monster.StopCoroutine(EndAttack());
             }
 
             public void StatePause()
             {
-                monster.StopCoroutine(SpecialAttack());
             }
 
             public void StateResum()
             {
-                monster.animator.SetTrigger("Attack");
-                monster.StartCoroutine(SpecialAttack());
             }
 
             public void StateUpdate()
             {
-                if (monster.ftm.currentTarget == null) monster.fsm.PopState();
 
-                monster.ftm.V2MoveToTarget();
-                if (monster.ftm.distance < monster.status.range) monster.animator.SetBool("isAttackInside", true);
-                else if (monster.isDefend && monster.ftm.distance < monster.status.range + 2.0f) monster.fsm.PushState(new Defend());
-                else monster.animator.SetBool("isAttackInside", false);
             }
 
-            WaitForSeconds specialAttackTimeDuration = new WaitForSeconds(1.0f);
-            IEnumerator SpecialAttack()
+            float SetAttackType()
+            {
+                if (monster.status.mp < 10f) return 0;
+
+                monster.status.mp -= 10f;
+                return 1.0f;
+            }
+
+            IEnumerator EndAttack()
             {
                 while (true)
                 {
-                    monster.animator.SetFloat("Attack Type", 0);
-                    yield return specialAttackTimeDuration;
-                    monster.animator.SetFloat("Attack Type", 1);
+                    yield return null;
+                    if (monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Type")) break;
                 }
+
+                yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length);
+                monster.fsm.PopState();
             }
         }
 
