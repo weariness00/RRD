@@ -62,9 +62,9 @@ public class Monster : MonoBehaviour, IDamage
     public MonsterType type;
     public MonsterRate rate;
 
-    [HideInInspector] public Status status;
-    public Animator animator;
+    [HideInInspector] public Animator animator;
 
+    [HideInInspector] public Status status;
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
 
@@ -72,6 +72,14 @@ public class Monster : MonoBehaviour, IDamage
     {
         ftm = Util.GetORAddComponet<FindToMove>(gameObject);
         status = Util.GetORAddComponet<Status>(gameObject);
+        animator = GetComponent<Animator>();
+
+        fsm = new FSMStructer<Monster>(this);
+    }
+
+    private void Update()
+    {
+        fsm.Update();
     }
 
     // 받아온 데이터를 넣어준다.
@@ -90,6 +98,11 @@ public class Monster : MonoBehaviour, IDamage
         status.damage = info.damage;
     }
 
+    void Attack()
+    {
+        Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage);
+    }
+
     public bool CheckDie()
     {
         if (status.hp > 0) return false;
@@ -98,7 +111,7 @@ public class Monster : MonoBehaviour, IDamage
 
     public void Dead()
     {
-        GetComponent<BoxCollider>().enabled = false;
+        Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
