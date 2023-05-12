@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace PlayerFSM
 {
@@ -10,6 +11,7 @@ namespace PlayerFSM
         Walk,
         Run,
         Attack,
+        Hit,
         Dead,
         LevelUp,
     }
@@ -47,9 +49,11 @@ namespace PlayerFSM
                 Managers.Key.InputAction(KeyToAction.MoveRight))
             {
                 if(Managers.Key.InputAction(KeyToAction.Run))
-                    pc.PushState(State.Run);
+                    pc.fsm.PushState(new Run());
                 else
-                    pc.PushState(State.Walk);
+                    pc.fsm.PushState(new Walk());
+
+                return;
             }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
@@ -63,6 +67,7 @@ namespace PlayerFSM
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
+            pc.status.speed = 1.0f;
             //pc.animator.SetFloat("Speed", 1f);
         }
 
@@ -83,20 +88,26 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             if (Managers.Key.InputAction(KeyToAction.Run))
-                pc.PushState(State.Run);
+                pc.fsm.PushState(new Run());
+
+            Vector3 dir = Vector3.zero;
 
             if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                pc.Move(Vector3.forward);
+                dir += Vector3.forward;
             if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                pc.Move(Vector3.back);
+                dir += Vector3.back;
             if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                pc.Move(Vector3.left);
+                dir += Vector3.left;
             if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.Move(Vector3.right);
+                dir += Vector3.right;
 
-            if (!Managers.Key.InputAnyKey)
-                pc.PopState();
+            if (!Managers.Key.InputAnyKey || dir.Equals(Vector3.zero))
+            {
+                pc.fsm.PopState();
+                return;
+            }
 
+            pc.Move(dir);
             pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 1f, Time.deltaTime));
         }
     }
@@ -119,6 +130,7 @@ namespace PlayerFSM
 
         public void StatePause()
         {
+
         }
 
         public void StateResum()
@@ -127,20 +139,36 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
+            Vector3 dir = Vector3.zero;
+
             if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                pc.Move(Vector3.forward);
+                dir += Vector3.forward;
             if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                pc.Move(Vector3.back);
+                dir += Vector3.back;
             if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                pc.Move(Vector3.left);
+                dir += Vector3.left;
             if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.Move(Vector3.right);
+                dir += Vector3.right;
+
+            if (dir.Equals(Vector3.zero))
+            {
+                pc.fsm.PopState();
+                return;
+            }
+
+            pc.Move(dir);
 
             if (!Managers.Key.InputAnyKey)
-                pc.ChangeState(State.Idle);
+            {
+                pc.fsm.ChangeState(new Idle());
+                return;
+            }
 
             if (!Managers.Key.InputAction(KeyToAction.Run))
-                pc.PopState();
+            {
+                pc.fsm.PopState();
+                return;
+            }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 2f, Time.deltaTime * pc.status.speed));
         }
@@ -149,18 +177,23 @@ namespace PlayerFSM
     public class Attack : IStateMachine
     {
         PlayerController pc;
-
         public void StateEnter<T>(T component) where T : Component
         {
-            pc = component as PlayerController;    
-            pc.animator.SetBool("Attack", true);
+            pc = component as PlayerController;
+            pc.animator.ResetTrigger("EndAttack");
+            pc.animator.SetTrigger("StartAttack");
             pc.AttackCall?.Invoke();
+
+            pc.animationController.isAttackCancle = false;
+            
+            pc.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
-            // 애니메이션 중지
-            pc.animator.SetBool("Attack", false);
+            pc.StopCoroutine(EndAttack());
+            pc.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
+            pc.animator.SetTrigger("EndAttack");
         }
 
         public void StatePause()
@@ -174,12 +207,85 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             // 만약 공격 도중 다른 키를 누르면 공격 취소
+            //if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveBack) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveLeft) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveRight))
+            //{
+            //    pc.fsm.PopState();
+            //    return;
+            //}
+
+            if(pc.animationController.isAttackCancle && Managers.Key.InputAnyKey)
+            {
+                pc.fsm.PopState();
+                return;
+            }
+            // 애니메이션
+        }
+
+        IEnumerator EndAttack()
+        {
+            AnimatorStateInfo clip;
+            while(true)
+            {
+                yield return null;
+                clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
+                if (clip.IsName("Attack")) break;
+            }
+
+            yield return new WaitForSeconds(clip.length - 0.2f);
+            pc.fsm.PopState();
+        }
+    }
+
+    public class Hit : IStateMachine
+    {
+        PlayerController pc;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            pc = component as PlayerController;
+            pc.animator.SetTrigger("Hit");
+            pc.StartCoroutine(EndHit());
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
             if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
                 Managers.Key.InputAction(KeyToAction.MoveBack) ||
                 Managers.Key.InputAction(KeyToAction.MoveLeft) ||
                 Managers.Key.InputAction(KeyToAction.MoveRight))
-                pc.PopState();
-            // 애니메이션
+            {
+                pc.StopCoroutine(EndHit());
+                pc.fsm.PopState();
+                return;
+            }
+        }
+
+        IEnumerator EndHit()
+        {
+            AnimatorStateInfo clip;
+            while (true)
+            {
+                yield return null;
+                clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
+                if (clip.IsName("Hit")) break;
+            }
+
+            yield return new WaitForSeconds(clip.length);
+            pc.fsm.PopState();
         }
     }
 
@@ -239,7 +345,10 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             if(Input.anyKey)
-                pc.PopState();
+            {
+                pc.fsm.PopState();
+                return;
+            }
         }
     }
 }

@@ -36,9 +36,9 @@ public class SelectItemICon : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void SelectIcon(Item item)
+    public void SelectIcon(ItemData itemData)
     {
-        item.icon = selectIcon.sprite;
+        itemData.icon = selectIcon.sprite;
     }
 
     // Icon이 무엇이 있는지 보여주는 Scroll List 관련 함수

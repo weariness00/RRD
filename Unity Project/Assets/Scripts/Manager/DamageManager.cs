@@ -19,17 +19,19 @@ public class DamageManager
     {
         foreach (var resultDamage in resultDamageDictionary)
         {
-            Status info = resultDamage.Key.GetComponent<Status>();
-            if(!info)
+            GameObject obj = resultDamage.Key;
+            DamageInfo info = resultDamage.Value;
+            Status status = obj.GetComponent<Status>();
+            if(!status)
             {
-                Debug.Log($"Not Have Status : {resultDamage.Key.name}");
+                Debug.Log($"Not Have Status : {obj.name}");
                 continue;
             }
 
-            CheckDebuff(info, resultDamage.Value);
+            CheckDebuff(status, info);
 
-            info.hp -= resultDamage.Value.damage;
-            Debug.Log($"\"{info.name}\" Under Attack ( Damage : {resultDamage.Value.damage} )");
+            info.iDamage?.Hit(info.damage);
+            Debug.Log($"\"{status.name}\" Under Attack ( Damage : {info.damage} )");
         }
 
         resultDamageDictionary.Clear();
@@ -59,6 +61,14 @@ public class DamageManager
         resultDamageDictionary[obj].damage += _Damage;
     }
 
+    public void Attack<T>(T obj, float _Damage) where T : UnityEngine.Component
+    {
+        AddObject(obj.gameObject);
+        DamageInfo info = resultDamageDictionary[obj.gameObject];
+        info.iDamage = obj as IDamage;
+        info.damage += _Damage;
+    }
+
     public void Attack(GameObject obj, Status status) { Attack(obj, status.damage); }
 
     public void Debuff(GameObject obj, DebuffType debuffType)
@@ -80,6 +90,8 @@ public class DamageManager
 
 class DamageInfo
 {
+    public IDamage iDamage;
+
     public float damage;
     public float heal;
     public Dictionary<DebuffType, int> debuffDictionary = new Dictionary<DebuffType, int>();    // 임시 // 디버프가 몇 중첩인지
@@ -89,4 +101,9 @@ class DamageInfo
         damage = 0f;
         heal = 0f;
     }
+}
+
+public interface IDamage
+{
+    public void Hit(float damage);
 }

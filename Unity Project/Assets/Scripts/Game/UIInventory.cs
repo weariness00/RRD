@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
-	public List<Item> items = new List<Item>();
-	public List<Item> itemssssss;
+	public List<ItemData> itemDatas = new List<ItemData>();
+	public List<ItemData> itemDatassssss;
 
 	GameObject content;
 
@@ -17,48 +17,48 @@ public class UIInventory : MonoBehaviour
     private void Start()
 	{
 		content = Util.FindChild<ScrollRect>(gameObject).content.gameObject;
-		SetInventory(itemssssss);	// 임시용
+		SetInventory(itemDatassssss);	// 임시용
     }
 
-	public void AddItem(Item item)
+	public void AddItem(ItemData itemdata)
 	{
-		if (items.Exists(_Item => {return item.id == _Item.id; } ))
+		if (itemDatas.Exists(_Item => {return _Item.id == itemdata.id; } ))
 		{
 			// 중복 소지시 어떻게 할지
-			int index = items.FindIndex((_Item) => { return _Item == item; });
-			items[index].amount += item.amount;
+			int index = itemDatas.FindIndex((_Item) => { return _Item == itemdata; });
+            itemDatas[index].amount += itemdata.amount;
 		}
 		else
 		{
-			items.Add(item);
-            items.Sort((a, b) => { return a.id < b.id ? -1 : 1; });
+			itemDatas.Add(itemdata);
+            itemDatas.Sort((a, b) => { return a.id < b.id ? -1 : 1; });
 
 			GameObject itemNode = Instantiate(itemUIPrefab, content.transform);
-			Util.FindChild<Image>(itemNode, "Icon").GetComponent<Image>().sprite = item.icon;
-			content.transform.SetSiblingIndex(items.IndexOf(item));
+			Util.FindChild<Image>(itemNode, "Icon").GetComponent<Image>().sprite = itemdata.icon;
+			content.transform.SetSiblingIndex(itemDatas.IndexOf(itemdata));
         }
     }
 
 	public void RemoveItem(int index)
 	{
-		if (items.Count.Equals(0))
+		if (itemDatas.Count.Equals(0))
 			return;
-		items.RemoveAt(index);
+		itemDatas.RemoveAt(index);
 		Destroy(content.transform.GetChild(index).gameObject);
 	}
 
-	public void UseItem(Item item)
+	public void UseItem(ItemData itemData)
 	{
-		item.amount--;
-		if(item.amount.Equals(0))
+		itemData.amount--;
+		if(itemData.amount.Equals(0))
 		{
-			RemoveItem(items.FindIndex(_Item => { return item.id == _Item.id; }));
+			RemoveItem(itemDatas.FindIndex(_ItemData => { return itemData.id == _ItemData.id; }));
 			return;
 		}	
 	}
 
 	// 이 인벤에 대한 정보가 있을경우 그 정보로 인벤토리 재생성
-	public void SetInventory(List<Item> _Items)
+	public void SetInventory(List<ItemData> _Items)
 	{
         _Items.ForEach((item) => { AddItem(item); });
     }

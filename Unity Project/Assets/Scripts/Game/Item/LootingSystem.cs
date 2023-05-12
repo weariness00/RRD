@@ -4,7 +4,7 @@ using UnityEngine;
 
 public struct DropTable
 {
-    public Item item;
+    public ItemData itemData;
     public float chance;
 }
 
@@ -28,18 +28,18 @@ public class LootingSystem : MonoBehaviour
         Instance = this;
     }
 
-    public Item CheckDropChance(DropTable table)
+    public ItemData CheckDropChance(DropTable table)
     {
         int chance = Random.Range(0, 100);
         if (table.chance >= chance)
-            return table.item;
+            return table.itemData;
 
         return null;
     }
 
-    public List<Item> SetDropTable(Monster monster)
+    public List<ItemData> SetDropTable(Monster monster)
     {
-        List<Item> items = new List<Item>();
+        List<ItemData> items = new List<ItemData>();
 
         for (int i = 0; i < itemDropData.ItemSheet.Count; ++i)
         {
@@ -47,12 +47,12 @@ public class LootingSystem : MonoBehaviour
                 itemDropData.ItemSheet[i].monsterRate == monster.rate)  //이 부분 검사를 어떻게 할지가 정말 애매한거같은데
             {
                 DropTable dt = new DropTable();
-                dt.item = ItemList.Instance.GetItem(itemDropData.ItemSheet[i].name); // 임시
+                dt.itemData = ItemList.Instance.GetItem(itemDropData.ItemSheet[i].name); // 임시
                 dt.chance = itemDropData.ItemSheet[i].dropChance;
 
-                Item item = CheckDropChance(dt);
-                if(item != null)
-                    items.Add(item);
+                ItemData itemData = CheckDropChance(dt);
+                if(itemData != null)
+                    items.Add(itemData);
             }
         }
 

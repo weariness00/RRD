@@ -2,18 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PlayerFSM;
-
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+using PlayerFSM;
+
+public class PlayerController : MonoBehaviour, IDamage
 {
+    [HideInInspector] public FSMStructer<PlayerController> fsm;
+    [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
-    [HideInInspector] public Weapon WeaponEquipment;
-
-    [SerializeField] GameObject leftHand;
-    [SerializeField] GameObject rightHand;
+    public Equipment equipment;
 
     public Action skill;
     public Vector3 motionSpeed;
@@ -23,24 +22,43 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        fsm = new FSMStructer<PlayerController>(this);
+        animationController = GetComponent<PlayerAnimationController>();
+
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        InitState();
+        fsm.SetDefaultState(new Idle());
     }
 
     private void Update()
     {
-        currentState.StateUpdate();
+        fsm.Update();
 
         if (Managers.Key.InputActionDown(KeyToAction.Attack))
-            ChangeState(State.Attack);
+            fsm.PushState(new Attack());
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Monster")
+        {
+            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage + equipment.weapon.status.damage);
+        }
+    }
+
+    // 확인용 임시 메서드
+    public void CreateWeapon()
+    {
+        int layer = (int)equipment.Equip(Instantiate(equipment.weapon));
+        animator.SetInteger("Layer", layer);
+        animator.SetLayerWeight(layer, 1);
     }
 
     public void Move(Vector3 direction)
@@ -54,61 +72,10 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.alivePlayerCount++;
     }
 
-
-    #region 상태 머신
-
-    Dictionary<State, IStateMachine> dictionaryState = new Dictionary<State, IStateMachine>();
-    [HideInInspector] public Stack<IStateMachine> stateStack = new Stack<IStateMachine>();
-    [HideInInspector] public IStateMachine currentState { get; private set; }
-    void InitState()
+    public void Hit(float damage)
     {
-        dictionaryState.Add(State.Idle, new Idle());
-        dictionaryState.Add(State.Walk, new Walk());
-        dictionaryState.Add(State.Run, new Run());
-        dictionaryState.Add(State.Attack, new Attack());
-        dictionaryState.Add(State.Dead, new Dead());
-        dictionaryState.Add(State.LevelUp, new LevelUp());
+        status.hp -= damage;
 
-        currentState = dictionaryState[PlayerFSM.State.Idle];
-        stateStack.Push(currentState);
-        currentState.StateEnter(this);
+        fsm.PushState(new Hit());
     }
-
-    public void PushState(PlayerFSM.State state)
-    {
-        if (dictionaryState[state] == currentState)
-            return;
-
-        currentState.StatePause();
-        currentState = dictionaryState[state];
-        stateStack.Push(currentState);
-        currentState.StateEnter(this);
-    }
-
-    public void PopState()
-    {
-        currentState.StateExit();
-        stateStack.Pop();
-
-        if (stateStack.Count.Equals(0))
-            stateStack.Push(dictionaryState[State.Idle]);
-
-        currentState = stateStack.Peek();
-        currentState.StateResum();
-    }
-
-    public void ChangeState(State state)
-    {
-        if (dictionaryState[state] == currentState)
-            return;
-
-        currentState.StateExit();
-        stateStack.Clear();
-
-        currentState = dictionaryState[state];
-        stateStack.Push(currentState);
-        currentState.StateEnter(this);
-    }
-
-    #endregion
 }

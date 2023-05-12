@@ -5,8 +5,8 @@ using UnityEngine;
 
 public struct StatusValue
 {
-    public float value;     //증가(깡스탯)
-    public float percent;       //증폭
+    public float value;   
+    public float percent;  
 
     public float Cal()
     {
@@ -27,7 +27,7 @@ public class Status : MonoBehaviour
 {
     public int level = 1;
     public float experience;
-    public float experiencePercent;     //얘는 몬스터가 죽을 때 더해지는 값에 곱해야함
+    public float experiencePercent;   
     [Space]
 
     public StatusValue hp;
@@ -39,8 +39,8 @@ public class Status : MonoBehaviour
 
     public StatusValue damage;
     public StatusValue attackSpeed;
-    public StatusValue criticalProbability;   // 치명타 확률 -> 이거 0~100으로 
-    public StatusValue criticalDamagePower;   // 치명태 배율       
+    public StatusValue criticalProbability;  
+    public StatusValue criticalDamagePower;      
     Dictionary<DebuffType, Action> propertyDictionary;
     [Space]
 
@@ -55,10 +55,24 @@ public class Status : MonoBehaviour
     {
         maxHp.value = 100f;
         maxMp.value = 100f;
-        hp = maxHp; mp = maxMp;
+        hp.value = maxHp.value; mp.value = maxMp.value;
         range.value = 1f;
         speed.value = 1f;
         jumpCount = 1;
+        range = 1f;
+        speed = 1f;
+
+        StartCoroutine(Recovery());
+    }
+
+    IEnumerator Recovery()
+    {
+        while(true)
+        {
+            yield return stdfx.OneSecond;
+            Mathf.Clamp(hp.value,0, maxHp.Cal());
+            Mathf.Clamp(mp.value,0, maxMp.Cal());
+        }
     }
 
     public bool LevelUP()

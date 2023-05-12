@@ -5,24 +5,24 @@ using UnityEngine;
 namespace Monsters
 {
     using SlimeFSM;
-    using static System.Net.WebRequestMethods;
 
     public class Slime : Monster
     {
         public void Start()
         {
-            Init(new MonsterInfo());
-
-            fsm = new FSMStructer<Monster>(this);
-            animator = GetComponent<Animator>();
-
             if (isOnIdle) fsm.SetDefaultState(new Idle());
             else fsm.SetDefaultState(new Patrol());
         }
 
-        public void Update()
+        // 애니메이션 이벤트임
+
+
+        public override void Hit(float damage)
         {
-            fsm.Update();
+            base.Hit(damage);
+
+            if (CheckDie()) fsm.ChangeState(new Die());
+            else fsm.ChangeState(new Hit());           
         }
     }
 
@@ -33,6 +33,7 @@ namespace Monsters
             Idle,
             Patrol,
             Attack,
+            Hit,
             Die,
         }
         public class Idle : IStateMachine
@@ -145,28 +146,57 @@ namespace Monsters
             }
         }
 
+        public class Hit : IStateMachine
+        {
+            Monster monster;
+
+            public void StateEnter<T>(T component) where T : Component
+            {
+                monster = component as Monster;
+
+                monster.animator.SetTrigger("Hit");
+            }
+
+            public void StateExit()
+            {
+            }
+
+            public void StatePause()
+            {
+            }
+
+            public void StateResum()
+            {
+            }
+
+            public void StateUpdate()
+            {
+                if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                    monster.fsm.ChangeState(new Patrol());
+            }
+        }
+
         public class Die : IStateMachine
         {
             Monster monster;
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as Monster;
-                monster.animator.SetBool("Die", true);
+                monster.animator.SetTrigger("Die");
+
+                monster.Dead();
             }
 
             public void StateExit()
             {
-                monster.animator.SetBool("Die", false);
             }
 
             public void StatePause()
             {
-                monster.animator.SetBool("Die", false);
             }
 
             public void StateResum()
             {
-                monster.animator.SetBool("Die", true);
             }
 
             public void StateUpdate()

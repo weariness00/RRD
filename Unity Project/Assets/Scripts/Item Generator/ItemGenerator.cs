@@ -40,10 +40,10 @@ public class ItemGenerator : MonoBehaviour
         itemNameField.onValueChanged.AddListener((text) => { currentItemName = text; });
     }
 
-    public Action<Item> createCall;
+    public Action<ItemData> createCall;
     public void CreateItem()
     {
-        Item scriptableObject = ScriptableObject.CreateInstance<Item>();
+        ItemData scriptableObject = ScriptableObject.CreateInstance<ItemData>();
 
         scriptableObject.id = itemListScript.itemList.Count;
         createCall?.Invoke(scriptableObject);
@@ -62,13 +62,13 @@ public class ItemGenerator : MonoBehaviour
         Debug.Log($"Create Item : {curPath}");
     }
 
-    public void SelectGameObect(Item item)
+    public void SelectGameObect(ItemData itemData)
     {
 
     }
 
-    public void SelectTear(Item item)
+    public void SelectTear(ItemData itemData)
     {
-        item.tear = (Define.ItemTear)tearDropdown.value;
+        itemData.tear = (Define.ItemTear)tearDropdown.value;
     }
 }
