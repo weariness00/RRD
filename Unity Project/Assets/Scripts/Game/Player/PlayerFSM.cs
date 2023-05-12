@@ -184,11 +184,14 @@ namespace PlayerFSM
             pc.animator.SetTrigger("StartAttack");
             pc.AttackCall?.Invoke();
 
+            pc.animationController.isAttackCancle = false;
+            
             pc.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
+            pc.StopCoroutine(EndAttack());
             pc.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
             pc.animator.SetTrigger("EndAttack");
         }
@@ -204,16 +207,20 @@ namespace PlayerFSM
         public void StateUpdate()
         {
             // 만약 공격 도중 다른 키를 누르면 공격 취소
-            if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
-                Managers.Key.InputAction(KeyToAction.MoveBack) ||
-                Managers.Key.InputAction(KeyToAction.MoveLeft) ||
-                Managers.Key.InputAction(KeyToAction.MoveRight))
+            //if (Managers.Key.InputAction(KeyToAction.MoveFront) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveBack) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveLeft) ||
+            //    Managers.Key.InputAction(KeyToAction.MoveRight))
+            //{
+            //    pc.fsm.PopState();
+            //    return;
+            //}
+
+            if(pc.animationController.isAttackCancle && Managers.Key.InputAnyKey)
             {
-                pc.StopCoroutine(EndAttack());
                 pc.fsm.PopState();
                 return;
             }
-
             // 애니메이션
         }
 
@@ -227,7 +234,7 @@ namespace PlayerFSM
                 if (clip.IsName("Attack")) break;
             }
 
-            yield return new WaitForSeconds(clip.length);
+            yield return new WaitForSeconds(clip.length - 0.2f);
             pc.fsm.PopState();
         }
     }

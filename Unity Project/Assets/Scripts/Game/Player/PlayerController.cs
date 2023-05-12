@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour, IDamage
         fsm.Update();
 
         if (Managers.Key.InputActionDown(KeyToAction.Attack))
-            fsm.ChangeState(new Attack());
+            fsm.PushState(new Attack());
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();

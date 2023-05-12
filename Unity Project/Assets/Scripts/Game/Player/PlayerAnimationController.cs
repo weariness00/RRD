@@ -7,6 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
 	PlayerController playerController;
 
 	public GameObject waepon;
+	[HideInInspector] public bool isAttackCancle = false;
 
 	private void Start()
 	{
@@ -19,5 +20,10 @@ public class PlayerAnimationController : MonoBehaviour
         playerController.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
 
         Debug.Log("╬Нец!");
+    }
+
+	void Cancle()
+	{
+		isAttackCancle = true;
     }
 }
