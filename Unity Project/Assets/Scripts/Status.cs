@@ -10,8 +10,10 @@ public class Status : MonoBehaviour
     [Space]
 
     public float hp = 10f;
+    public float recoveryHP = 1f;
     public float maxHp;
     public float mp = 1f;
+    public float recoveryMP = 1f;
     public float maxMp;
     [Space]
 
@@ -32,6 +34,18 @@ public class Status : MonoBehaviour
         hp = maxHp; mp = maxMp;
         range = 1f;
         speed = 1f;
+
+        StartCoroutine(Recovery());
+    }
+
+    IEnumerator Recovery()
+    {
+        while(true)
+        {
+            yield return stdfx.OneSecond;
+            if (hp < maxHp) hp += recoveryHP;
+            if (mp < maxMp) mp += recoveryMP;
+        }
     }
 
     public bool LevelUP()
