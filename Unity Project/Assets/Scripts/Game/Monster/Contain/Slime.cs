@@ -10,25 +10,12 @@ namespace Monsters
     {
         public void Start()
         {
-            Init(new MonsterInfo());
-
-            fsm = new FSMStructer<Monster>(this);
-            animator = GetComponent<Animator>();
-
             if (isOnIdle) fsm.SetDefaultState(new Idle());
             else fsm.SetDefaultState(new Patrol());
         }
 
-        public void Update()
-        {
-            fsm.Update();
-        }
-
         // 애니메이션 이벤트임
-        void Attack()
-        {
-            Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage);
-        }
+
 
         public override void Hit(float damage)
         {
