@@ -1,10 +1,8 @@
-using System;
+using Monsters;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static System.Net.WebRequestMethods;
 
 [System.Serializable]
 public enum MonsterType
@@ -75,6 +73,9 @@ public class Monster : MonoBehaviour, IDamage
         animator = GetComponent<Animator>();
 
         fsm = new FSMStructer<Monster>(this);
+
+        if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
+        else fsm.SetDefaultState(ReturnPatrol());
     }
 
     private void Update()
@@ -127,8 +128,155 @@ public class Monster : MonoBehaviour, IDamage
         Dead(3.0f);
     }
 
+    public virtual IStateMachine ReturnIdle() { return new DefaultMonsterFSM.Idle(); }
+    public virtual IStateMachine ReturnPatrol() { return new DefaultMonsterFSM.Patrol(); }
+    public virtual IStateMachine ReturnTarget() { return null; }
+    public virtual IStateMachine ReturnAttack() { return null; }
+    public virtual IStateMachine ReturnHit() { return new DefaultMonsterFSM.Hit(); }
+    public virtual IStateMachine ReturnDie() { return new DefaultMonsterFSM.Die(); }
+
     public virtual void Hit(float damage)
     {
         status.hp.value -= damage;
+
+        if (CheckDie()) fsm.ChangeState(ReturnDie());
+        else fsm.ChangeState(ReturnHit());
+    }
+}
+
+namespace DefaultMonsterFSM
+{
+    public class Idle : IStateMachine
+    {
+        Monster monster;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+            monster.animator.SetBool("Idle", true);
+        }
+
+        public void StateExit()
+        {
+            monster.animator.SetBool("Idle", false);
+        }
+
+        public void StatePause()
+        {
+            monster.animator.SetBool("Idle", false);
+        }
+
+        public void StateResum()
+        {
+            monster.animator.SetBool("Idle", true);
+        }
+
+        public void StateUpdate()
+        {
+        }   
+    }
+
+    public class Patrol : IStateMachine
+    {
+        Monster monster;
+        Vector3 direction;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+            monster.animator.SetBool("Patrol", true);
+
+            direction = Random.insideUnitSphere.normalized;
+        }
+
+        public void StateExit()
+        {
+            monster.animator.SetBool("Patrol", false);
+        }
+
+        public void StatePause()
+        {
+            monster.animator.SetBool("Patrol", false);
+        }
+
+        public void StateResum()
+        {
+            monster.animator.SetBool("Patrol", true);
+        }
+
+        public void StateUpdate()
+        {
+            if (monster.ftm.currentTarget != null)
+            {
+                monster.fsm.PushState(monster.ReturnTarget());
+                return;
+            }
+
+            float aniClipTime = Time.deltaTime + monster.animator.GetFloat("fPatrolTime");
+            if (aniClipTime > 10.0f) aniClipTime = 0.0f;
+            monster.animator.SetFloat("fPatrolTime", aniClipTime);
+            if (aniClipTime > 7.0f)
+            {
+                direction = Random.insideUnitSphere.normalized;
+                return;
+            }
+
+            monster.transform.rotation = Quaternion.Slerp(monster.transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+            monster.transform.position += direction * monster.status.speed.Cal() * Time.deltaTime;
+        }
+    }
+
+    public class Hit : IStateMachine
+    {
+        Monster monster;
+
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+            monster.animator.SetTrigger("Hit");
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+            if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+                monster.fsm.ChangeState(monster.ReturnPatrol());
+        }
+    }
+    public class Die : IStateMachine
+    {
+        Monster monster;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+            monster.animator.SetTrigger("Die");
+
+            monster.Dead();
+        }
+
+        public void StateExit()
+        {
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+        }
     }
 }
