@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if(other.tag == "Monster")
         {
-            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
+            Managers.Damage.Attack(other.transform.root.gameObject.GetComponent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
         }
     }
 

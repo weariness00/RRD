@@ -7729,6 +7729,7 @@ GameObject:
   - component: {fileID: 1474167296}
   - component: {fileID: 1474167294}
   - component: {fileID: 1474167295}
+  - component: {fileID: 1474167297}
   m_Layer: 0
   m_Name: Charector
   m_TagString: Player
@@ -7763,11 +7764,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &1474167293
 CapsuleCollider:
@@ -7777,7 +7778,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7536235577664078177}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.1486476
   m_Height: 1.5040452
@@ -7831,11 +7832,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
   status: {fileID: 0}
   animator: {fileID: 0}
-  WeaponEquipment: {fileID: 0}
-  leftHand: {fileID: 2002187540012637376}
-  rightHand: {fileID: 2002187540012637318}
+  equipment:
+    weapon: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+    leftHand: {fileID: 2002187540012637378}
+    rightHand: {fileID: 2002187540012637318}
   motionSpeed: {x: 0, y: 0, z: 0}
   AttackCall:
     m_PersistentCalls:
@@ -7843,3 +7846,17 @@ MonoBehaviour:
   LevelUpCall:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1474167297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7536235577664078177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd5ca62ca45d7324b8d34792a515fa19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waepon: {fileID: 8623270529099630138, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+  isAttackCancle: 0

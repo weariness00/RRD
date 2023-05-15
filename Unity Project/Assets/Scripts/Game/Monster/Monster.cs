@@ -1,4 +1,5 @@
 using Monsters;
+using Monsters.TurtleShellFSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -130,8 +131,8 @@ public class Monster : MonoBehaviour, IDamage
 
     public virtual IStateMachine ReturnIdle() { return new DefaultMonsterFSM.Idle(); }
     public virtual IStateMachine ReturnPatrol() { return new DefaultMonsterFSM.Patrol(); }
-    public virtual IStateMachine ReturnTarget() { return null; }
-    public virtual IStateMachine ReturnAttack() { return null; }
+    public virtual IStateMachine ReturnTarget() { return new DefaultMonsterFSM.Target(); }
+    public virtual IStateMachine ReturnAttack() { return new DefaultMonsterFSM.Attack(); }
     public virtual IStateMachine ReturnHit() { return new DefaultMonsterFSM.Hit(); }
     public virtual IStateMachine ReturnDie() { return new DefaultMonsterFSM.Die(); }
 
@@ -221,6 +222,79 @@ namespace DefaultMonsterFSM
 
             monster.transform.rotation = Quaternion.Slerp(monster.transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
             monster.transform.position += direction * monster.status.speed.Cal() * Time.deltaTime;
+        }
+    }
+
+    public class Attack : IStateMachine
+    {
+        Monster monster;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+
+            monster.animator.SetTrigger("Attack");
+            monster.StartCoroutine(EndAttack());
+        }
+
+        public void StateExit()
+        {
+            monster.StopCoroutine(EndAttack());
+        }
+
+        public void StatePause()
+        {
+        }
+
+        public void StateResum()
+        {
+        }
+
+        public void StateUpdate()
+        {
+
+        }
+
+        IEnumerator EndAttack()
+        {
+            while (true)
+            {
+                yield return null;
+                if (monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Type")) break;
+            }
+
+            yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length);
+            monster.fsm.PopState();
+        }
+    }
+
+    public class Target : IStateMachine
+    {
+        Monster monster;
+        public void StateEnter<T>(T component) where T : Component
+        {
+            monster = component as Monster;
+            monster.animator.SetBool("Target", true);
+        }
+
+        public void StateExit()
+        {
+            monster.animator.SetBool("Target", false);
+        }
+
+        public void StatePause()
+        {
+            monster.animator.SetBool("Target", false);
+        }
+
+        public void StateResum()
+        {
+            monster.animator.SetBool("Target", true);
+        }
+
+        public void StateUpdate()
+        {
+            monster.ftm.V2MoveToTarget();
+            if (monster.ftm.distance < monster.status.range.Cal()) monster.fsm.PushState(monster.ReturnAttack());
         }
     }
 
