@@ -109,15 +109,22 @@ public class Monster : MonoBehaviour, IDamage
         return true;
     }
 
-    public void Dead()
+    public void Dead(float dstroyTimeDuration)
     {
-        Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
+        //Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
+        gameObject.GetComponentsInChildren<BoxCollider>()[0].enabled = false;
+
         // 만약 필요하다면 파티클도
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
         MonsterSpawnManager.Instance.aliveMonsterCount--;
         // 다 끝난후 객체 소멸시키기
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, dstroyTimeDuration);
+    }
+
+    public void Dead()
+    {
+        Dead(3.0f);
     }
 
     public virtual void Hit(float damage)
