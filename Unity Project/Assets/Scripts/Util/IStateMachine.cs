@@ -40,6 +40,8 @@ public class FSMStructer<T> where T : UnityEngine.Component
 
     public void PushState(IStateMachine state)
     {
+        if (state == null) return;
+
         CurrentState?.StatePause();
 
         CurrentState = state;
@@ -65,7 +67,9 @@ public class FSMStructer<T> where T : UnityEngine.Component
 
     public void ChangeState(IStateMachine state)
     {
-        while(StackState.TryPop(out CurrentState))
+        if (state == null) return;
+
+        while (StackState.TryPop(out CurrentState))
         {
             CurrentState.StateExit();
         }
