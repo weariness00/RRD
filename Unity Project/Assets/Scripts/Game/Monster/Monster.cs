@@ -98,7 +98,7 @@ public class Monster : MonoBehaviour, IDamage
         status.damage.value = info.damage;
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
         Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage.Cal());
     }

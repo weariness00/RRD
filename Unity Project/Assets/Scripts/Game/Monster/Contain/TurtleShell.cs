@@ -9,11 +9,18 @@ namespace Monsters
     public class TurtleShell : Monster
     {
         public bool isDefend = false;
+        public float skillDamage = 0; // юс╫ц©К
 
         private void Start()
         {
             if (isOnIdle) fsm.SetDefaultState(new Idle());
             else fsm.SetDefaultState(new Patrol());
+        }
+
+        protected override void Attack()
+        {
+            float damage = status.damage.Cal() + skillDamage;
+            Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), damage);
         }
 
         public override void Hit(float damage)
@@ -176,8 +183,10 @@ namespace Monsters
 
             float SetAttackType()
             {
+                monster.skillDamage = 0;
                 if (monster.status.mp.value < 10f) return 0;
 
+                monster.skillDamage = 5;
                 monster.status.mp.value -= 10f;
                 return 1.0f;
             }
@@ -220,7 +229,7 @@ namespace Monsters
 
             public void StateUpdate()
             {
-                if (monster.ftm.distance < monster.status.range.Cal()) monster.fsm.PopState();
+                if (monster.ftm.distance > monster.status.range.Cal() + 1.0f) monster.fsm.PopState();
             }
         }
 
