@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8784268281161669297, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.96
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
 --- !u!1 &943497936 stripped
@@ -551,6 +555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DogKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 2565694414027245538, guid: a80067d8195f6c446b76f28c00e6010c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80067d8195f6c446b76f28c00e6010c, type: 3}
 --- !u!1 &5955930682326935903 stripped
@@ -627,13 +635,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8726233786752551118, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
+      propertyPath: m_TagString
+      value: Monster
+      objectReference: {fileID: 0}
     - target: {fileID: 8726373309575009476, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
       propertyPath: m_Name
       value: TurtleShell
       objectReference: {fileID: 0}
     - target: {fileID: 8726373309575009476, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727071513496702066, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
