@@ -30,7 +30,7 @@ public class WindCutter : Skill
             return;
 
         property = Util.GetORAddComponet<WindProperty>(gameObject);
-        property.damage = status.damage;
+        property.damage = status.damage.Cal();
         property.ApplyEffect(other.gameObject);
         property.ApplyDebuff(other.gameObject);
     }

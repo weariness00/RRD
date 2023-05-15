@@ -20,7 +20,7 @@ namespace Monsters
         {
             base.Hit(damage);
 
-            if (!isDefend && status.hp < Mathf.Lerp(0, status.maxMp, 0.3f))
+            if (!isDefend && status.hp.value < Mathf.Lerp(0, status.maxMp.value, 0.3f))
             {
                 animator.SetFloat("Hit Type", 1.0f);
                 isDefend = true;
@@ -107,7 +107,7 @@ namespace Monsters
                 }
 
                 monster.transform.rotation = Quaternion.Slerp(monster.transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
-                monster.transform.position += direction * monster.status.speed * Time.deltaTime;
+                monster.transform.position += direction * monster.status.speed.Cal() * Time.deltaTime;
             }
         }
 
@@ -138,8 +138,8 @@ namespace Monsters
             public void StateUpdate()
             {
                 monster.ftm.V2MoveToTarget();
-                if (monster.ftm.distance < monster.status.range) monster.fsm.PushState(new Attack());
-                else if (monster.isDefend && monster.ftm.distance < monster.status.range + 2.0f) monster.fsm.PushState(new Defend());
+                if (monster.ftm.distance < monster.status.range.Cal()) monster.fsm.PushState(new Attack());
+                else if (monster.isDefend && monster.ftm.distance < monster.status.range.Cal() + 2.0f) monster.fsm.PushState(new Defend());
             }
         }
 
@@ -176,9 +176,9 @@ namespace Monsters
 
             float SetAttackType()
             {
-                if (monster.status.mp < 10f) return 0;
+                if (monster.status.mp.value < 10f) return 0;
 
-                monster.status.mp -= 10f;
+                monster.status.mp.value -= 10f;
                 return 1.0f;
             }
 
@@ -220,7 +220,7 @@ namespace Monsters
 
             public void StateUpdate()
             {
-                if (monster.ftm.distance < monster.status.range) monster.fsm.PopState();
+                if (monster.ftm.distance < monster.status.range.Cal()) monster.fsm.PopState();
             }
         }
 

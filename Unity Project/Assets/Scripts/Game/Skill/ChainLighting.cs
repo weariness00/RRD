@@ -24,7 +24,7 @@ public class ChainLighting : Skill
     public void FindTarget()  
     {
         Collider[] enemy = null;
-        enemy = Physics.OverlapSphere(transform.position, status.range, layerMask);
+        enemy = Physics.OverlapSphere(transform.position, status.range.Cal(), layerMask);
 
         if(target == null)
         {

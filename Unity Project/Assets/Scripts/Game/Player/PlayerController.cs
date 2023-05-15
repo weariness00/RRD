@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if(other.tag == "Monster")
         {
-            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage + equipment.weapon.status.damage);
+            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
         }
     }
 
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Hit(float damage)
     {
-        status.hp -= damage;
+        status.hp.value -= damage;
 
         fsm.PushState(new Hit());
     }

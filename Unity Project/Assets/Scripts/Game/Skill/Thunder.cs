@@ -29,12 +29,12 @@ public class Thunder : Skill
     {
         // 왜 배열이 아닌지
         RaycastHit[] hits;
-        hits = Physics.SphereCastAll(transform.position, status.range, Vector3.up, 100f, layerMask);
+        hits = Physics.SphereCastAll(transform.position, status.range.Cal(), Vector3.up, 100f, layerMask);
 
         foreach(var hit in hits)
         {
             Instantiate(targetEffect, hit.transform.position + Vector3.up * 5, Quaternion.identity);  //이펙트 생성 높이 조절 필요
-            Managers.Damage.Attack(hit.transform.gameObject, status.damage);
+            Managers.Damage.Attack(hit.transform.gameObject, status.damage.Cal());
         }
     }
 

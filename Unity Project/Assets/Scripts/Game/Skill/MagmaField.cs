@@ -28,9 +28,9 @@ public class MagmaField : Skill
     IEnumerable TicDamage()
     {
         RaycastHit hit;
-        Physics.SphereCast(skillPoint, status.range, Vector3.zero, out hit, 1f, layerMask);
+        Physics.SphereCast(skillPoint, status.range.Cal(), Vector3.zero, out hit, 1f, layerMask);
 
-        Managers.Damage.Attack(hit.transform.gameObject, status.damage);
+        Managers.Damage.Attack(hit.transform.gameObject, status.damage.Cal());
         yield return new WaitForSeconds(ticCoolTime);
     }
 

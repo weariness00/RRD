@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SoldiersSyringe : MonoBehaviour
 {
-    public Item itemInfo;
+    public ItemData itemInfo;
 
     private void OnTriggerEnter(Collider other)
     {

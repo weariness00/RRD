@@ -6,6 +6,6 @@ public class AbilityStatusBlockList : BlockList
 {
     public void Critical(Status status, float value)
     {
-        status.criticalProbability += value;
+        status.criticalProbability.value += value;
     }
 }

@@ -69,7 +69,7 @@ public class DamageManager
         info.damage += _Damage;
     }
 
-    public void Attack(GameObject obj, Status status) { Attack(obj, status.damage); }
+    public void Attack(GameObject obj, Status status) { Attack(obj, status.damage.Cal()); }
 
     public void Debuff(GameObject obj, DebuffType debuffType)
     {

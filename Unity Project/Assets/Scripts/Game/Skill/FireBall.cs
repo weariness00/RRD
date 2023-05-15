@@ -11,7 +11,7 @@ public class FireBall : Skill
     FireProperty property;
     private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * status.speed);
+        transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +20,7 @@ public class FireBall : Skill
             return;
 
         property = Util.GetORAddComponet<FireProperty>(gameObject);
-        property.damage = status.damage;
+        property.damage = status.damage.Cal();
         property.ApplyEffect(other.gameObject);
         property.ApplyDebuff(other.gameObject);
     }

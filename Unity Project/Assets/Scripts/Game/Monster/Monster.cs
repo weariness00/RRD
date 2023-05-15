@@ -91,21 +91,21 @@ public class Monster : MonoBehaviour, IDamage
         id = info.id;
         type = info.type;
         rate = info.rate;
-        status.hp = info.hp;
-        status.maxHp = info.hp;
-        status.mp = info.mp;
-        status.maxMp = info.mp;
-        status.damage = info.damage;
+        status.hp.value = info.hp;
+        status.maxHp.value = info.hp;
+        status.mp.value = info.mp;
+        status.maxMp.value = info.mp;
+        status.damage.value = info.damage;
     }
 
     void Attack()
     {
-        Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage);
+        Managers.Damage.Attack(ftm.currentTarget.GetComponent<PlayerController>(), status.damage.Cal());
     }
 
     public bool CheckDie()
     {
-        if (status.hp > 0) return false;
+        if (status.hp.Cal() > 0) return false;
         return true;
     }
 
@@ -122,6 +122,6 @@ public class Monster : MonoBehaviour, IDamage
 
     public virtual void Hit(float damage)
     {
-        status.hp -= damage;
+        status.hp.value -= damage;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LensMarksGlasses : MonoBehaviour
 {
-    public Item iteminfo;
+    public ItemData iteminfo;
 
     private void OnTriggerEnter(Collider other)
     {

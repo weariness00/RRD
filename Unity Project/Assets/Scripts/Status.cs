@@ -59,8 +59,8 @@ public class Status : MonoBehaviour
         range.value = 1f;
         speed.value = 1f;
         jumpCount = 1;
-        range = 1f;
-        speed = 1f;
+        range.value = 1f;
+        speed.value = 1f;
 
         StartCoroutine(Recovery());
     }

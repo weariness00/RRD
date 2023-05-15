@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PaulsGoatHoof : MonoBehaviour
 {
-    public Item iteminfo;
+    public ItemData iteminfo;
 
     private void OnTriggerEnter(Collider other)
     {

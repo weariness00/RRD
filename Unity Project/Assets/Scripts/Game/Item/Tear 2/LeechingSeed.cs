@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LeechingSeed : MonoBehaviour
 {
-    public Item iteminfo;
+    public ItemData iteminfo;
 
     private void OnTriggerEnter(Collider other)
     {

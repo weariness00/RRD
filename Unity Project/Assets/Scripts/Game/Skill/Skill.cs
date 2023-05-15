@@ -39,7 +39,7 @@ public class Skill : MonoBehaviour
         }
         else if(isGuide == false)
         {
-            gameObject.transform.Translate(Vector3.forward * status.speed * Time.deltaTime);
+            gameObject.transform.Translate(Vector3.forward * status.speed.Cal() * Time.deltaTime);
         }
     }
 

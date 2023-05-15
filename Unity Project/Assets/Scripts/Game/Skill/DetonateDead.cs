@@ -21,7 +21,7 @@ public class DetonateDead: Skill
     {
         skillPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         RaycastHit[] hits;
-        hits = Physics.SphereCastAll(skillPos, status.range, Vector3.up, 1f, layerMask);
+        hits = Physics.SphereCastAll(skillPos, status.range.Cal(), Vector3.up, 1f, layerMask);
         foreach(var hit in hits)
         {
             Monster monster = hit.transform.GetComponent<Monster>();

@@ -110,7 +110,7 @@ namespace Monsters
                 }
 
                 monster.transform.rotation = Quaternion.Slerp(monster.transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
-                monster.transform.position += direction * monster.status.speed * Time.deltaTime;
+                monster.transform.position += direction * monster.status.speed.Cal() * Time.deltaTime;
             }
         }
 
@@ -141,7 +141,7 @@ namespace Monsters
                 if (monster.ftm.currentTarget == null) monster.fsm.PopState();
 
                 monster.ftm.V2MoveToTarget();
-                if(monster.ftm.distance < monster.status.range) monster.animator.SetBool("isAttackInside", true);
+                if(monster.ftm.distance < monster.status.range.Cal()) monster.animator.SetBool("isAttackInside", true);
                 else monster.animator.SetBool("isAttackInside", false);
             }
         }

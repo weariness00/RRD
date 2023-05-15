@@ -67,7 +67,7 @@ namespace PlayerFSM
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
-            pc.status.speed = 1.0f;
+            pc.status.speed.value = 1.0f;
             //pc.animator.SetFloat("Speed", 1f);
         }
 
@@ -120,12 +120,12 @@ namespace PlayerFSM
         {
             pc = component as PlayerController;
             //pc.animator.SetFloat("Speed", 2f);
-            pc.status.speed += 1f;
+            pc.status.speed.value += 1f;
         }
 
         public void StateExit()
         {
-            pc.status.speed -= 1f;
+            pc.status.speed.value -= 1f;
         }
 
         public void StatePause()
@@ -170,7 +170,7 @@ namespace PlayerFSM
                 return;
             }
 
-            pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 2f, Time.deltaTime * pc.status.speed));
+            pc.animator.SetFloat("Speed", Mathf.Lerp(pc.animator.GetFloat("Speed"), 2f, Time.deltaTime * pc.status.speed.Cal()));
         }
     }
 
