@@ -5,17 +5,6 @@ using UnityEngine.Rendering;
 
 namespace PlayerFSM
 {
-    public enum State
-    {
-        Idle,
-        Walk,
-        Run,
-        Attack,
-        Hit,
-        Dead,
-        LevelUp,
-    }
-
     public class Idle : IStateMachine
     {
         PlayerController pc;
@@ -289,7 +278,7 @@ namespace PlayerFSM
         }
     }
 
-    public class Dead : IStateMachine
+    public class Die : IStateMachine
     {
         PlayerController pc;
         public void StateEnter<T>(T component) where T : Component

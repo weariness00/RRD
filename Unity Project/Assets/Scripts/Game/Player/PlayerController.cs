@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public Animator animator;
     public Equipment equipment;
 
-    public Action skill;
+    public Skill skill_Q;
+    public Skill skill_W;
     public Vector3 motionSpeed;
 
     [HideInInspector] public UnityEvent AttackCall;

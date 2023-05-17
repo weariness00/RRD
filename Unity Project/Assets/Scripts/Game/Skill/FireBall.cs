@@ -9,6 +9,8 @@ using static UnityEngine.GraphicsBuffer;
 public class FireBall : Skill
 {
     FireProperty property;
+    public GameObject[] ballParticle;
+
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());

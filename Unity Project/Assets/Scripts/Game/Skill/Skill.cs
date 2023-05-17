@@ -23,7 +23,7 @@ public class Skill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<PlayerController>();
+        player = GameManager.Instance.Player;
         status = Util.GetORAddComponet<Status>(gameObject);
         layerMask = LayerMask.GetMask("Monster");
 
