@@ -2023,6 +2023,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   status: {fileID: 0}
   ftm: {fileID: 0}
+  hitParticle: {fileID: 8402303112826440722, guid: a00177d35599fb2479882f1e3cf0597a, type: 3}
 --- !u!1 &2565694414027245540
 GameObject:
   m_ObjectHideFlags: 0
