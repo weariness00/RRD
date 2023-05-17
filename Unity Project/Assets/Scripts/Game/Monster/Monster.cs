@@ -67,6 +67,8 @@ public class Monster : MonoBehaviour, IDamage
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
 
+    public GameObject hitParticle;
+
     private void Awake()
     {
         ftm = Util.GetORAddComponet<FindToMove>(gameObject);
@@ -142,6 +144,11 @@ public class Monster : MonoBehaviour, IDamage
 
         if (CheckDie()) fsm.ChangeState(ReturnDie());
         else fsm.ChangeState(ReturnHit());
+    }
+
+    public virtual void HitParticle()
+    {
+        Instantiate(hitParticle, transform.position, Quaternion.identity);
     }
 }
 

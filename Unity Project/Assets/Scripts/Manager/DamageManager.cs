@@ -31,6 +31,7 @@ public class DamageManager
             CheckDebuff(status, info);
 
             info.iDamage?.Hit(info.damage);
+            info.iDamage?.HitParticle();
             Debug.Log($"\"{status.name}\" Under Attack ( Damage : {info.damage} )");
         }
 
@@ -106,4 +107,5 @@ class DamageInfo
 public interface IDamage
 {
     public void Hit(float damage);
+    public void HitParticle();
 }
