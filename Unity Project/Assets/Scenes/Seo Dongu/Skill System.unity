@@ -1150,14 +1150,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 461687097885530726, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
-      propertyPath: speed.value
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 461687097885530726, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
-      propertyPath: damage.value
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 2002187540012637578, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: m_Name
       value: Player

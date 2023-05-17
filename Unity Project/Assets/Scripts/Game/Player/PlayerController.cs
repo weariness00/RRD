@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();
+
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_Q))
+            skill_Q.OnSkill();
     }
 
     private void OnTriggerEnter(Collider other)

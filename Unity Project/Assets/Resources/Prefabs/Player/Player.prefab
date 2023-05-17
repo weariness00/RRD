@@ -8008,8 +8008,8 @@ MonoBehaviour:
     weapon: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
     leftHand: {fileID: 2002187540012637378}
     rightHand: {fileID: 2002187540012637318}
-  skill_Q: {fileID: 0}
-  skill_W: {fileID: 0}
+  skill_Q: {fileID: 1043398398}
+  skill_W: {fileID: 1232319285}
   motionSpeed: {x: 0, y: 0, z: 0}
   AttackCall:
     m_PersistentCalls:
