@@ -29,6 +29,8 @@ public class Skill : MonoBehaviour
 
         playerTranform = player.transform;
         coolTime = 1f;
+
+        Init();
     }
 
     private void Update()
@@ -52,6 +54,8 @@ public class Skill : MonoBehaviour
         Managers.Damage.Attack(other.gameObject, status);
         Util.Instantiate(targetEffect, other.gameObject.transform);
     }
+
+    protected virtual void Init() { }
 
     /// <summary>
     /// Player OR Item etc..
