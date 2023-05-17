@@ -54,15 +54,6 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
-        maxHp.value = 100f;
-        maxMp.value = 100f;
-        hp.value = maxHp.value; mp.value = maxMp.value;
-        range.value = 1f;
-        speed.value = 1f;
-        jumpCount = 1;
-        range.value = 1f;
-        speed.value = 1f;
-
         StartCoroutine(Recovery());
     }
 
