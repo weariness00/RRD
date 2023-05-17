@@ -49,11 +49,11 @@ namespace Monsters
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as DogKnight;
+                monster.StartCoroutine(EndAttack());
 
-                monster.animator.SetFloat("Attack Type", 0.0f); // юс╫ц
+                monster.animator.SetFloat("Attack Type", ChagneAttackType());
 
                 monster.animator.SetTrigger("Attack");
-                monster.StartCoroutine(EndAttack());
             }
 
             public void StateExit()
@@ -74,6 +74,14 @@ namespace Monsters
 
             }
 
+            float ChagneAttackType()
+            {
+                float type = monster.animator.GetFloat("Attack Type") + 1f;
+                if (type.Equals(2)) type = 0;
+
+                return type;
+            }
+
             IEnumerator EndAttack()
             {
                 while (true)
@@ -82,7 +90,7 @@ namespace Monsters
                     if (monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Type")) break;
                 }
 
-                yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length);
+                yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length - 0.1f);
                 monster.fsm.PopState();
             }
         }
