@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1474167294, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
+      propertyPath: radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2002187540012637578, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -303,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1beebd7abeb7b48a9ee2aa80a01b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
+  priority: -1
   radius: 10
   isMask: 0
 --- !u!1 &1908618944
@@ -384,7 +388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908618944}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -555,35 +559,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DogKnight
       objectReference: {fileID: 0}
-    - target: {fileID: 2565694414027245538, guid: a80067d8195f6c446b76f28c00e6010c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80067d8195f6c446b76f28c00e6010c, type: 3}
---- !u!1 &5955930682326935903 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2565694414027245538, guid: a80067d8195f6c446b76f28c00e6010c, type: 3}
-  m_PrefabInstance: {fileID: 5955930682326935902}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5955930682326935904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5955930682326935903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951282404b42846459ff050b9a07b903, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  type: 0
-  rate: 0
-  animator: {fileID: 0}
-  status: {fileID: 0}
-  ftm: {fileID: 0}
 --- !u!1001 &8727071514392489458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,21 +612,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8726233786752551118, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
-      propertyPath: m_TagString
-      value: Monster
-      objectReference: {fileID: 0}
     - target: {fileID: 8726373309575009476, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
       propertyPath: m_Name
       value: TurtleShell
-      objectReference: {fileID: 0}
-    - target: {fileID: 8726373309575009476, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8727071513496702066, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c9a8e5f014b62b44bcf9a674207c88f, type: 3}
