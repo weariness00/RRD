@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// Non Target
@@ -9,21 +8,29 @@ using static UnityEngine.GraphicsBuffer;
 public class FireBall : Skill
 {
     FireProperty property;
-    public GameObject[] ballParticle;
+    public GameObject ballObject;
 
-    private void Update()
+    public override void OnSkill()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
+        base.OnSkill();
+
+        GameObject obj = Instantiate(ballObject, transform.position, transform.rotation);
+        ObjectEventHandle objEventHandle = obj.AddComponent<ObjectEventHandle>();
+        objEventHandle.UpdateEvent.AddListener(UpdateEvent);
+        objEventHandle.OnCollisionEnterEvent.AddListener(OnCollisionEnterEvent);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void UpdateEvent(ObjectEventHandle objectEventHandle)
     {
-        if (other.tag == "Player")
-            return;
+        objectEventHandle.transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
+    }
 
-        property = Util.GetORAddComponet<FireProperty>(gameObject);
-        property.damage = status.damage.Cal();
-        property.ApplyEffect(other.gameObject);
-        property.ApplyDebuff(other.gameObject);
+    public void OnCollisionEnterEvent(Collision collision, ObjectEventHandle objEventHandle)
+    {
+        if (collision.gameObject.tag == "Player") return;
+
+        Managers.Damage.Attack(collision.gameObject, status.damage.Cal());
+
+        Destroy(objEventHandle.gameObject);
     }
 }
