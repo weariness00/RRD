@@ -49,6 +49,7 @@ public class MonsterInfo
     [Space]
     public int damage;
     public float speed;
+    public float range;
 }
 
 public class Monster : MonoBehaviour, IDamage
@@ -99,7 +100,9 @@ public class Monster : MonoBehaviour, IDamage
         status.maxHp.value = info.hp;
         status.mp.value = info.mp;
         status.maxMp.value = info.mp;
+        status.speed.value = info.speed;
         status.damage.value = info.damage;
+        status.range.value = info.range;
     }
 
     protected virtual void Attack()
