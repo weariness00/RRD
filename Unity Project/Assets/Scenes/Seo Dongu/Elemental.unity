@@ -590,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -649,14 +649,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47bca85cd6738245a446c7ba92e3b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  maxHp: 0
-  mp: 0
-  maxMp: 0
-  damage: 1
-  strike: 0
-  speed: 0
-  range: 0
+  level: 1
+  experience: 0
+  experiencePercent: 0
+  hp:
+    value: 0
+    percent: 0
+  maxHp:
+    value: 0
+    percent: 0
+  mp:
+    value: 0
+    percent: 0
+  maxMp:
+    value: 0
+    percent: 0
+  BlockChance:
+    value: 0
+    percent: 0
+  damage:
+    value: 0
+    percent: 0
+  attackSpeed:
+    value: 0
+    percent: 0
+  criticalProbability:
+    value: 0
+    percent: 0
+  criticalDamagePower:
+    value: 0
+    percent: 0
+  speed:
+    value: 0
+    percent: 0
+  range:
+    value: 0
+    percent: 0
+  jumpCount: 0
+  dead: 0
 --- !u!114 &396878669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,22 +699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ada502691133774ab73f4cd1ea27b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 0}
   status: {fileID: 396878668}
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2007914072}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  type: 0
 --- !u!1 &637817779
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,14 +735,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47bca85cd6738245a446c7ba92e3b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxHp: 100
-  mp: 0
-  maxMp: 0
-  damage: 0
-  strike: 0
-  speed: 0
-  range: 0
+  level: 1
+  experience: 0
+  experiencePercent: 0
+  hp:
+    value: 0
+    percent: 0
+  maxHp:
+    value: 0
+    percent: 0
+  mp:
+    value: 0
+    percent: 0
+  maxMp:
+    value: 0
+    percent: 0
+  BlockChance:
+    value: 0
+    percent: 0
+  damage:
+    value: 0
+    percent: 0
+  attackSpeed:
+    value: 0
+    percent: 0
+  criticalProbability:
+    value: 0
+    percent: 0
+  criticalDamagePower:
+    value: 0
+    percent: 0
+  speed:
+    value: 0
+    percent: 0
+  range:
+    value: 0
+    percent: 0
+  jumpCount: 0
+  dead: 0
 --- !u!65 &637817781
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -759,7 +806,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -952,7 +999,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1093,7 +1141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1294,7 +1342,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1343,6 +1391,7 @@ MonoBehaviour:
   targetEffect: {fileID: 0}
   cutterObject: {fileID: 1795823833}
   cutterCount: 3
+  spawnDuration: 2
 --- !u!1 &2007914072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,7 +1460,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1458,6 +1507,7 @@ MonoBehaviour:
   status: {fileID: 0}
   skillEffect: {fileID: 0}
   targetEffect: {fileID: 0}
+  ballObject: {fileID: 0}
 --- !u!1 &2112457360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1540,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
   status: {fileID: 0}
+  animator: {fileID: 0}
+  equipment:
+    weapon: {fileID: 0}
+    leftHand: {fileID: 0}
+    rightHand: {fileID: 0}
+  skill_Q: {fileID: 0}
+  skill_W: {fileID: 0}
+  motionSpeed: {x: 0, y: 0, z: 0}
+  AttackCall:
+    m_PersistentCalls:
+      m_Calls: []
+  LevelUpCall:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &2112457362
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1524,7 +1589,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

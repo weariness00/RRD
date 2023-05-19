@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public Animator animator;
     public Equipment equipment;
 
-    public Action skill;
+    public Skill skill_Q;
+    public Skill skill_E;
     public Vector3 motionSpeed;
 
     [HideInInspector] public UnityEvent AttackCall;
@@ -43,13 +44,20 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (status.LevelUP())
             LevelUpCall?.Invoke();
+
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_Q))
+            skill_Q.OnSkill();
+
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_E))
+            skill_E.OnSkill();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Monster")
         {
-            Managers.Damage.Attack(other.gameObject.GetComponent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
+            Managers.Damage.Attack(other.GetComponentInParent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
         }
     }
 
@@ -77,5 +85,9 @@ public class PlayerController : MonoBehaviour, IDamage
         status.hp.value -= damage;
 
         fsm.PushState(new Hit());
+    }
+
+    public void HitParticle()
+    {
     }
 }

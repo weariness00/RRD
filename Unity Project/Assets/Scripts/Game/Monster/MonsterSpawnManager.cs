@@ -99,9 +99,8 @@ public class MonsterSpawnManager : MonoBehaviour
         {
             foreach (var monster in Util.GetChildren<Monster>(child))
             {
-                monster.Dead();
+                monster.Dead(0.0f);
             }
-
             Destroy(child);
         }
     }

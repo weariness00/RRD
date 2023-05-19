@@ -236,12 +236,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41bfd17a4e2bb24c9d7dea3d6278300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  isWaveStart: 0
-  endTime: 60
+  Player: {fileID: 0}
+  isWave: 0
+  waveTime: 60
+  UpdateCall:
+    m_PersistentCalls:
+      m_Calls: []
+  SetDataCall:
+    m_PersistentCalls:
+      m_Calls: []
   StartWaveCall:
     m_PersistentCalls:
       m_Calls: []
+  StopWaveCall:
+    m_PersistentCalls:
+      m_Calls: []
+  PauseCall:
+    m_PersistentCalls:
+      m_Calls: []
+  alivePlayerCount: 0
 --- !u!4 &971135221
 Transform:
   m_ObjectHideFlags: 0

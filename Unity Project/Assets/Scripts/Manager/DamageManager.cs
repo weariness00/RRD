@@ -21,7 +21,7 @@ public class DamageManager
         {
             GameObject obj = resultDamage.Key;
             DamageInfo info = resultDamage.Value;
-            Status status = obj.GetComponent<Status>();
+            Status status = obj.GetComponentInParent<Status>();
             if(!status)
             {
                 Debug.Log($"Not Have Status : {obj.name}");
@@ -31,6 +31,7 @@ public class DamageManager
             CheckDebuff(status, info);
 
             info.iDamage?.Hit(info.damage);
+            info.iDamage?.HitParticle();
             Debug.Log($"\"{status.name}\" Under Attack ( Damage : {info.damage} )");
         }
 
@@ -106,4 +107,5 @@ class DamageInfo
 public interface IDamage
 {
     public void Hit(float damage);
+    public void HitParticle();
 }

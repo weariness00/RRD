@@ -859,8 +859,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789c5d70ba8978348a8fef85226e2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnParant: {fileID: 0}
+  spawnDistance: 1
+  aliveMonsterCount: 0
+  maxAliveMonsterCount: 100
   waveNode:
-    waveMonsterList: []
+    monsterNodeList: []
     award: 
 --- !u!1 &5469570013773726441
 GameObject:

@@ -303,6 +303,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 343466691957256650, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 343466691957256653, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
       propertyPath: m_Name
       value: Sword(Normal)
@@ -362,7 +366,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -563,7 +567,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -673,7 +678,10 @@ MonoBehaviour:
   id: 0
   type: 0
   rate: 0
+  animator: {fileID: 0}
   status: {fileID: 0}
+  ftm: {fileID: 0}
+  hitParticle: {fileID: 0}
 --- !u!65 &1398440866
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -707,7 +715,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -766,15 +774,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   experience: 0
-  hp: 100
-  maxHp: 0
-  mp: 1
-  maxMp: 0
-  damage: 0
-  criticalProbability: 0
-  criticalDamagePower: 0
-  speed: 0
-  range: 0
+  experiencePercent: 0
+  hp:
+    value: 0
+    percent: 0
+  maxHp:
+    value: 0
+    percent: 0
+  mp:
+    value: 0
+    percent: 0
+  maxMp:
+    value: 0
+    percent: 0
+  BlockChance:
+    value: 0
+    percent: 0
+  damage:
+    value: 0
+    percent: 0
+  attackSpeed:
+    value: 0
+    percent: 0
+  criticalProbability:
+    value: 0
+    percent: 0
+  criticalDamagePower:
+    value: 0
+    percent: 0
+  speed:
+    value: 0
+    percent: 0
+  range:
+    value: 0
+    percent: 0
+  jumpCount: 0
   dead: 0
 --- !u!114 &1398440871
 MonoBehaviour:
@@ -788,7 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a76125702c52243b730082bc6fbdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  itemDatas: []
 --- !u!1 &1563322046
 GameObject:
   m_ObjectHideFlags: 0

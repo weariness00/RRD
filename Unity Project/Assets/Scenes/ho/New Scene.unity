@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -328,7 +328,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -406,14 +406,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47bca85cd6738245a446c7ba92e3b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  maxHp: 0
-  mp: 0
-  maxMp: 0
-  damage: 0
-  strike: 0
-  speed: 0
-  range: 0
+  level: 1
+  experience: 0
+  experiencePercent: 0
+  hp:
+    value: 0
+    percent: 0
+  maxHp:
+    value: 0
+    percent: 0
+  mp:
+    value: 0
+    percent: 0
+  maxMp:
+    value: 0
+    percent: 0
+  BlockChance:
+    value: 0
+    percent: 0
+  damage:
+    value: 0
+    percent: 0
+  attackSpeed:
+    value: 0
+    percent: 0
+  criticalProbability:
+    value: 0
+    percent: 0
+  criticalDamagePower:
+    value: 0
+    percent: 0
+  speed:
+    value: 0
+    percent: 0
+  range:
+    value: 0
+    percent: 0
+  jumpCount: 0
   dead: 0
 --- !u!54 &363054630
 Rigidbody:
@@ -464,7 +493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -538,7 +567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285bea15700e6ff4fba51984dfac4ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
   itemList:
   - {fileID: 0}
 --- !u!4 &557825158
@@ -554,7 +582,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639522504
 GameObject:
@@ -649,7 +677,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 343466691957256648, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 343466691957256648, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
       propertyPath: m_LocalPosition.x
@@ -691,6 +719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 343466691957256650, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 343466691957256653, guid: cd49783fdd18e61459d6fedb9de5d758, type: 3}
       propertyPath: m_Name
       value: Sword(Normal)
@@ -956,7 +988,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1071,7 +1103,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1186,7 +1218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1447,12 +1479,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
+  status: {fileID: 0}
+  animator: {fileID: 0}
+  equipment:
+    weapon: {fileID: 0}
+    leftHand: {fileID: 0}
+    rightHand: {fileID: 0}
+  skill_Q: {fileID: 0}
+  skill_W: {fileID: 0}
   motionSpeed: {x: 0, y: 0, z: 0}
   AttackCall:
     m_PersistentCalls:
       m_Calls: []
-  status: {fileID: 0}
-  animator: {fileID: 0}
+  LevelUpCall:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!136 &1847129003
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1487,7 +1529,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

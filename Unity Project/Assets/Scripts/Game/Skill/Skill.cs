@@ -23,12 +23,14 @@ public class Skill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<PlayerController>();
+        player = GameManager.Instance.Player;
         status = Util.GetORAddComponet<Status>(gameObject);
         layerMask = LayerMask.GetMask("Monster");
 
         playerTranform = player.transform;
         coolTime = 1f;
+
+        Init();
     }
 
     private void Update()
@@ -52,6 +54,8 @@ public class Skill : MonoBehaviour
         Managers.Damage.Attack(other.gameObject, status);
         Util.Instantiate(targetEffect, other.gameObject.transform);
     }
+
+    protected virtual void Init() { }
 
     /// <summary>
     /// Player OR Item etc..

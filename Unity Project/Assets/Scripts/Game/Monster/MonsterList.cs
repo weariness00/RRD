@@ -11,7 +11,7 @@ public class MonsterList : MonoBehaviour
     public static MonsterList Instance = null;
 
     public MonsterData monsterData;
-    public List<GameObject> monsterList;
+    public GameObject[] monsterList;
 
     private void Awake()
     {
@@ -34,18 +34,18 @@ public class MonsterList : MonoBehaviour
 
     public GameObject RandomMonster()
     {
-        return monsterList[Random.Range(0, monsterList.Count)];
+        return monsterList[Random.Range(0, monsterList.Length)];
     }
 
     public void InitList()
     {
-        monsterList.Clear();
-
         GameObject[] objs = Resources.LoadAll<GameObject>("Prefabs/Monster");
+        monsterList = new GameObject[objs.Length];
+
         foreach (var obj in objs)
         {
             int id = monsterData.data.Find((info) => info.name.Equals(obj.name)).id;
-            monsterList.Insert(id, obj);
+            monsterList[id] = obj;
         }
     }
 }

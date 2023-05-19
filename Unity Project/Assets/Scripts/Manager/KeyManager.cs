@@ -29,6 +29,9 @@ public enum KeyToAction
 
     KeyManager,
     MonsterSpawnManager,
+
+    Skill_Q,
+    Skill_E,
 }
 
 /// <summary>

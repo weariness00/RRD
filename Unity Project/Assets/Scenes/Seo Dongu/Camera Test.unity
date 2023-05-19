@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,7 +273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: -1, y: 5, z: -2}
+  ownerObject: {fileID: 0}
   ownerName: Player
 --- !u!1001 &2135603003
 PrefabInstance:
@@ -689,11 +690,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeca30244e64ca94ebf47d8a727366b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 0}
   status: {fileID: 0}
   animator: {fileID: 0}
-  WeaponEquipment: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  equipment:
+    weapon: {fileID: 0}
+    leftHand: {fileID: 0}
+    rightHand: {fileID: 0}
+  skill_Q: {fileID: 0}
+  skill_W: {fileID: 0}
   motionSpeed: {x: 0, y: 0, z: 0}
   AttackCall:
     m_PersistentCalls:

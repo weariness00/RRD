@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.VFX;
 
 /// <summary>
 /// Non Target
@@ -9,19 +9,39 @@ using static UnityEngine.GraphicsBuffer;
 public class FireBall : Skill
 {
     FireProperty property;
-    private void Update()
+    public GameObject ballObject;
+
+    public override void OnSkill()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
+        base.OnSkill();
+
+        GameObject obj = Instantiate(ballObject, transform.position, transform.rotation);
+        ObjectEventHandle objEventHandle = obj.AddComponent<ObjectEventHandle>();
+        VisualEffect vfx = obj.GetComponentInChildren<VisualEffect>();
+        objEventHandle.componets.Add("VisualEffect", vfx);
+
+        objEventHandle.UpdateEvent.AddListener(UpdateEvent);
+        objEventHandle.OnTriggerEnterEvent.AddListener(OnTriggerEnterEvent);
+
+        Destroy(obj, 10f);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void UpdateEvent(ObjectEventHandle objectEventHandle)
     {
-        if (other.tag == "Player")
-            return;
+        objectEventHandle.transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
+    }
 
-        property = Util.GetORAddComponet<FireProperty>(gameObject);
-        property.damage = status.damage.Cal();
-        property.ApplyEffect(other.gameObject);
-        property.ApplyDebuff(other.gameObject);
+    public void OnTriggerEnterEvent(Collider collider, ObjectEventHandle objEventHandle)
+    {
+        if (collider.gameObject.tag == "Player") return;
+        
+        Status parentStatus = gameObject.transform.parent.GetComponentInParent<Status>();
+
+        Managers.Damage.Attack(collider.gameObject, status.damage.Cal() + parentStatus.damage.Cal());
+        VisualEffect vfx = objEventHandle.componets["VisualEffect"] as VisualEffect;
+        vfx.SendEvent("Impact");
+
+        Destroy(objEventHandle.gameObject, 1f);
+        objEventHandle.enabled = false;
     }
 }
