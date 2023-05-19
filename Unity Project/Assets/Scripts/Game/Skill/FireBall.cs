@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 /// <summary>
 /// Non Target
@@ -16,8 +17,13 @@ public class FireBall : Skill
 
         GameObject obj = Instantiate(ballObject, transform.position, transform.rotation);
         ObjectEventHandle objEventHandle = obj.AddComponent<ObjectEventHandle>();
+        VisualEffect vfx = obj.GetComponentInChildren<VisualEffect>();
+        objEventHandle.componets.Add("VisualEffect", vfx);
+
         objEventHandle.UpdateEvent.AddListener(UpdateEvent);
-        objEventHandle.OnCollisionEnterEvent.AddListener(OnCollisionEnterEvent);
+        objEventHandle.OnTriggerEnterEvent.AddListener(OnTriggerEnterEvent);
+
+        Destroy(obj, 10f);
     }
 
     public void UpdateEvent(ObjectEventHandle objectEventHandle)
@@ -25,12 +31,17 @@ public class FireBall : Skill
         objectEventHandle.transform.Translate(Vector3.forward * Time.deltaTime * status.speed.Cal());
     }
 
-    public void OnCollisionEnterEvent(Collision collision, ObjectEventHandle objEventHandle)
+    public void OnTriggerEnterEvent(Collider collider, ObjectEventHandle objEventHandle)
     {
-        if (collision.gameObject.tag == "Player") return;
+        if (collider.gameObject.tag == "Player") return;
+        
+        Status parentStatus = gameObject.transform.parent.GetComponentInParent<Status>();
 
-        Managers.Damage.Attack(collision.gameObject, status.damage.Cal());
+        Managers.Damage.Attack(collider.gameObject, status.damage.Cal() + parentStatus.damage.Cal());
+        VisualEffect vfx = objEventHandle.componets["VisualEffect"] as VisualEffect;
+        vfx.SendEvent("Impact");
 
-        Destroy(objEventHandle.gameObject);
+        Destroy(objEventHandle.gameObject, 1f);
+        objEventHandle.enabled = false;
     }
 }

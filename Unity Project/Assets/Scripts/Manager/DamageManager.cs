@@ -21,7 +21,7 @@ public class DamageManager
         {
             GameObject obj = resultDamage.Key;
             DamageInfo info = resultDamage.Value;
-            Status status = obj.GetComponent<Status>();
+            Status status = obj.GetComponentInParent<Status>();
             if(!status)
             {
                 Debug.Log($"Not Have Status : {obj.name}");
