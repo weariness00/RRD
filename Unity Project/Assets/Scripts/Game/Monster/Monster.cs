@@ -53,7 +53,7 @@ public class MonsterInfo
 
 public class Monster : MonoBehaviour, IDamage
 {
-    public UnityEvent<Transform> onDie;
+    static public UnityEvent<Transform> onDie;
     static public bool isOnIdle = false;
 
     public int id;
@@ -68,6 +68,9 @@ public class Monster : MonoBehaviour, IDamage
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
 
+    [Space]
+    public GameObject crowbar;
+
     public GameObject hitParticle;
 
     private void Awake()
@@ -77,6 +80,7 @@ public class Monster : MonoBehaviour, IDamage
         animator = GetComponent<Animator>();
 
         fsm = new FSMStructer<Monster>(this);
+        onDie = new UnityEvent<Transform>();
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
         else fsm.SetDefaultState(ReturnPatrol());
@@ -87,7 +91,6 @@ public class Monster : MonoBehaviour, IDamage
         fsm.Update();
     }
 
-    // �޾ƿ� �����͸� �־��ش�.
     public void Init(MonsterInfo info)
     {
         status = Util.GetORAddComponet<Status>(gameObject);
@@ -121,12 +124,8 @@ public class Monster : MonoBehaviour, IDamage
         //Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
         gameObject.GetComponentsInChildren<BoxCollider>()[0].enabled = false;
 
-        // ���� �ʿ��ϴٸ� ��ƼŬ��
-        // ������ ���õ� �߰�
-        // ų ī��Ʈ�� ����
         MonsterSpawnManager.Instance.aliveMonsterCount--;
-        //onDie.Invoke(this.transform);
-        // �� ������ ��ü �Ҹ��Ű��
+        onDie.Invoke(this.transform);
         Destroy(gameObject, dstroyTimeDuration);
     }
 
@@ -144,6 +143,10 @@ public class Monster : MonoBehaviour, IDamage
 
     public virtual void Hit(float damage)
     {
+        if (status.hp.value >= status.maxHp.value * 0.9f)
+        {
+            damage = crowbar.GetComponent<Crowbar>().ItemEffect(damage);
+        }
         status.hp.value -= damage;
 
         if (CheckDie()) fsm.ChangeState(ReturnDie());

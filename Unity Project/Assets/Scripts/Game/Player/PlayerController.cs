@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public UnityEvent AttackCall;
     [HideInInspector] public UnityEvent LevelUpCall;
 
+    public bool outofcombat;
+
     private void Awake()
     {
         fsm = new FSMStructer<PlayerController>(this);
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
+
+        outofcombat = true;
     }
 
     private void Start()

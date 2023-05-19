@@ -9,7 +9,7 @@ public class CautiousSlug : MonoBehaviour
 
     private void Update()
     {
-        //이 부분에서 프레임 마다 검사해서 코루틴 개많이 실행되나?
+        //플레이어가 정지 상태인지 검사해 줘야함
         //if (GameManager.Instance.Player.fsm.CurrentState.Equals(PlayerFSM.State.Hit))
         //{
         //    StartCoroutine(ItemEffect());

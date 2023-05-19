@@ -9,6 +9,12 @@ public class MonsterTooth : MonoBehaviour
     public ItemData iteminfo;
     GameObject temp;
 
+    public void Awake()
+    {
+        Monster.onDie.AddListener(HealingDrop);
+        Debug.Log("Å×½ºÆ®");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Plyaer")

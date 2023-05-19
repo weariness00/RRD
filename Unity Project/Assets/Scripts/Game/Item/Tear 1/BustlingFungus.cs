@@ -18,11 +18,11 @@ public class BustlingFungus : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.GetComponent<PlayerFSM.Idle>().itemCheck == true)
+        /*if (gameObject.GetComponent == true)
             StartCoroutine(ItemEffect());
 
         else
-            StopCoroutine(ItemEffect());
+            StopCoroutine(ItemEffect());*/
 
     }
 

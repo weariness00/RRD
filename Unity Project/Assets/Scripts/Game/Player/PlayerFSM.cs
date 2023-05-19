@@ -12,17 +12,12 @@ namespace PlayerFSM
         PlayerController pc;
         float prevSpeed;
 
-        Stopwatch timer;
-        public bool itemCheck = false;
-
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
             prevSpeed = pc.animator.GetFloat("Speed");
             //pc.animator.SetFloat("Speed", 0f);
 
-            timer = new Stopwatch();
-            timer.Start();
         }
 
         public void StateExit()
@@ -54,11 +49,6 @@ namespace PlayerFSM
             }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
-
-            if(timer.ElapsedMilliseconds > 2000)
-            {
-                itemCheck = true;
-            }
         }
     }
 
@@ -249,6 +239,8 @@ namespace PlayerFSM
             pc = component as PlayerController;
             pc.animator.SetTrigger("Hit");
             pc.StartCoroutine(EndHit());
+
+            pc.outofcombat = false;
         }
 
         public void StateExit()
@@ -288,6 +280,13 @@ namespace PlayerFSM
 
             yield return new WaitForSeconds(clip.length);
             pc.fsm.PopState();
+        }
+
+        //비전투중
+        IEnumerator OutofCombat()
+        {
+            yield return new WaitForSeconds(7);
+            pc.outofcombat = true;
         }
     }
 

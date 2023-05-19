@@ -13,15 +13,6 @@ public struct StatusValue
     {
         return value * (1.0f + percent);
     }
-
-    public bool ItemChance()
-    {
-        float chance = UnityEngine.Random.Range(0.0f, 100.0f);
-        if (value <= chance)
-            return true;
-
-        return false;
-    }
 }
 
 public class Status : MonoBehaviour
@@ -35,6 +26,7 @@ public class Status : MonoBehaviour
     public StatusValue maxHp;
     public StatusValue mp;
     public StatusValue maxMp;
+    public StatusValue shield;
     public StatusValue BlockChance;
     [Space]
 
