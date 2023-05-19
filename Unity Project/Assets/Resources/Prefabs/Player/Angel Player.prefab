@@ -1,5 +1,188 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &15996388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15996389}
+  - component: {fileID: 15996391}
+  - component: {fileID: 15996390}
+  m_Layer: 0
+  m_Name: FireBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &15996389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15996388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0.22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 229408625}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &15996391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15996388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f16f204aa855504eb810e91be0b1497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolTime: 0
+  isOn: 1
+  status: {fileID: 0}
+  skillEffect: {fileID: 0}
+  targetEffect: {fileID: 0}
+  ballObject: {fileID: 1386828442658577577, guid: 81f6ebcf062b69d44bacc33f73df596f, type: 3}
+--- !u!114 &15996390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15996388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47bca85cd6738245a446c7ba92e3b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  experience: 0
+  experiencePercent: 0
+  hp:
+    value: 0
+    percent: 0
+  maxHp:
+    value: 0
+    percent: 0
+  mp:
+    value: 0
+    percent: 0
+  maxMp:
+    value: 0
+    percent: 0
+  BlockChance:
+    value: 0
+    percent: 0
+  damage:
+    value: 10
+    percent: 0
+  attackSpeed:
+    value: 0
+    percent: 0
+  criticalProbability:
+    value: 0
+    percent: 0
+  criticalDamagePower:
+    value: 0
+    percent: 0
+  speed:
+    value: 10
+    percent: 0
+  range:
+    value: 0
+    percent: 0
+  jumpCount: 0
+  dead: 0
+--- !u!1 &229408624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 229408625}
+  m_Layer: 0
+  m_Name: Skill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &229408625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229408624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 701076781}
+  - {fileID: 15996389}
+  m_Father: {fileID: 4158239947747991842}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &701076780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701076781}
+  - component: {fileID: 701076782}
+  m_Layer: 0
+  m_Name: Camera Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701076781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701076780}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 229408625}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701076782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701076780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fff3a7466edd654f809d7ce316780af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolTime: 0
+  isOn: 1
+  status: {fileID: 0}
+  skillEffect: {fileID: 4121519515230571699, guid: 374b4738f96ac274c8346e8a22676cba, type: 3}
+  targetEffect: {fileID: 3801794979845052895, guid: 1cc5e24a5d2acc54a8ed074d5490fcc6, type: 3}
 --- !u!1 &1101978231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2488,7 @@ Transform:
   - {fileID: 9018305131237277205}
   - {fileID: 5737871861303569255}
   - {fileID: 1573036917991833035}
+  - {fileID: 229408625}
   m_Father: {fileID: 1281510937689749551}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2393,8 +2577,8 @@ MonoBehaviour:
     weapon: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
     leftHand: {fileID: 2092131846}
     rightHand: {fileID: 1101978231}
-  skill_Q: {fileID: 0}
-  skill_W: {fileID: 0}
+  skill_Q: {fileID: 701076782}
+  skill_W: {fileID: 15996391}
   motionSpeed: {x: 0, y: 0, z: 0}
   AttackCall:
     m_PersistentCalls:

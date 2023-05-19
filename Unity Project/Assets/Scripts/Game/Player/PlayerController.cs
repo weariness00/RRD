@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public Equipment equipment;
 
     public Skill skill_Q;
-    public Skill skill_W;
+    public Skill skill_E;
     public Vector3 motionSpeed;
 
     [HideInInspector] public UnityEvent AttackCall;
@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (Managers.Key.InputActionDown(KeyToAction.Skill_Q))
             skill_Q.OnSkill();
+
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_E))
+            skill_E.OnSkill();
+
     }
 
     private void OnTriggerEnter(Collider other)
