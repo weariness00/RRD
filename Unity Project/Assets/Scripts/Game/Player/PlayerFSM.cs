@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -21,11 +23,17 @@ namespace PlayerFSM
         PlayerController pc;
         float prevSpeed;
 
+        Stopwatch timer;
+        public bool itemCheck = false;
+
         public void StateEnter<T>(T component) where T : UnityEngine.Component
         {
             pc = component as PlayerController;
             prevSpeed = pc.animator.GetFloat("Speed");
             //pc.animator.SetFloat("Speed", 0f);
+
+            timer = new Stopwatch();
+            timer.Start();
         }
 
         public void StateExit()
@@ -57,6 +65,11 @@ namespace PlayerFSM
             }
 
             pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
+
+            if(timer.ElapsedMilliseconds > 2000)
+            {
+                itemCheck = true;
+            }
         }
     }
 

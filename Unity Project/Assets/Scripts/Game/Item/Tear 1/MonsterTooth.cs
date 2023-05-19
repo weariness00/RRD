@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class MonsterTooth : MonoBehaviour
 {
-    UnityEvent ev;
     public ItemData iteminfo;
+    GameObject temp;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,15 +19,8 @@ public class MonsterTooth : MonoBehaviour
         }
     }
 
-    public void HealingDrop()
+    public void HealingDrop(Transform pos)
     {
-        //몬스터 죽음에 action추가해서 검사?
-
-
-
-        RaycastHit hit;
-        Physics.Raycast();
-
-
+        Instantiate(temp, pos);
     }
 }
