@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 using static System.Net.WebRequestMethods;
 
@@ -54,6 +56,7 @@ public class MonsterInfo
 
 public class Monster : MonoBehaviour, IDamage
 {
+    UnityAction onDie;
     static public bool isOnIdle = false;
 
     public int id;
@@ -116,6 +119,7 @@ public class Monster : MonoBehaviour, IDamage
         // 아이템 루팅도 추가
         // 킬 카운트에 포함
         MonsterSpawnManager.Instance.aliveMonsterCount--;
+        onDie.Invoke();
         // 다 끝난후 객체 소멸시키기
         Destroy(gameObject, 3f);
     }
