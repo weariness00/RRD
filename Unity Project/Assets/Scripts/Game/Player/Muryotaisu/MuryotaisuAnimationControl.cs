@@ -13,6 +13,7 @@ public class MuryotaisuAnimationControl : MonoBehaviour
 
     void Attack()
 	{
+        player.equipment.weapon.OnEffect();
         player.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
     }
 
