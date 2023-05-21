@@ -1,9 +1,10 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Muryotaisu), true)]
-public class EquipmentEditor : Editor
+[CustomEditor(typeof(QuestManager), true)]
+public class QuestManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -12,11 +13,11 @@ public class EquipmentEditor : Editor
         EditorGUILayout.BeginHorizontal();  //BeginHorizontal() 이후 부터는 GUI 들이 가로로 생성됩니다.
         GUILayout.FlexibleSpace();
 
-        Muryotaisu pc = ((Muryotaisu)target);
+        QuestManager questManager = ((QuestManager)target);
 
-        if (GUILayout.Button("Create Waepon", GUILayout.Width(100), GUILayout.Height(25)))
+        if (GUILayout.Button("Send Quest Massage", GUILayout.Width(300), GUILayout.Height(25)))
         {
-            pc.CreateWeapon();
+            questManager.SendQeustEvent(new QuestAction[] {});
         }
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();

@@ -186,15 +186,12 @@ namespace PlayerFSM
             pc.animator.SetTrigger("StartAttack");
             pc.AttackCall?.Invoke();
 
-            pc.animationController.isAttackCancle = false;
-            
             pc.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
             pc.StopCoroutine(EndAttack());
-            pc.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
             pc.animator.SetTrigger("EndAttack");
         }
 
@@ -218,11 +215,11 @@ namespace PlayerFSM
             //    return;
             //}
 
-            if(pc.animationController.isAttackCancle && Managers.Key.InputAnyKey)
-            {
-                pc.fsm.PopState();
-                return;
-            }
+            //if(Managers.Key.InputAnyKey)
+            //{
+            //    pc.fsm.PopState();
+            //    return;
+            //}
             // 애니메이션
         }
 

@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
 using PlayerFSM;
+using UnityEditor;
 
+[CanEditMultipleObjects]
 public class PlayerController : MonoBehaviour, IDamage
 {
     [HideInInspector] public FSMStructer<PlayerController> fsm;
     [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
     [HideInInspector] public Animator animator;
-    public Equipment equipment;
 
     public Skill skill_Q;
     public Skill skill_E;
@@ -57,16 +57,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if(other.tag == "Monster")
         {
-            Managers.Damage.Attack(other.GetComponentInParent<Monster>(), status.damage.Cal() + equipment.weapon.status.damage.Cal());
+            Managers.Damage.Attack(other.GetComponentInParent<Monster>(), status.damage.Cal());
         }
-    }
-
-    // 확인용 임시 메서드
-    public void CreateWeapon()
-    {
-        int layer = (int)equipment.Equip(Instantiate(equipment.weapon));
-        animator.SetInteger("Layer", layer);
-        animator.SetLayerWeight(layer, 1);
     }
 
     public void Move(Vector3 direction)
