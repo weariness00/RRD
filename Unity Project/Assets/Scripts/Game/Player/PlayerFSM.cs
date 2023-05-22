@@ -47,7 +47,7 @@ namespace PlayerFSM
 
                 return;
             }
-
+            
             pc.animator.SetFloat("Speed", Mathf.Lerp(0f, prevSpeed, Time.deltaTime));
         }
     }
