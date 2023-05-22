@@ -1210,9 +1210,21 @@ PrefabInstance:
       value: WaveNodeGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: isTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: spawnParant
       value: 
       objectReference: {fileID: 487272646}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnTarget
+      value: 
+      objectReference: {fileID: 1799839711}
     - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: maxSpawnCount
       value: 10
@@ -1222,8 +1234,40 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: SpawnPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: SpawnPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnPoolParant
+      value: 
+      objectReference: {fileID: 487272646}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnMinDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: SpawnPositionType.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: SpawnPositionType.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: maxAliveMonsterCount
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnSpot_Vector.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: monsterList.Array.size
@@ -1393,6 +1437,11 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
+--- !u!1 &1799839711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3674613623355603864, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+  m_PrefabInstance: {fileID: 428850274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1818783536 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 290565210, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}

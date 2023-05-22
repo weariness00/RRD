@@ -6,10 +6,25 @@ using UnityEngine;
 public class Muryotaisu : PlayerController
 {
     public Equipment equipment;
+
+    private void Start()
+    {
+        CreateWeapon();
+    }
+
     public void CreateWeapon()
     {
         int layer = (int)equipment.Equip(Instantiate(equipment.weapon));
         animator.SetInteger("Layer", layer);
         animator.SetLayerWeight(layer, 1);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Monster")
+        {
+            float damage = status.damage.Cal() + equipment.weapon.status.damage.Cal();
+            Managers.Damage.Attack(other.GetComponentInParent<Monster>(),damage);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Monsters
 {
     public class Slime : Monster
     {
-        public override IStateMachine ReturnAttack() { return new SlimeFSM.Attack(); }
+        //public override IStateMachine ReturnAttack() { return new SlimeFSM.Attack(); }
     }
 
     namespace SlimeFSM

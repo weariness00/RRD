@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 1
   title: "\uAC8C\uC784 \uB05D"
   text: "\uB85C\uBE44\uB85C \uB3CC\uC544\uAC04\uB2E4"
-  golaCount: 100
-  count: 1
+  golaCount: 2147483647
+  count: 70
   isScessce: 0
   Progress: 0000000002000000
   RewardEvent:

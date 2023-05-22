@@ -15,10 +15,19 @@ public class MuryotaisuAnimationControl : MonoBehaviour
 	{
         player.equipment.weapon.OnEffect();
         player.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
+        StartCoroutine(StopAttack());
     }
 
     void EndAttack()
     {
+        player.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
+        StopCoroutine(StopAttack());
+    }
+
+    WaitForSeconds stopAttackTime = new WaitForSeconds(0.1f);
+    IEnumerator StopAttack()
+    {
+        yield return stopAttackTime;
         player.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
     }
 }

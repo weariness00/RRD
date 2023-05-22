@@ -28,10 +28,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
-    }
 
-    private void Start()
-    {
         fsm.SetDefaultState(new Idle());
     }
 
