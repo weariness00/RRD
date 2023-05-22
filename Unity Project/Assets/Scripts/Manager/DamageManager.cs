@@ -21,6 +21,8 @@ public class DamageManager
         foreach (var resultDamage in resultDamageDictionary)
         {
             GameObject obj = resultDamage.Key;
+            if (obj == null) continue;
+
             DamageInfo info = resultDamage.Value;
             Status status = obj.GetComponentInParent<Status>();
             if(!status)

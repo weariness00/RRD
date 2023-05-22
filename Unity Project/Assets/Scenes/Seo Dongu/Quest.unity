@@ -721,6 +721,16 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1835603000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 290565210, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
+  m_PrefabInstance: {fileID: 2095494609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1835603001 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 290565211, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
+  m_PrefabInstance: {fileID: 2095494609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1897579894
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +937,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5833252886405602228, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
+      propertyPath: uiNode
+      value: 
+      objectReference: {fileID: 1835603000}
+    - target: {fileID: 5833252886405602228, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
+      propertyPath: NodeParentTransform
+      value: 
+      objectReference: {fileID: 1835603001}
     - target: {fileID: 5833252886405602228, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
       propertyPath: questList.Array.size
       value: 0

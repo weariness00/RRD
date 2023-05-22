@@ -82,7 +82,7 @@ public class KeyManager : UIUtil
         keyObject.SetActive(true);
 
         GameObject keyFieldObject = Resources.Load("Prefabs/UI/KeyField") as GameObject;
-        KeySettingData keyData = Resources.Load("Data/KeySettingData") as KeySettingData;
+        KeySettingData keyData = Resources.Load("Data/Key/KeySettingData") as KeySettingData;
 
         RectTransform viewRect = GameObject.Find("KeyScrollView").GetComponent<RectTransform>();
         RectTransform contentsRect = viewRect.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();  // 맵핑을 하기위한 오브젝트 로드

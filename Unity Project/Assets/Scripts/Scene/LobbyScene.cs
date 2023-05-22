@@ -7,6 +7,8 @@ public class LobbyScene : BaseScene
     protected override void Init()
     {
         base.Init();
+
+        Type = SceneType.Lobby;
     }
 
     public override void Clear()

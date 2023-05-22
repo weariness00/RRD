@@ -8,6 +8,7 @@ public enum SceneType
     Login,
     Lobby,
     Game,
+    GameEnd,
     GameOver,
 }
 
@@ -21,7 +22,7 @@ public abstract class BaseScene : MonoBehaviour
 
     protected virtual void Init()
 	{
-		
+        Managers.Instance.enabled = true;
 	}
 
     public abstract void Clear();

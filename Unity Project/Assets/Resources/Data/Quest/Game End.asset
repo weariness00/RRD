@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d50591d299916b4e810198d42de2143, type: 3}
+  m_Name: Game End
+  m_EditorClassIdentifier: 
+  id: 1
+  title: "\uAC8C\uC784 \uB05D"
+  text: "\uB85C\uBE44\uB85C \uB3CC\uC544\uAC04\uB2E4"
+  golaCount: 100
+  count: 1
+  isScessce: 0
+  Progress: 0000000002000000
+  RewardEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4510108427637661206, guid: b7796ee9b6a65ae43b454aa5708a8892, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: GameEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

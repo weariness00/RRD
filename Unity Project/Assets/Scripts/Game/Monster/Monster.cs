@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public enum MonsterType
@@ -63,12 +62,13 @@ public class Monster : MonoBehaviour, IDamage
     public MonsterRate rate;
 
     [HideInInspector] public Animator animator;
-
     [HideInInspector] public Status status;
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
 
     public GameObject hitParticle;
+
+    [SerializeField] protected List<QuestAction> deadQuestAction;
 
     private void Awake()
     {
@@ -80,6 +80,8 @@ public class Monster : MonoBehaviour, IDamage
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
         else fsm.SetDefaultState(ReturnPatrol());
+
+        deadQuestAction = new List<QuestAction>() { QuestAction.Kill, QuestAction.Monster };
     }
 
     private void Update()
@@ -118,15 +120,11 @@ public class Monster : MonoBehaviour, IDamage
 
     public void Dead(float dstroyTimeDuration)
     {
-        //Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
-        gameObject.GetComponentsInChildren<BoxCollider>()[0].enabled = false;
+        gameObject.GetComponentsInChildren<Collider>()[0].enabled = false;
 
-        // ���� �ʿ��ϴٸ� ��ƼŬ��
-        // ������ ���õ� �߰�
-        // ų ī��Ʈ�� ����
         MonsterSpawnManager.Instance.aliveMonsterCount--;
-        //onDie.Invoke(this.transform);
-        // �� ������ ��ü �Ҹ��Ű��
+
+        QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
         Destroy(gameObject, dstroyTimeDuration);
     }
 
@@ -152,7 +150,7 @@ public class Monster : MonoBehaviour, IDamage
 
     public virtual void HitParticle()
     {
-        Instantiate(hitParticle, transform.position, Quaternion.identity);
+        //Instantiate(hitParticle, transform.position, Quaternion.identity);
     }
 }
 
@@ -344,6 +342,8 @@ namespace DefaultMonsterFSM
         {
             monster = component as Monster;
             monster.animator.SetTrigger("Die");
+
+            Debug.Log("죽음");
 
             monster.Dead();
         }
