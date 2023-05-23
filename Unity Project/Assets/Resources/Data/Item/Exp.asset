@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exp
   m_EditorClassIdentifier: 
   id: 0
-  prefab: {fileID: 8621035592479899728, guid: ed10699d048bebb4c9514842d30aac9f, type: 3}
+  prefab: {fileID: 4527635379764513685, guid: ed10699d048bebb4c9514842d30aac9f, type: 3}
   icon: {fileID: 0}
   amount: 1
   type: 0

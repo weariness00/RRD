@@ -13,7 +13,14 @@ public class ItemDropTable : MonoBehaviour
 
     public void Loot()
     {
-        itemDatas.ForEach((itemData) => { Instantiate(itemData.prefab, gameObject.transform.position, Quaternion.identity); });
+        itemDatas.ForEach((itemData) => {
+            if (itemData.prefab == null) return;
+            GameObject obj = Instantiate(itemData.prefab, gameObject.transform.position, Quaternion.identity);
+            obj.transform.position += Vector3.up;
+
+            Item item = obj.GetComponent<Item>();
+            item.StartCoroutine(item.InitRigidBody());
+        });
     }
 
     public void TestLoot()
