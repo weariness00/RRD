@@ -65,6 +65,7 @@ public class Monster : MonoBehaviour, IDamage
     [HideInInspector] public Status status;
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
+    ItemDropTable idt;
 
     public GameObject hitParticle;
 
@@ -72,11 +73,11 @@ public class Monster : MonoBehaviour, IDamage
 
     private void Awake()
     {
-        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
-        status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
-
+        status = Util.GetORAddComponet<Status>(gameObject);
         fsm = new FSMStructer<Monster>(this);
+        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
+        idt = Util.GetORAddComponet<ItemDropTable>(gameObject);
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
         else fsm.SetDefaultState(ReturnPatrol());
@@ -125,6 +126,8 @@ public class Monster : MonoBehaviour, IDamage
         MonsterSpawnManager.Instance.aliveMonsterCount--;
 
         QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
+
+        idt.Loot();
         Destroy(gameObject, dstroyTimeDuration);
     }
 

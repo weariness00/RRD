@@ -33,3 +33,23 @@ MonoBehaviour:
     monsterRate: 0
     dropMonster: Orc
     dropChance: 4
+  - name: Exp
+    rate: 0
+    monsterRate: 0
+    dropMonster: Slime
+    dropChance: 100
+  - name: Exp
+    rate: 0
+    monsterRate: 0
+    dropMonster: TurtleShell
+    dropChance: 100
+  - name: Exp
+    rate: 0
+    monsterRate: 0
+    dropMonster: DogKnight
+    dropChance: 100
+  - name: Exp
+    rate: 0
+    monsterRate: 0
+    dropMonster: Slime
+    dropChance: 100

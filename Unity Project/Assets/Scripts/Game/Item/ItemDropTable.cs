@@ -6,14 +6,14 @@ public class ItemDropTable : MonoBehaviour
 {
 	public List<ItemData> itemDatas;
 
-	public void SetDropItem(List<ItemData> _ItemDatas)
+    public void SetDropItem(List<ItemData> _ItemDatas)
     {
         itemDatas = _ItemDatas;
     }
 
     public void Loot()
     {
-        itemDatas.ForEach((itemData) => { Instantiate(itemData.prefab); });
+        itemDatas.ForEach((itemData) => { Instantiate(itemData.prefab, gameObject.transform.position, Quaternion.identity); });
     }
 
     public void TestLoot()
