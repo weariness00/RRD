@@ -81,6 +81,12 @@ public class GameManager : MonoBehaviour
         // 게임 오버 씬으로 전환
     }
 
+    public void GameEnd()
+    {
+        Pause();
+        Managers.Scene.LoadScene(SceneType.GameEnd);
+    }
+
     WaitForSeconds waitWaveTime;
     IEnumerator WatiStopWave()
     {

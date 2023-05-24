@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(PlayerController))]
+[CustomEditor(typeof(Muryotaisu), true)]
 public class EquipmentEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -12,7 +12,7 @@ public class EquipmentEditor : Editor
         EditorGUILayout.BeginHorizontal();  //BeginHorizontal() 이후 부터는 GUI 들이 가로로 생성됩니다.
         GUILayout.FlexibleSpace();
 
-        PlayerController pc = ((PlayerController)target);
+        Muryotaisu pc = ((Muryotaisu)target);
 
         if (GUILayout.Button("Create Waepon", GUILayout.Width(100), GUILayout.Height(25)))
         {

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d50591d299916b4e810198d42de2143, type: 3}
+  m_Name: Quest Node
+  m_EditorClassIdentifier: 
+  id: 0
+  title: 
+  text: 
+  Progress: 000000000100000002000000
+  RewardEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5833252886405602228, guid: 133cb4299c6bd4440baab593a515d37a, type: 3}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: CreateObject
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8623270529099630138, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

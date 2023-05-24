@@ -17,8 +17,6 @@ public class PlayerAnimationController : MonoBehaviour
 	// 무기의 콜라이더를 활성화 해야함
 	void Attack()
 	{
-        playerController.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
-
         Debug.Log("어택!");
     }
 

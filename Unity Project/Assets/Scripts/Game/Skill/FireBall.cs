@@ -37,7 +37,8 @@ public class FireBall : Skill
         
         Status parentStatus = gameObject.transform.parent.GetComponentInParent<Status>();
 
-        Managers.Damage.Attack(collider.gameObject, status.damage.Cal() + parentStatus.damage.Cal());
+        if(collider.tag == "Monster")
+            Managers.Damage.Attack(collider.GetComponentInParent<Monster>(), status.damage.Cal() + parentStatus.damage.Cal());
         VisualEffect vfx = objEventHandle.componets["VisualEffect"] as VisualEffect;
         vfx.SendEvent("Impact");
 

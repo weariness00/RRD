@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 데미지 계산 관련 클래스
@@ -20,6 +21,8 @@ public class DamageManager
         foreach (var resultDamage in resultDamageDictionary)
         {
             GameObject obj = resultDamage.Key;
+            if (obj == null) continue;
+
             DamageInfo info = resultDamage.Value;
             Status status = obj.GetComponentInParent<Status>();
             if(!status)

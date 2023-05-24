@@ -43,8 +43,7 @@ public class LootingSystem : MonoBehaviour
 
         for (int i = 0; i < itemDropData.ItemSheet.Count; ++i)
         {
-            if (itemDropData.ItemSheet[i].dropMonster == monster.name &&
-                itemDropData.ItemSheet[i].monsterRate == monster.rate)  //이 부분 검사를 어떻게 할지가 정말 애매한거같은데
+            if (itemDropData.ItemSheet[i].dropMonster == monster.name )
             {
                 DropTable dt = new DropTable();
                 dt.itemData = ItemList.Instance.GetItem(itemDropData.ItemSheet[i].name); // 임시

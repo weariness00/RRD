@@ -550,8 +550,8 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.578125
-        functionName: Cancle
+      - time: 0.83225805
+        functionName: EndAttack
         data: 
         objectReferenceParameter: {fileID: 2002187540012637578, guid: dbad2e9d17dcf064cada2cb22340713a, type: 3}
         floatParameter: 0

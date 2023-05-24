@@ -73,8 +73,9 @@ public class SoundManager
 	{
 		foreach(AudioSource source in audioSources)
 		{
+			if (source == null) continue;
 			source.clip = null;
-			source.Stop();
+            source.Stop();
         }
 		clipDictionary.Clear();
 	}

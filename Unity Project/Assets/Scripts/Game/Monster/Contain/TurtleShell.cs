@@ -1,3 +1,4 @@
+using Monsters.TurtleShellFSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,11 @@ namespace Monsters
                 isDefend = true;
             }
 
-            if (CheckDie()) fsm.ChangeState(ReturnDie());
+            if (CheckDie())
+            {
+                isDefend = false;
+                fsm.ChangeState(ReturnDie());
+            }
             else fsm.ChangeState(ReturnHit());
         }
     }

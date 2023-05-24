@@ -10,6 +10,8 @@ public class GameScene : BaseScene
         base.Init();
 
         Type = SceneType.Game;
+
+        Time.timeScale = 1;
     }
 
     public override void Clear()

@@ -44,8 +44,7 @@ public class UIUtil
     protected T Get<T>(int index) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objs = null;
-        if (objectDictionary.TryGetValue(typeof(T), out objs) == false)
-            return null;
+        if (objectDictionary.TryGetValue(typeof(T), out objs) == false)  return null;
 
         return objs[index] as T;
     }

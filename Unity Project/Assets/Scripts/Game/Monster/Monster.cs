@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public enum MonsterType
@@ -63,27 +62,33 @@ public class Monster : MonoBehaviour, IDamage
     public MonsterRate rate;
 
     [HideInInspector] public Animator animator;
-
     [HideInInspector] public Status status;
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
+    ItemDropTable idt;
 
     [Space]
     public GameObject crowbar;
 
     public GameObject hitParticle;
 
+    [SerializeField] protected List<QuestAction> deadQuestAction;
+
     private void Awake()
     {
-        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
-        status = Util.GetORAddComponet<Status>(gameObject);
         animator = GetComponent<Animator>();
-
+        status = Util.GetORAddComponet<Status>(gameObject);
+        
         fsm = new FSMStructer<Monster>(this);
+        ftm = Util.GetORAddComponet<FindToMove>(gameObject);
+        idt = Util.GetORAddComponet<ItemDropTable>(gameObject);
+
         onDie = new UnityEvent<Transform>();
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
         else fsm.SetDefaultState(ReturnPatrol());
+
+        deadQuestAction = new List<QuestAction>() { QuestAction.Kill, QuestAction.Monster };
     }
 
     private void Update()
@@ -121,11 +126,15 @@ public class Monster : MonoBehaviour, IDamage
 
     public void Dead(float dstroyTimeDuration)
     {
-        //Util.GetChildren<BoxCollider>(gameObject)[0].enabled = false;
-        gameObject.GetComponentsInChildren<BoxCollider>()[0].enabled = false;
+        gameObject.GetComponentsInChildren<Collider>()[0].enabled = false;
 
         MonsterSpawnManager.Instance.aliveMonsterCount--;
+        
         onDie.Invoke(this.transform);
+
+        QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
+
+        idt.Loot();
         Destroy(gameObject, dstroyTimeDuration);
     }
 
@@ -155,7 +164,7 @@ public class Monster : MonoBehaviour, IDamage
 
     public virtual void HitParticle()
     {
-        Instantiate(hitParticle, transform.position, Quaternion.identity);
+        //Instantiate(hitParticle, transform.position, Quaternion.identity);
     }
 }
 
@@ -347,6 +356,8 @@ namespace DefaultMonsterFSM
         {
             monster = component as Monster;
             monster.animator.SetTrigger("Die");
+
+            Debug.Log("죽음");
 
             monster.Dead();
         }
