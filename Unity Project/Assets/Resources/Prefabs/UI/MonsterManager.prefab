@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 5469570012813569285}
   - component: {fileID: 402422480}
   m_Layer: 5
-  m_Name: WaveGenerator
+  m_Name: WaveNodeGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -859,10 +859,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789c5d70ba8978348a8fef85226e2a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParant: {fileID: 0}
-  spawnDistance: 1
+  type: 0
+  maxAliveMonsterCount: 10
+  SpawnPositionType:
+    x: 1
+    y: 0
+    z: 1
+  spawnPoolParant: {fileID: 0}
+  spawnMinDistance: 10
+  spawnMaxDistance: 20
   aliveMonsterCount: 0
-  maxAliveMonsterCount: 100
+  isTarget: 1
+  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnTarget: {fileID: 0}
+  spawnSpot_Object: []
   waveNode:
     monsterNodeList: []
     award: 

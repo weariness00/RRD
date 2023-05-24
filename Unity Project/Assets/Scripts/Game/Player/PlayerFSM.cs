@@ -174,7 +174,6 @@ namespace PlayerFSM
             pc = component as PlayerController;
             pc.animator.ResetTrigger("EndAttack");
             pc.animator.SetTrigger("StartAttack");
-            pc.AttackCall?.Invoke();
 
             pc.StartCoroutine(EndAttack());
         }
@@ -242,6 +241,7 @@ namespace PlayerFSM
 
         public void StateExit()
         {
+            pc.StopCoroutine(EndHit());
         }
 
         public void StatePause()

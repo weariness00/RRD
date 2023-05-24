@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public Skill skill_E;
     public Vector3 motionSpeed;
 
-    [HideInInspector] public UnityEvent AttackCall;
+    [HideInInspector] public UnityEvent<GameObject> AttackCall; // 임시
+    [HideInInspector] public Crowbar crowbar = new Crowbar(); // 임시
     [HideInInspector] public UnityEvent LevelUpCall;
 
     public bool outofcombat;
@@ -58,7 +59,14 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if(other.tag == "Monster")
         {
-            Managers.Damage.Attack(other.GetComponentInParent<Monster>(), status.damage.Cal());
+            AttackCall?.Invoke(other.gameObject);
+
+            // 임시
+            float damage;
+            damage = crowbar.ItemEffect(status.damage.Cal());
+            // ---------
+
+            Managers.Damage.Attack(other.GetComponentInParent<Monster>(), damage);
         }
     }
 

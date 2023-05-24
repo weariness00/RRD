@@ -25,7 +25,7 @@ public class DetonateDead: Skill
         foreach(var hit in hits)
         {
             Monster monster = hit.transform.GetComponent<Monster>();
-            if (monster.status.dead)
+            if (monster.status.isDead)
             {
                 deadBody.Add(monster);
             }

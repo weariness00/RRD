@@ -128,13 +128,13 @@ public class Monster : MonoBehaviour, IDamage
     {
         gameObject.GetComponentsInChildren<Collider>()[0].enabled = false;
 
-        MonsterSpawnManager.Instance.aliveMonsterCount--;
+        //MonsterSpawnManager.Instance.aliveMonsterCount--;
         
-        onDie.Invoke(this.transform);
+        onDie?.Invoke(this.transform);
 
-        QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
+        //QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
 
-        idt.Loot();
+        //idt.Loot();
         Destroy(gameObject, dstroyTimeDuration);
     }
 
@@ -154,7 +154,8 @@ public class Monster : MonoBehaviour, IDamage
     {
         if (status.hp.value >= status.maxHp.value * 0.9f)
         {
-            damage = crowbar.GetComponent<Crowbar>().ItemEffect(damage);
+            if(crowbar != null) 
+                damage = crowbar.GetComponent<Crowbar>().ItemEffect(damage);
         }
         status.hp.value -= damage;
 
@@ -251,17 +252,18 @@ namespace DefaultMonsterFSM
     public class Attack : IStateMachine
     {
         Monster monster;
+        Coroutine EndAttackCoroutine;
         public void StateEnter<T>(T component) where T : Component
         {
             monster = component as Monster;
 
             monster.animator.SetTrigger("Attack");
-            monster.StartCoroutine(EndAttack());
+            EndAttackCoroutine = monster.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
-            monster.StopCoroutine(EndAttack());
+            monster.StopCoroutine(EndAttackCoroutine);
         }
 
         public void StatePause()
@@ -279,13 +281,15 @@ namespace DefaultMonsterFSM
 
         IEnumerator EndAttack()
         {
+            float findTiem = 0f;
             while (true)
             {
                 yield return null;
+                findTiem += Time.deltaTime;
                 if (monster.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Type")) break;
             }
 
-            yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(monster.animator.GetCurrentAnimatorStateInfo(0).length - findTiem);
             monster.fsm.PopState();
         }
     }

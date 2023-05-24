@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+interface IItem
+{
+	public void IItemEffect();
+}
+
 public class Item : MonoBehaviour
 {
 	protected bool isGet = false; // 이 아이템을 다른 누군가가 습득 할 수 있는지

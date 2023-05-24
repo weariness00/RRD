@@ -42,7 +42,7 @@ public class Status : MonoBehaviour
     public int jumpCount;
     [Space]
 
-    public bool dead;
+    public bool isDead;
 
     private void Start()
     {
@@ -54,6 +54,13 @@ public class Status : MonoBehaviour
         while(true)
         {
             yield return stdfx.OneSecond;
+
+            if (hp.Cal() <= 0)
+            {
+                StopCoroutine(Recovery());
+                break;
+            }
+
             Mathf.Clamp(hp.value,0, maxHp.Cal());
             Mathf.Clamp(mp.value,0, maxMp.Cal());
         }

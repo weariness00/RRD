@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ObjectEventHandle : MonoBehaviour
 {
+    public Dictionary<string, GameObject> objects;
     public Dictionary<string, Component> componets = new Dictionary<string, Component>();
 
     public UnityEvent<ObjectEventHandle> AwakeEvent = new UnityEvent<ObjectEventHandle>();
