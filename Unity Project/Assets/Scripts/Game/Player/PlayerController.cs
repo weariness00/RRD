@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [HideInInspector] public UnityEvent<GameObject> AttackCall; // 임시
     [HideInInspector] public Crowbar crowbar = new Crowbar(); // 임시
+    [HideInInspector] public Dictionary<string, GameObject> ItemClassList = new Dictionary<string, GameObject>();
     [HideInInspector] public UnityEvent LevelUpCall;
 
     public bool outofcombat;
@@ -60,12 +61,11 @@ public class PlayerController : MonoBehaviour, IDamage
         if(other.tag == "Monster")
         {
             AttackCall?.Invoke(other.gameObject);
-
             // 임시
             float damage;
             damage = crowbar.ItemEffect(status.damage.Cal());
             // ---------
-
+            
             Managers.Damage.Attack(other.GetComponentInParent<Monster>(), damage);
         }
     }

@@ -24,6 +24,7 @@ public class Muryotaisu : PlayerController
         if (other.tag == "Monster")
         {
             float damage = status.damage.Cal() + equipment.weapon.status.damage.Cal();
+            //ItemClassList["StunGrenade"].GetComponent<StunGrenade>().ItemEffect(other);
             Managers.Damage.Attack(other.GetComponentInParent<Monster>(),damage);
         }
     }

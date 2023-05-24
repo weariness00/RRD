@@ -8,16 +8,18 @@ public class StunGrenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plyaer")
+        Debug.Log("그냥 충돌");
+        if (other.tag == "Player")
         {
-            Destroy(gameObject);
-
             iteminfo.amount++;
+            GameManager.Instance.Player.ItemClassList.Add(name, gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     public void ItemEffect(Collider monster)
     {
+        Debug.Log("아이템 효과 발동");
         if(Random.Range(1, 100) <= 5)
         {
             //스턴 -> 지속이라 코루틴으로

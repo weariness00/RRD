@@ -8,12 +8,15 @@ public class BustlingFungus : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plyaer")
+        if (other.tag == "Player")
         {
-            Destroy(gameObject);
-
             iteminfo.amount++;
+
+
+            gameObject.SetActive(false);
         }
+
+        
     }
 
     private void Update()

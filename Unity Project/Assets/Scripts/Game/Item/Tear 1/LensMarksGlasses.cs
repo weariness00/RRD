@@ -14,7 +14,12 @@ public class LensMarksGlasses : MonoBehaviour
             Destroy(gameObject);
 
             iteminfo.amount++;
-            GameManager.Instance.Player.GetOrAddComponent<Status>().criticalProbability.value += 10f;
+            
         }
+    }
+
+    public void ItemEffect()
+    {
+        GameManager.Instance.Player.GetOrAddComponent<Status>().criticalProbability.value += 10f;
     }
 }

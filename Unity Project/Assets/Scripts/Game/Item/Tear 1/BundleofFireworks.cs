@@ -37,6 +37,4 @@ public class BundleofFireworks : Item
         handle.transform.position = Vector3.MoveTowards(handle.transform.position ,handle.objects["Target"].transform.position, Time.deltaTime * misileSpeed);
     }
     
-
-    //객체를 생성해주고 각각 미사일마다 감지 범위를 줘야하나
 }
