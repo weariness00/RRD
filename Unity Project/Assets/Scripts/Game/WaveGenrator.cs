@@ -29,7 +29,7 @@ public struct WaveNode
 
 public class WaveGenrator : MonoBehaviour
 {
-    public GameObject[] buttons;
+    public Button[] buttons;
 
     public List<WaveNode> waveList;
     WaveNode currentWaveNode;
@@ -41,7 +41,18 @@ public class WaveGenrator : MonoBehaviour
     {
         GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
         GameManager.Instance.StopWaveCall.AddListener(WaveGenerate);
+
+        GameManager.Instance.UpdateCall.AddListener(OnOff);
+
+
+
         WaveGenerate();
+    }
+
+    public void OnOff()
+    {
+        if (Managers.Key.InputActionDown(KeyToAction.WaveGenerator_UI))
+            gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void WaveGenerate()

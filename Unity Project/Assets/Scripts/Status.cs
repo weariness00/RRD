@@ -18,6 +18,7 @@ public struct StatusValue
 public class Status : MonoBehaviour
 {
     public int level = 1;
+    public float need_Exp = 1 * 35f;
     public float experience;
     public float experiencePercent;   
     [Space]
@@ -68,11 +69,10 @@ public class Status : MonoBehaviour
 
     public bool LevelUP()
     {
-        float needExp = level * 35f;
-        if (needExp < experience)
+        if (need_Exp < experience)
         {
-            level++;
-            experience -= needExp;
+            experience -= need_Exp;
+            need_Exp = ++level * 35f;
 
             return true;
         }

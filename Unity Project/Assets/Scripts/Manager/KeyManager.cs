@@ -28,7 +28,8 @@ public enum KeyToAction
     Inventory,
 
     KeyManager,
-    MonsterSpawnManager,
+    WaveGenerator_UI,
+    Quest_UI,
 
     Skill_Q,
     Skill_E,

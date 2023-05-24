@@ -59,6 +59,17 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+		GameManager.Instance.UpdateCall.AddListener(OnOff);
+    }
+
+    void OnOff()
+	{
+		if (Managers.Key.InputActionDown(KeyToAction.Quest_UI)) 
+			gameObject.SetActive(!gameObject.activeSelf);
+	}
+
     public void AddQuest(Quest node)
 	{
 		Array.Sort(node.Progress);

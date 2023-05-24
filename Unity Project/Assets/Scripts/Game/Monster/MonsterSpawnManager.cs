@@ -46,15 +46,7 @@ public class MonsterSpawnManager : MonoBehaviour
         GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
         GameManager.Instance.StopWaveCall.AddListener(AliveMonsterAllKill);
 
-        GameManager.Instance.UpdateCall.AddListener(OnOff);
-
         gameObject.SetActive(false);
-    }
-
-    public void OnOff()
-    {
-        if (Managers.Key.InputActionDown(KeyToAction.MonsterSpawnManager))
-            gameObject.SetActive(!gameObject.activeSelf);
     }
 
     void Spawn()

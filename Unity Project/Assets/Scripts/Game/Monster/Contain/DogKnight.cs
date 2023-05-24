@@ -46,10 +46,11 @@ namespace Monsters
         public class Attack : IStateMachine
         {
             DogKnight monster;
+            Coroutine EndAttackCorounine;
             public void StateEnter<T>(T component) where T : Component
             {
                 monster = component as DogKnight;
-                monster.StartCoroutine(EndAttack());
+                EndAttackCorounine = monster.StartCoroutine(EndAttack());
 
                 monster.animator.SetFloat("Attack Type", ChagneAttackType());
 
@@ -58,7 +59,7 @@ namespace Monsters
 
             public void StateExit()
             {
-                monster.StopCoroutine(EndAttack());
+                monster.StopCoroutine(EndAttackCorounine);
             }
 
             public void StatePause()

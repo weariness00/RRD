@@ -128,13 +128,13 @@ public class Monster : MonoBehaviour, IDamage
     {
         gameObject.GetComponentsInChildren<Collider>()[0].enabled = false;
 
-        //MonsterSpawnManager.Instance.aliveMonsterCount--;
-        
+        MonsterSpawnManager.Instance.aliveMonsterCount--;
+
         onDie?.Invoke(this.transform);
 
-        //QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
+        QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
 
-        //idt.Loot();
+        idt.Loot();
         Destroy(gameObject, dstroyTimeDuration);
     }
 

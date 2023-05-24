@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Monster")
         {
