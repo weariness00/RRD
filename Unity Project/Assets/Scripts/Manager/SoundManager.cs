@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
 
 public enum SoundType
 {
@@ -11,15 +14,21 @@ public enum SoundType
 	MaxValue
 }
 
-public class SoundManager
+public class SoundManager : UIUtil
 {
+	public GameObject Sound_UI;
 	AudioSource[] audioSources = new AudioSource[(int)SoundType.MaxValue];
 	Dictionary<string, AudioClip> clipDictionary = new Dictionary<string, AudioClip>();
+
+	string defualt_Path = "Sound/";
 
 	public SoundManager()
 	{
 		Managers.Instance.StartCall += Init;
-	}
+		Managers.Instance.UpdateCall += Update;
+
+		UIInit();
+    }
 
 	public void Init()
 	{
@@ -37,39 +46,67 @@ public class SoundManager
 			}
 		}
 	}
+    void UIInit()
+    {
+        Sound_UI = Util.FindChild(Managers.Instance.gameObject, "Sound UI Canvas");
 
-	public void Play(string path, SoundType type = SoundType.Effect, float pitch = 1.0f)
+        //Bind<Button>(Sound_UI, new string[] { "Back Button" });
+        foreach (var soundTypeName in Enum.GetNames(typeof(SoundType)))
+            Bind<Slider>(Sound_UI, new string[] { $"{soundTypeName} Slider" });
+
+    }
+
+	void Update()
 	{
-		if(type == SoundType.BGM)
-		{
-			AudioClip clip = GetORAddAudioClip(path);
-			if(clip != null )
-			{
-				Debug.Log($"AudioClip Missing : {path}");
-				return;
-			}
+        for (int i = 0; i < (int)SoundType.MaxValue; i++)
+			audioSources[i].volume = Get<Slider>(i).value;
+    }
 
-			AudioSource source = audioSources[(int)SoundType.BGM];
-			if (source.isPlaying)
-				source.Stop();
+    public void Play(string path, SoundType type = SoundType.Effect, float pitch = 1.0f)
+	{
+		if(!path.Contains("/"))
+			path = defualt_Path + path;
 
-			source.clip = clip;
-			source.pitch = pitch;
-			source.loop = true;
-			source.Play();
+		AudioSource source;
+		AudioClip clip = GetORAddAudioClip(path);
+        if (clip == null)
+        {
+            Debug.LogWarning($"AudioClip Missing : {path}");
+            return;
         }
-		else
-		{
-            AudioClip clip = GetORAddAudioClip(path);
-            if (clip != null)
-            {
-                Debug.Log($"AudioClip Missing : {path}");
-                return;
-            }
-        }
-	}
+		Play(clip, type, pitch);
+    }
 
-	public void Clear()
+    public void Play(AudioClip clip, SoundType type = SoundType.Effect, float pitch = 1.0f)
+	{
+		if(clip == null)
+		{
+			Debug.LogWarning("사운드 Clip이 존재하지 않습니다.");
+			return;
+		}
+
+        AudioSource source;
+        if (type == SoundType.BGM)
+        {
+            source = audioSources[(int)SoundType.BGM];
+            if (source.isPlaying)
+                source.Stop();
+
+            source.clip = clip;
+            source.pitch = pitch;
+            source.loop = true;
+
+            source.Play();
+        }
+        else
+        {
+            source = audioSources[(int)SoundType.Effect];
+            source.pitch = pitch;
+            source.PlayOneShot(clip);
+        }
+    }
+
+    public void Clear()
 	{
 		foreach(AudioSource source in audioSources)
 		{

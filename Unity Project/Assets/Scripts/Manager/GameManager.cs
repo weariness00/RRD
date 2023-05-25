@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
 	public static GameManager Instance { get { Init(); return instance; } }
 
-    public PlayerController Player;
+    public AudioClip bgm;
+
+    [HideInInspector] public PlayerController Player;
 
     public bool isWave = false;
     public float waveTime = 60f;
@@ -32,6 +34,11 @@ public class GameManager : MonoBehaviour
         alivePlayerCount++;
 
         StartCoroutine(InitData());
+    }
+
+    private void Start()
+    {
+        Managers.Sound.Play(bgm, SoundType.BGM);
     }
 
     private void Update()

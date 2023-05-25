@@ -22,7 +22,10 @@ public class Util
     {
         Transform transform = FindChild<Transform>(_Object, name, isRecursive);
         if (transform == null)
+        {
+            Debug.LogWarning($"{_Object.name}하위에 {name}이라는 오브젝트가 존재하지 않습니다.");
             return null;
+        }
 
         return transform.gameObject;
     }
