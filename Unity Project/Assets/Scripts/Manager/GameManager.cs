@@ -66,7 +66,17 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         isPause = !isPause;
-        Time.timeScale = isPause ? 0 : 1;
+
+        if(isPause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
     }
 
     public void StartWave()
