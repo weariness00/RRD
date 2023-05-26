@@ -278,7 +278,7 @@ namespace PlayerFSM
 
             int count = GameManager.Instance.alivePlayerCount--;
             if (count <= 0)
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameEnd();
             // 사망 애니메이션 호출
         }
 

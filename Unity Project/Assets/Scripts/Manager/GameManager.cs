@@ -93,11 +93,6 @@ public class GameManager : MonoBehaviour
         StopWaveCall?.Invoke();
     }
 
-    public void GameOver()
-    {
-        // 게임 오버 씬으로 전환
-    }
-
     public void GameEnd()
     {
         Pause();
