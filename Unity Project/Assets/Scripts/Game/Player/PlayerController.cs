@@ -5,10 +5,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using PlayerFSM;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 [CanEditMultipleObjects]
 public class PlayerController : MonoBehaviour, IDamage
 {
+    public Transform LookTransform;
     [HideInInspector] public FSMStructer<PlayerController> fsm;
     [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public UnityEvent LevelUpCall;
 
     public bool outofcombat;
+    public bool isStop = false;
 
     private void Awake()
     {
@@ -37,8 +40,10 @@ public class PlayerController : MonoBehaviour, IDamage
         fsm.SetDefaultState(new Idle());
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        if (GameManager.Instance.isPause) return;
+
         fsm.Update();
 
         if (Managers.Key.InputActionDown(KeyToAction.Attack))
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Monster")
         {
@@ -72,8 +77,25 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Move(Vector3 direction)
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 2 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 10.0f* Time.deltaTime);
         transform.position += direction * status.speed.Cal() * Time.deltaTime;
+    }
+
+    public Vector3 MoveMent()
+    {
+        Vector3 dir = Vector3.zero;
+
+        if (Managers.Key.InputAction(KeyToAction.MoveFront))
+            dir += LookTransform.forward;
+        if (Managers.Key.InputAction(KeyToAction.MoveBack))
+            dir += -LookTransform.forward;
+        if (Managers.Key.InputAction(KeyToAction.MoveLeft))
+            dir += -LookTransform.right;
+        if (Managers.Key.InputAction(KeyToAction.MoveRight))
+            dir += LookTransform.right;
+
+        dir.y = 0;
+        return dir;
     }
 
     public void ReSpawn()

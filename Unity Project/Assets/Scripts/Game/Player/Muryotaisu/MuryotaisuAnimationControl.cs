@@ -15,6 +15,7 @@ public class MuryotaisuAnimationControl : MonoBehaviour
 	{
         player.equipment.weapon.OnEffect();
         player.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
+        Managers.Sound.Play(player.attack, SoundType.Effect, 1.5f);
         StartCoroutine(StopAttack());
     }
 

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public PlayerController Player;
 
+    public bool isPause = false;
     public bool isWave = false;
     public float waveTime = 60f;
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         alivePlayerCount++;
 
         StartCoroutine(InitData());
+        isPause = false;
     }
 
     private void Start()
@@ -46,10 +48,7 @@ public class GameManager : MonoBehaviour
         UpdateCall?.Invoke();
 
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
             PauseCall?.Invoke();
-        }
     }
 
     static void Init()
@@ -66,7 +65,8 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        isPause = !isPause;
+        Time.timeScale = isPause ? 0 : 1;
     }
 
     public void StartWave()

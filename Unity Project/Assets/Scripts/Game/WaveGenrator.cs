@@ -44,15 +44,17 @@ public class WaveGenrator : MonoBehaviour
 
         GameManager.Instance.UpdateCall.AddListener(OnOff);
 
-
-
         WaveGenerate();
+
+        gameObject.SetActive(false);
     }
 
     public void OnOff()
     {
         if (Managers.Key.InputActionDown(KeyToAction.WaveGenerator_UI))
+        {
             gameObject.SetActive(!gameObject.activeSelf);
+        }
     }
 
     public void WaveGenerate()

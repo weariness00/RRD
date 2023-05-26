@@ -45,8 +45,6 @@ public class MonsterSpawnManager : MonoBehaviour
 
         GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
         GameManager.Instance.StopWaveCall.AddListener(AliveMonsterAllKill);
-
-        gameObject.SetActive(false);
     }
 
     void Spawn()

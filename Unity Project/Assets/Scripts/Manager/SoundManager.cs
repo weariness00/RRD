@@ -48,12 +48,11 @@ public class SoundManager : UIUtil
 	}
     void UIInit()
     {
-        Sound_UI = Util.FindChild(Managers.Instance.gameObject, "Sound UI Canvas");
+		//Sound_UI = GameObject.FindGameObjectWithTag("Sound");
+		Sound_UI = Util.FindChild(Util.FindChild(Managers.Instance.gameObject, "Setting Canvas"), "Sound UI");
 
-        //Bind<Button>(Sound_UI, new string[] { "Back Button" });
-        foreach (var soundTypeName in Enum.GetNames(typeof(SoundType)))
+		foreach (var soundTypeName in Enum.GetNames(typeof(SoundType)))
             Bind<Slider>(Sound_UI, new string[] { $"{soundTypeName} Slider" });
-
     }
 
 	void Update()

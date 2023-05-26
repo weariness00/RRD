@@ -82,16 +82,7 @@ namespace PlayerFSM
             if (Managers.Key.InputAction(KeyToAction.Run))
                 pc.fsm.PushState(new Run());
 
-            Vector3 dir = Vector3.zero;
-
-            if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                dir += Vector3.forward;
-            if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                dir += Vector3.back;
-            if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                dir += Vector3.left;
-            if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                dir += Vector3.right;
+            Vector3 dir = pc.MoveMent();
 
             if (!Managers.Key.InputAnyKey || dir.Equals(Vector3.zero))
             {
@@ -131,16 +122,7 @@ namespace PlayerFSM
 
         public void StateUpdate()
         {
-            Vector3 dir = Vector3.zero;
-
-            if (Managers.Key.InputAction(KeyToAction.MoveFront))
-                dir += Vector3.forward;
-            if (Managers.Key.InputAction(KeyToAction.MoveBack))
-                dir += Vector3.back;
-            if (Managers.Key.InputAction(KeyToAction.MoveLeft))
-                dir += Vector3.left;
-            if (Managers.Key.InputAction(KeyToAction.MoveRight))
-                dir += Vector3.right;
+            Vector3 dir = pc.MoveMent();
 
             if (dir.Equals(Vector3.zero))
             {

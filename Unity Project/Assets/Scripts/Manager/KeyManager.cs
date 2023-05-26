@@ -27,6 +27,7 @@ public enum KeyToAction
 
     Inventory,
 
+    Setting_UI,
     KeyManager,
     WaveGenerator_UI,
     Quest_UI,
@@ -40,21 +41,12 @@ public enum KeyToAction
 /// </summary>
 public class KeyManager : UIUtil
 {
-    public GameObject keyObject;
 	public Dictionary<KeyToAction, KeyCode> keyDictionary = new Dictionary<KeyToAction, KeyCode>();
 
     public KeyManager()
     {
-        keyObject = Util.FindChild(Managers.Instance.gameObject, "KeyManager");
         Managers.Instance.StartCall += DefulatKeySetting;
         Managers.Instance.OnGUICall += OnGUI;
-        Managers.Instance.UpdateCall += OnOff;
-    }
-
-    public void OnOff()
-    {
-        if (InputActionDown(KeyToAction.KeyManager))
-            keyObject.SetActive(!keyObject.activeSelf);
     }
 
     public void OnGUI()
@@ -80,13 +72,12 @@ public class KeyManager : UIUtil
     /// </summary>
     public void DefulatKeySetting()
 	{
-        keyObject.SetActive(true);
-
         GameObject keyFieldObject = Resources.Load("Prefabs/UI/KeyField") as GameObject;
-        KeySettingData keyData = Resources.Load("Data/Key/KeySettingData") as KeySettingData;
+        KeySettingData keyData = Resources.Load<ScriptableObject>("Data/Key/KeySettingData") as KeySettingData;
 
-        RectTransform viewRect = GameObject.Find("KeyScrollView").GetComponent<RectTransform>();
-        RectTransform contentsRect = viewRect.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>();  // 맵핑을 하기위한 오브젝트 로드
+        //RectTransform viewRect = GameObject.Find("KeyScrollView").GetComponent<RectTransform>();
+        ScrollRect viewRect = Util.FindChild(Util.FindChild(Managers.Instance.gameObject, "Setting Canvas"), "Key UI").GetComponent<ScrollRect>();
+        RectTransform contentsRect = viewRect.content;  // 맵핑을 하기위한 오브젝트 로드
 
         for (int i = 0; i < keyData.Default.Count; i++)
         {
@@ -109,7 +100,7 @@ public class KeyManager : UIUtil
         // 버튼을 동적 할당 했기에 사이즈를 조정해줘야함
         contentsRect.sizeDelta = new Vector2(
             contentsRect.rect.width,
-            (keyData.Default.Count + 1) * keyFieldObject.GetComponent<RectTransform>().sizeDelta.y - viewRect.rect.height
+            (keyData.Default.Count + 1) * keyFieldObject.GetComponent<RectTransform>().sizeDelta.y - viewRect.GetComponent<RectTransform>().rect.height
             );
 
         for (int i = 0; i < keyData.Default.Count; i++)
@@ -119,8 +110,6 @@ public class KeyManager : UIUtil
             button.onClick.AddListener(() => OnKeyIndex(temp));
             button.onClick.AddListener(() => OnKeyButton(button.GetComponentInChildren<TMP_Text>()));
         }
-
-        keyObject.SetActive(false);
     }
 
     public bool InputActionDown(KeyToAction action)
