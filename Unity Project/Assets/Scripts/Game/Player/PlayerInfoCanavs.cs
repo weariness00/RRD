@@ -24,7 +24,7 @@ public class PlayerInfoCanavs : MonoBehaviour
         status = GameManager.Instance.Player.status;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         OnChangeInfo();
     }
