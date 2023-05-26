@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIUtil
+public class UIUtil : MonoBehaviour
 {
     Dictionary<Type, UnityEngine.Object[]> objectDictionary = new Dictionary<Type, UnityEngine.Object[]>();
 

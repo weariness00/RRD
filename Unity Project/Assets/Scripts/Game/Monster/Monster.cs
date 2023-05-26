@@ -84,6 +84,7 @@ public class Monster : MonoBehaviour, IDamage
         ftm = Util.GetORAddComponet<FindToMove>(gameObject);
         idt = Util.GetORAddComponet<ItemDropTable>(gameObject);
 
+        Util.GetORAddComponet<Monster_UI>(gameObject);
         onDie = new UnityEvent<Transform>();
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());

@@ -1931,6 +1931,7 @@ GameObject:
   - component: {fileID: 7521581843902347624}
   - component: {fileID: -4084529463786041531}
   - component: {fileID: -7443955749363190465}
+  - component: {fileID: 8219397653593812280}
   m_Layer: 7
   m_Name: DogKnight
   m_TagString: Monster
@@ -2027,6 +2028,19 @@ MonoBehaviour:
   crowbar: {fileID: 0}
   hitParticle: {fileID: 8402303112826440722, guid: a00177d35599fb2479882f1e3cf0597a, type: 3}
   deadQuestAction: 
+--- !u!114 &8219397653593812280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565694414027245538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4160dc990bf4e60419d5f73fc3b85162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp_Bar: {fileID: 2418338806527081642, guid: 1461d215831ce6c4cbe38ed1f0a6d706, type: 3}
 --- !u!1 &2565694414027245540
 GameObject:
   m_ObjectHideFlags: 0

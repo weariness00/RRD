@@ -15,37 +15,13 @@ public enum QuestAction
 
 	Monster,
 }
-
-[System.Serializable]
-public class QuestUI : UIUtil
-{
-	int nodeLenth = 0;
-	public void AddNode(GameObject ui, Quest quest)
-	{
-		Bind<TMP_Text>(ui, new string[] { "Title" });
-		Bind<TMP_Text>(ui, new string[] { "Text" });
-		Bind<TMP_Text>(ui, new string[] { "Goal" });
-
-		UpdateNode(quest, nodeLenth);
-		++nodeLenth;
-    }
-
-	public void UpdateNode(Quest quest, int index)
-	{
-        Get<TMP_Text>(index * 2).text = quest.title;
-        Get<TMP_Text>(index * 2 + 1).text = quest.text;
-        Get<TMP_Text>(index * 2 + 2).text = $"{quest.count} / {quest.golaCount}";
-    }
-}
-
-public class QuestManager : MonoBehaviour
+public class QuestManager : UIUtil
 {
 	static public QuestManager Instance { get; private set; }
 	public Transform NodeParentTransform;
     public GameObject uiNode;
 
-	public QuestUI ui;
-
+    int nodeLenth = 0;
     public List<Quest> questList;
 
     private void Awake()
@@ -55,7 +31,7 @@ public class QuestManager : MonoBehaviour
 		foreach (var item in questList)
 		{
             GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
-            ui.AddNode(uiObj, item);
+            AddNode(uiObj, item);
         }
     }
 
@@ -70,6 +46,23 @@ public class QuestManager : MonoBehaviour
 			gameObject.SetActive(!gameObject.activeSelf);
 	}
 
+    public void AddNode(GameObject ui, Quest quest)
+    {
+        Bind<TMP_Text>(ui, new string[] { "Title" });
+        Bind<TMP_Text>(ui, new string[] { "Text" });
+        Bind<TMP_Text>(ui, new string[] { "Goal" });
+
+        UpdateNode(quest, nodeLenth);
+        ++nodeLenth;
+    }
+
+    public void UpdateNode(Quest quest, int index)
+    {
+        Get<TMP_Text>(index * 2).text = quest.title;
+        Get<TMP_Text>(index * 2 + 1).text = quest.text;
+        Get<TMP_Text>(index * 2 + 2).text = $"{quest.count} / {quest.golaCount}";
+    }
+
     public void AddQuest(Quest node)
 	{
 		Array.Sort(node.Progress);
@@ -78,7 +71,7 @@ public class QuestManager : MonoBehaviour
         questList.OrderBy(q => q.id);
 
 		GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
-		ui.AddNode(uiObj, node);
+		AddNode(uiObj, node);
     }
 
 	public void SendQeustEvent(QuestAction[] actions)
@@ -88,7 +81,7 @@ public class QuestManager : MonoBehaviour
 		int count = 0;
 		questList.ForEach(quest => {
 			if (!quest.CheckProgress(actions)) return;
-            ui.UpdateNode(quest, count);
+            UpdateNode(quest, count);
 			++count;
         });
     }
