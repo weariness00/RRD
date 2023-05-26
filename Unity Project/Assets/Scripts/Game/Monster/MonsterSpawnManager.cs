@@ -49,7 +49,7 @@ public class MonsterSpawnManager : MonoBehaviour
 
     void Spawn()
     {
-        foreach(var monsterNode in waveNode.monsterNodeList)
+        foreach (var monsterNode in waveNode.monsterNodeList)
         {
             spawnCoroutineList.Add(monsterNodeSpawn(monsterNode));
         }
@@ -86,7 +86,7 @@ public class MonsterSpawnManager : MonoBehaviour
 
             for (int i = 0; i < node.spawnCount; i++)
             {             
-                GameObject obj = Util.Instantiate(node.monster, monsterUnion.transform);
+                GameObject obj = Util.Instantiate(node.monster.gameObject, monsterUnion.transform);
                 Monster monster = Util.GetORAddComponet<Monster>(obj);
                 ItemDropTable idt = Util.GetORAddComponet<ItemDropTable>(obj);
 

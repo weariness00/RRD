@@ -2018,12 +2018,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  icon: {fileID: 21300000, guid: 2114e84494c9244439bdc327e83e58c6, type: 3}
   type: 0
   rate: 0
   animator: {fileID: 0}
   status: {fileID: 0}
   ftm: {fileID: 0}
+  crowbar: {fileID: 0}
   hitParticle: {fileID: 8402303112826440722, guid: a00177d35599fb2479882f1e3cf0597a, type: 3}
+  deadQuestAction: 
 --- !u!1 &2565694414027245540
 GameObject:
   m_ObjectHideFlags: 0

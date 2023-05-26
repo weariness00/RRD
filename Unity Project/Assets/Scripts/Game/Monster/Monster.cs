@@ -56,6 +56,7 @@ public class Monster : MonoBehaviour, IDamage
     static public bool isOnIdle = false;
 
     public int id;
+    public Sprite icon;
 
     [Space]
     public MonsterType type;
