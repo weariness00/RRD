@@ -2999,6 +2999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e37a2b0e2b06a40983091d059c6e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LookTransform: {fileID: 0}
   animationController: {fileID: 0}
   status: {fileID: 0}
   animator: {fileID: 0}
@@ -3013,6 +3014,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   outofcombat: 0
+  isStop: 0
   equipment:
     weapon: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
     leftHand: {fileID: 2092131846}
@@ -5002,10 +5004,10 @@ MonoBehaviour:
   m_Data:
     m_ConstrainedObject: {fileID: 1415207003902317102}
     m_SourceObjects:
-      m_Length: 0
+      m_Length: 1
       m_Item0:
         transform: {fileID: 0}
-        weight: 0
+        weight: 1
       m_Item1:
         transform: {fileID: 0}
         weight: 0
@@ -5028,8 +5030,8 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
+    m_MinLimit: -50
+    m_MaxLimit: 51
     m_AimAxis: 4
     m_UpAxis: 2
     m_WorldUpType: 0
@@ -5037,9 +5039,9 @@ MonoBehaviour:
     m_WorldUpAxis: 2
     m_MaintainOffset: 0
     m_ConstrainedAxes:
-      x: 1
+      x: 0
       y: 1
-      z: 1
+      z: 0
 --- !u!1 &8746524290502426464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5248,6 +5250,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 229408625}
     m_Modifications:
+    - target: {fileID: 7267506695001962144, guid: ae6e1dd39df0eac42b8f79c6072de3d8, type: 3}
+      propertyPath: vfx
+      value: 
+      objectReference: {fileID: 7820905956998776512, guid: 41be406ed0f857148bcd64cad75fcf74, type: 3}
     - target: {fileID: 7267506695001962146, guid: ae6e1dd39df0eac42b8f79c6072de3d8, type: 3}
       propertyPath: m_Name
       value: Camera Attack

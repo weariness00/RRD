@@ -44,7 +44,6 @@ public class WindCutter : Skill
 
         Skill cutterSkill = Util.GetORAddComponet<Skill>(obj);
         cutterSkill.status = Util.GetORAddComponet<Status>(obj);
-        cutterSkill.isGuide = false;
         cutterSkill.status = status;
         cutterSkill.OnSkill();
 

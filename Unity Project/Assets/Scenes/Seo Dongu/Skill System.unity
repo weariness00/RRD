@@ -130,10 +130,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 294711602, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701076782, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: Lazer
+      value: 
+      objectReference: {fileID: 7820905956998776512, guid: 41be406ed0f857148bcd64cad75fcf74, type: 3}
     - target: {fileID: 1474130738, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
       propertyPath: skill_E
       value: 
       objectReference: {fileID: 1974309494}
+    - target: {fileID: 1997905688, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 721109881349578583, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -186,6 +198,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4158239947747991842, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.126
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052800089157210447, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: LookTransform
+      value: 
+      objectReference: {fileID: 748868254}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
 --- !u!1 &148639485
@@ -335,6 +359,7 @@ GameObject:
   - component: {fileID: 384259453}
   - component: {fileID: 384259452}
   - component: {fileID: 384259456}
+  - component: {fileID: 384259457}
   m_Layer: 7
   m_Name: Monster (1)
   m_TagString: Untagged
@@ -436,6 +461,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &384259457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384259451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98878f1cb589fad448717bcb4c8dcbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: 0}
+  type: 0
+  rate: 0
+  animator: {fileID: 0}
+  status: {fileID: 0}
+  ftm: {fileID: 0}
+  crowbar: {fileID: 0}
+  hitParticle: {fileID: 0}
+  deadQuestAction: 
 --- !u!1 &508413950
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +594,7 @@ GameObject:
   - component: {fileID: 745239361}
   - component: {fileID: 745239360}
   - component: {fileID: 745239364}
+  - component: {fileID: 745239365}
   m_Layer: 7
   m_Name: Monster
   m_TagString: Untagged
@@ -648,6 +696,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &745239365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745239359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98878f1cb589fad448717bcb4c8dcbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: 0}
+  type: 0
+  rate: 0
+  animator: {fileID: 0}
+  status: {fileID: 0}
+  ftm: {fileID: 0}
+  crowbar: {fileID: 0}
+  hitParticle: {fileID: 0}
+  deadQuestAction: 
 --- !u!1 &748868250
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +963,7 @@ GameObject:
   - component: {fileID: 1291492075}
   - component: {fileID: 1291492074}
   - component: {fileID: 1291492073}
+  - component: {fileID: 1291492076}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -966,6 +1037,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1291492076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291492072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1295571298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,6 +1185,7 @@ GameObject:
   - component: {fileID: 1424024190}
   - component: {fileID: 1424024189}
   - component: {fileID: 1424024193}
+  - component: {fileID: 1424024194}
   m_Layer: 7
   m_Name: Monster (2)
   m_TagString: Untagged
@@ -1182,6 +1287,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1424024194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424024188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98878f1cb589fad448717bcb4c8dcbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: 0}
+  type: 0
+  rate: 0
+  animator: {fileID: 0}
+  status: {fileID: 0}
+  ftm: {fileID: 0}
+  crowbar: {fileID: 0}
+  hitParticle: {fileID: 0}
+  deadQuestAction: 
 --- !u!1 &1780611465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1437,7 @@ GameObject:
   - component: {fileID: 1836838379}
   - component: {fileID: 1836838378}
   - component: {fileID: 1836838382}
+  - component: {fileID: 1836838383}
   m_Layer: 7
   m_Name: Monster (3)
   m_TagString: Untagged
@@ -1411,6 +1539,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1836838383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836838377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98878f1cb589fad448717bcb4c8dcbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: 0}
+  type: 0
+  rate: 0
+  animator: {fileID: 0}
+  status: {fileID: 0}
+  ftm: {fileID: 0}
+  crowbar: {fileID: 0}
+  hitParticle: {fileID: 0}
+  deadQuestAction: 
 --- !u!1 &1859862617
 GameObject:
   m_ObjectHideFlags: 0
