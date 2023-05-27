@@ -108,6 +108,9 @@ public class MonsterSpawnManager : MonoBehaviour
                 }
                 obj.transform.position = new Vector3(SpawnPositionType.x ? pos.x : 0, SpawnPositionType.y ? pos.y : 0, SpawnPositionType.z ? pos.z : 0);
 
+                float terrainHeight = Terrain.activeTerrain.SampleHeight(obj.transform.position);
+                obj.transform.position += Vector3.up * terrainHeight;
+
                 aliveMonsterCount++;
             }
             yield return waitSpawn;

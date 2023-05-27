@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public enum ViewType
@@ -14,21 +12,16 @@ public enum ViewType
 
 public class CameraController : MonoBehaviour
 {
-	GameObject owner;
+    public Camera camera;
+	public GameObject owner;
+    Collider ownerCollider;
     public ViewType type = ViewType.Third_Person_View;
 
-    public Vector3 pivot_Offset;
     public Vector3 camera_offset;
-
-    public GameObject ownerObject;
-    public string ownerName;
 
     private void Start()
     {
-        owner = GameObject.FindGameObjectWithTag(ownerName);
-        if (ownerObject != null)
-            owner = ownerObject;
-
+        ownerCollider = owner.GetComponent<Collider>();
         switch (type)
         {
             case ViewType.Friest_Person_View:
@@ -53,11 +46,13 @@ public class CameraController : MonoBehaviour
                 Third_Person_View();
                 break;
             case ViewType.Quarter_View:
-                Camera.main.transform.position = camera_offset + owner.transform.position;
+                camera.transform.position = camera_offset + owner.transform.position;
                 break;
             default:
                 break;
         }
+
+
     }
 
     float xRotate, yRotate, xRotateMove, yRotateMove;
@@ -78,10 +73,18 @@ public class CameraController : MonoBehaviour
 
     void Third_Person_View()
     {
-        Camera.main.transform.LookAt(transform.position);
-        
-        transform.position = pivot_Offset + owner.transform.position;
+        camera.transform.LookAt(transform.position);
+        transform.position = ownerCollider.bounds.center;
         MousRotate(transform);
-        //transform.rotation = owner.transform.rotation;
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.forward, out hit, camera_offset.magnitude, LayerMask.GetMask("Terrain")))
+        {
+            camera.transform.localPosition = hit.point - transform.position;
+        }
+        else
+        {
+            camera.transform.localPosition = camera_offset;
+        }
     }
 }

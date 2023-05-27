@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +11,8 @@ public class GameManager : MonoBehaviour
     public AudioClip bgm;
 
     [HideInInspector] public PlayerController Player;
+
+    public Transform[] PlayerSpawnSpot; // 임시 나중에는 스테이지 별로 스크립트를 만들건데 거기서 다루기
 
     public bool isPause = false;
     public bool isWave = false;
@@ -41,6 +42,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Managers.Sound.Play(bgm, SoundType.BGM);
+     
+        PlayerSpawn();
     }
 
     private void Update()
@@ -104,6 +107,12 @@ public class GameManager : MonoBehaviour
     {
         yield return waitWaveTime;
         StopWave();
+    }
+
+    public void PlayerSpawn()
+    {
+        int index = Random.Range(0, PlayerSpawnSpot.Length);
+        Player.transform.position = PlayerSpawnSpot[index].position;
     }
 
     IEnumerator InitData()
