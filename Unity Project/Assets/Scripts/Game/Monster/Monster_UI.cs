@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster_UI : UIUtil
+public class Monster_UI : MonoBehaviour
 {
 	static public GameObject canvas = null;
     static public GameObject hp_Bar = null;
@@ -23,9 +23,16 @@ public class Monster_UI : UIUtil
         bar_UI = Instantiate(hp_Bar, canvas.transform).GetComponent<Scrollbar>();
     }
 
+    private void OnDestroy()
+    {
+        Destroy(bar_UI.gameObject);
+    }
+
     private void Update()
     {
-        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, collider.bounds.max.y, 0));
+        Vector3 pos = transform.position;
+        pos.y = collider.bounds.max.y;
+        pos = Camera.main.WorldToScreenPoint(pos);
         if (pos.z <= 0) return;
         bar_UI.transform.position = pos;
     }
@@ -33,5 +40,9 @@ public class Monster_UI : UIUtil
     private void LateUpdate()
     {
         bar_UI.size = Mathf.InverseLerp(0, status.maxHp.Cal(), status.hp.Cal());
+        if(bar_UI.size.Equals(0))
+        {
+            Destroy(this);
+        }
     }
 }

@@ -15,37 +15,10 @@ public enum QuestAction
 
 	Monster,
 }
-public class QuestManager : UIUtil
+
+public class Quest_UI : UIUtil
 {
-	static public QuestManager Instance { get; private set; }
-	public Transform NodeParentTransform;
-    public GameObject uiNode;
-
     int nodeLenth = 0;
-    public List<Quest> questList;
-
-    private void Awake()
-    {
-		Instance = this;
-
-		foreach (var item in questList)
-		{
-            GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
-            AddNode(uiObj, item);
-        }
-    }
-
-    private void Start()
-    {
-		GameManager.Instance.UpdateCall.AddListener(OnOff);
-    }
-
-    void OnOff()
-	{
-		if (Managers.Key.InputActionDown(KeyToAction.Quest_UI)) 
-			gameObject.SetActive(!gameObject.activeSelf);
-	}
-
     public void AddNode(GameObject ui, Quest quest)
     {
         Bind<TMP_Text>(ui, new string[] { "Title" });
@@ -63,6 +36,41 @@ public class QuestManager : UIUtil
         Get<TMP_Text>(index * 2 + 2).text = $"{quest.count} / {quest.golaCount}";
     }
 
+}
+
+public class QuestManager : MonoBehaviour
+{
+	static public QuestManager Instance { get; private set; }
+
+    Quest_UI ui = new Quest_UI();
+
+    public Transform NodeParentTransform;
+    public GameObject uiNode;
+
+    public List<Quest> questList;
+
+    private void Awake()
+    {
+		Instance = this;
+
+		foreach (var quest in questList)
+		{
+            GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
+            ui.AddNode(uiObj, quest);
+        }
+    }
+
+    private void Start()
+    {
+		GameManager.Instance.UpdateCall.AddListener(OnOff);
+    }
+
+    void OnOff()
+	{
+		if (Managers.Key.InputActionDown(KeyToAction.Quest_UI)) 
+			gameObject.SetActive(!gameObject.activeSelf);
+	}
+
     public void AddQuest(Quest node)
 	{
 		Array.Sort(node.Progress);
@@ -71,7 +79,7 @@ public class QuestManager : UIUtil
         questList.OrderBy(q => q.id);
 
 		GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
-		AddNode(uiObj, node);
+		ui.AddNode(uiObj, node);
     }
 
 	public void SendQeustEvent(QuestAction[] actions)
@@ -81,7 +89,7 @@ public class QuestManager : UIUtil
 		int count = 0;
 		questList.ForEach(quest => {
 			if (!quest.CheckProgress(actions)) return;
-            UpdateNode(quest, count);
+            ui.UpdateNode(quest, count);
 			++count;
         });
     }
