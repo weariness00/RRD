@@ -20,7 +20,6 @@ public class BundleofFireworks : Item
             iteminfo.amount++;
         }
     }
-    //
 
     public void OnEvent(GameObject target)
     {
