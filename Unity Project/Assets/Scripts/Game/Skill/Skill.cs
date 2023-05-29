@@ -10,9 +10,6 @@ public class Skill : MonoBehaviour
 
     [HideInInspector] public Status status;
 
-    [SerializeField] protected ParticleSystem skillEffect;
-    [SerializeField] protected ParticleSystem targetEffect;
-
     protected PlayerController player;
     protected LayerMask layerMask;
 

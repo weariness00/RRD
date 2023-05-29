@@ -15,6 +15,25 @@ public struct StatusValue
     }
 }
 
+[System.Serializable]
+public class StatusData
+{
+    public int ID;
+    public string Name;
+    public int Level;
+    public float Exp;
+    public float Need_Exp;
+    public float MaxHP;
+    public float HP;
+    public float MaxMP;
+    public float MP;
+    public float Shield;
+    public float Damage;
+    public float AttackSpeed;
+    public float Speed;
+    public float Range;
+}
+
 public class Status : MonoBehaviour
 {
     public int level = 1;

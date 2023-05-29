@@ -15,8 +15,6 @@ public class MagmaField : Skill
         skillPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         Debug.Log(skillPoint);
 
-        Instantiate(targetEffect, skillPoint, Quaternion.identity);  //마우스 좌표에 스킬 이펙트 발동
-
         StartCoroutine("SkillCoolTime");
     }
 
