@@ -54,33 +54,6 @@ MonoBehaviour:
     - model: {fileID: 8926484042661615209}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661615028}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615034}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615109}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615043}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615001}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615002}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615004}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615006}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615011}
-      id: 0
-      isStickyNote: 0
   stickyNoteInfos: []
   categories: []
   uiBounds:
@@ -1193,7 +1166,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -12947,7 +12920,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:

@@ -15,9 +15,29 @@ public struct StatusValue
     }
 }
 
+[System.Serializable]
+public class StatusData
+{
+    public int ID;
+    public string Name;
+    public int Level;
+    public float Exp;
+    public float Need_Exp;
+    public float MaxHP;
+    public float HP;
+    public float MaxMP;
+    public float MP;
+    public float Shield;
+    public float Damage;
+    public float AttackSpeed;
+    public float Speed;
+    public float Range;
+}
+
 public class Status : MonoBehaviour
 {
     public int level = 1;
+    public float need_Exp = 1 * 35f;
     public float experience;
     public float experiencePercent;   
     [Space]
@@ -68,11 +88,10 @@ public class Status : MonoBehaviour
 
     public bool LevelUP()
     {
-        float needExp = level * 35f;
-        if (needExp < experience)
+        if (need_Exp < experience)
         {
-            level++;
-            experience -= needExp;
+            experience -= need_Exp;
+            need_Exp = ++level * 35f;
 
             return true;
         }

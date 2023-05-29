@@ -45,21 +45,11 @@ public class MonsterSpawnManager : MonoBehaviour
 
         GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
         GameManager.Instance.StopWaveCall.AddListener(AliveMonsterAllKill);
-
-        GameManager.Instance.UpdateCall.AddListener(OnOff);
-
-        gameObject.SetActive(false);
-    }
-
-    public void OnOff()
-    {
-        if (Managers.Key.InputActionDown(KeyToAction.MonsterSpawnManager))
-            gameObject.SetActive(!gameObject.activeSelf);
     }
 
     void Spawn()
     {
-        foreach(var monsterNode in waveNode.monsterNodeList)
+        foreach (var monsterNode in waveNode.monsterNodeList)
         {
             spawnCoroutineList.Add(monsterNodeSpawn(monsterNode));
         }
@@ -96,7 +86,7 @@ public class MonsterSpawnManager : MonoBehaviour
 
             for (int i = 0; i < node.spawnCount; i++)
             {             
-                GameObject obj = Util.Instantiate(node.monster, monsterUnion.transform);
+                GameObject obj = Util.Instantiate(node.monster.gameObject, monsterUnion.transform);
                 Monster monster = Util.GetORAddComponet<Monster>(obj);
                 ItemDropTable idt = Util.GetORAddComponet<ItemDropTable>(obj);
 
@@ -117,6 +107,9 @@ public class MonsterSpawnManager : MonoBehaviour
                         break;
                 }
                 obj.transform.position = new Vector3(SpawnPositionType.x ? pos.x : 0, SpawnPositionType.y ? pos.y : 0, SpawnPositionType.z ? pos.z : 0);
+
+                float terrainHeight = Terrain.activeTerrain.SampleHeight(obj.transform.position);
+                obj.transform.position += Vector3.up * terrainHeight;
 
                 aliveMonsterCount++;
             }

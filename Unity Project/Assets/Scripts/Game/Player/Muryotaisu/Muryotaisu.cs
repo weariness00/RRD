@@ -6,10 +6,16 @@ using UnityEngine;
 public class Muryotaisu : PlayerController
 {
     public Equipment equipment;
+    public AudioClip attack;
 
     private void Start()
     {
         CreateWeapon();
+    }
+
+    protected override void Update()
+    {
+        base.Update();          
     }
 
     public void CreateWeapon()
@@ -19,7 +25,7 @@ public class Muryotaisu : PlayerController
         animator.SetLayerWeight(layer, 1);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Monster")
         {

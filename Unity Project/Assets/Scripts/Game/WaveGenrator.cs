@@ -5,11 +5,12 @@ using TMPro;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine.UI;
+using UnityEditor.UI;
 
 [System.Serializable]
 public struct MonsterNode
 {
-    public GameObject monster;
+    public Monster monster;
     public int spawnCount;
     public float spawnTime;
 }
@@ -29,7 +30,8 @@ public struct WaveNode
 
 public class WaveGenrator : MonoBehaviour
 {
-    public GameObject[] buttons;
+    public ToggleGroup toggleGroup;
+    public Toggle[] buttons;
 
     public List<WaveNode> waveList;
     WaveNode currentWaveNode;
@@ -41,7 +43,27 @@ public class WaveGenrator : MonoBehaviour
     {
         GameManager.Instance.StartWaveCall.AddListener(()=> { waveList.Clear(); gameObject.SetActive(false); });
         GameManager.Instance.StopWaveCall.AddListener(WaveGenerate);
+
+        GameManager.Instance.UpdateCall.AddListener(OnOff);
+
         WaveGenerate();
+
+        gameObject.SetActive(false);
+    }
+
+    public void OnOff()
+    {
+        if (Managers.Key.InputActionDown(KeyToAction.WaveGenerator_UI))
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
+    }
+
+    public void StartWaveButton()
+    {
+        if (!toggleGroup.AnyTogglesOn() ||
+            GameManager.Instance.isWave) return;
+        GameManager.Instance.StartWave();
     }
 
     public void WaveGenerate()
@@ -50,31 +72,40 @@ public class WaveGenrator : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             int temp = i;
-            buttons[i].GetComponent<Button>().onClick.AddListener(() => { SelcetWave(temp); });
-            TMP_Text text = buttons[i].GetComponentInChildren<TMP_Text>();
-            text.text = "";
-            MakeWaveNode(text);
+            buttons[i].GetComponent<Toggle>().onValueChanged.AddListener((isOn) => { if(isOn) SelcetWave(temp); });
+
+            MakeWaveNode(buttons[i]);
         }
     }
 
-    public void MakeWaveNode(TMP_Text text)
+    public void MakeWaveNode<T>(T component) where T : UnityEngine.Component
     {
         WaveNode waveNode = new WaveNode();
         waveNode.Init();
         for (int i = 0; i < buttons.Length; i++)
         {
             MonsterNode monsterNode = new MonsterNode();
-            monsterNode.monster = MonsterList.Instance.RandomMonster();
+            monsterNode.monster = MonsterList.Instance.RandomMonster().GetComponent<Monster>();
             monsterNode.spawnCount = Random.Range(5, 10);
             monsterNode.spawnTime = Random.Range(8f, 12f);
 
-            text.text += "Name : " + monsterNode.monster.name + "\n";
-            text.text += "SpawnCount : " + monsterNode.spawnCount + "\n";
-            //text.text += "SpawnTime : " + monsterNode.spawnTime + "\n";        
+            //monster 정보를 가시화
+            GameObject infoUI = component.GetComponentInChildren<GridLayoutGroup>().transform.GetChild(i).gameObject;
+            TMP_Text explain = infoUI.GetComponentInChildren<TMP_Text>();
+            Image icon = null;
+            foreach (var image in infoUI.GetComponentsInChildren<Image>())
+                if (image.name.Equals("Icon")) icon = image;
+
+            explain.fontSizeMin = 10;
+            explain.fontSizeMax = 28;
+            explain.text = "";
+            explain.text += monsterNode.monster.name + "\n";
+            explain.text += $"{monsterNode.spawnTime}초당\n{monsterNode.spawnCount}마리 소환";
+            icon.sprite = monsterNode.monster.icon;
 
             waveNode.monsterNodeList.Add(monsterNode);
         }
-        text.text += $"Reward : {waveNode.award}";
+        //text.text += $"Reward : {waveNode.award}";
 
         waveList.Add(waveNode);
     }

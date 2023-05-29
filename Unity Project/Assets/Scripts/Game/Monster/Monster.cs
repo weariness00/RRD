@@ -56,6 +56,7 @@ public class Monster : MonoBehaviour, IDamage
     static public bool isOnIdle = false;
 
     public int id;
+    public Sprite icon;
 
     [Space]
     public MonsterType type;
@@ -83,6 +84,7 @@ public class Monster : MonoBehaviour, IDamage
         ftm = Util.GetORAddComponet<FindToMove>(gameObject);
         idt = Util.GetORAddComponet<ItemDropTable>(gameObject);
 
+        Util.GetORAddComponet<Monster_UI>(gameObject);
         onDie = new UnityEvent<Transform>();
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
@@ -128,13 +130,13 @@ public class Monster : MonoBehaviour, IDamage
     {
         gameObject.GetComponentsInChildren<Collider>()[0].enabled = false;
 
-        //MonsterSpawnManager.Instance.aliveMonsterCount--;
-        
+        MonsterSpawnManager.Instance.aliveMonsterCount--;
+
         onDie?.Invoke(this.transform);
 
-        //QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
+        QuestManager.Instance.SendQeustEvent(deadQuestAction.ToArray());
 
-        //idt.Loot();
+        idt.Loot();
         Destroy(gameObject, dstroyTimeDuration);
     }
 

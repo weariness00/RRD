@@ -11,11 +11,12 @@ TagManager:
   - Enemy
   - Weapon
   - Exp
+  - Sound
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Terrain
   - Water
   - UI
   - NPC

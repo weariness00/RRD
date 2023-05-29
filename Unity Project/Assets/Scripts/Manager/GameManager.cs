@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +8,13 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
 	public static GameManager Instance { get { Init(); return instance; } }
 
-    public PlayerController Player;
+    public AudioClip bgm;
 
+    [HideInInspector] public PlayerController Player;
+
+    public Transform[] PlayerSpawnSpot; // 임시 나중에는 스테이지 별로 스크립트를 만들건데 거기서 다루기
+
+    public bool isPause = false;
     public bool isWave = false;
     public float waveTime = 60f;
 
@@ -32,6 +36,14 @@ public class GameManager : MonoBehaviour
         alivePlayerCount++;
 
         StartCoroutine(InitData());
+        isPause = false;
+    }
+
+    private void Start()
+    {
+        Managers.Sound.Play(bgm, SoundType.BGM);
+     
+        PlayerSpawn();
     }
 
     private void Update()
@@ -39,10 +51,7 @@ public class GameManager : MonoBehaviour
         UpdateCall?.Invoke();
 
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
             PauseCall?.Invoke();
-        }
     }
 
     static void Init()
@@ -59,7 +68,18 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+        isPause = !isPause;
+
+        if(isPause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
     }
 
     public void StartWave()
@@ -76,11 +96,6 @@ public class GameManager : MonoBehaviour
         StopWaveCall?.Invoke();
     }
 
-    public void GameOver()
-    {
-        // 게임 오버 씬으로 전환
-    }
-
     public void GameEnd()
     {
         Pause();
@@ -92,6 +107,12 @@ public class GameManager : MonoBehaviour
     {
         yield return waitWaveTime;
         StopWave();
+    }
+
+    public void PlayerSpawn()
+    {
+        int index = Random.Range(0, PlayerSpawnSpot.Length);
+        Player.transform.position = PlayerSpawnSpot[index].position;
     }
 
     IEnumerator InitData()

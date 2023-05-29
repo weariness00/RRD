@@ -33,7 +33,6 @@ public class Thunder : Skill
 
         foreach(var hit in hits)
         {
-            Instantiate(targetEffect, hit.transform.position + Vector3.up * 5, Quaternion.identity);  //이펙트 생성 높이 조절 필요
             Managers.Damage.Attack(hit.transform.gameObject, status.damage.Cal());
         }
     }

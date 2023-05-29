@@ -50,6 +50,8 @@ public class UIUtil
     }
     protected T[] Gets<T>() where T : UnityEngine.Object { return objectDictionary[typeof(T)] as T[];   }
 
+    protected int GetTypeCount(Type type) { return objectDictionary[type].Length; }
+
     protected Text GetText(int index) { return Get<Text>(index); }
     protected Button GetButton(int index) { return Get<Button>(index); }
     protected Image GetImage(int index) { return Get<Image>(index); }
