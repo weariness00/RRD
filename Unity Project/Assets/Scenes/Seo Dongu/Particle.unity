@@ -878,6 +878,12 @@ VisualEffect:
       - m_Value: 0
         m_Name: Flare Rate
         m_Overridden: 1
+      - m_Value: 1
+        m_Name: Glow Ground Rate
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: Aura Rate
+        m_Overridden: 0
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -1572,7 +1578,7 @@ GameObject:
   - component: {fileID: 1218165115}
   - component: {fileID: 1218165114}
   m_Layer: 0
-  m_Name: Aura VFX
+  m_Name: Burn VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1641,12 +1647,18 @@ VisualEffect:
       - m_Value: 3
         m_Name: Aura Rate
         m_Overridden: 1
+      - m_Value: 2
+        m_Name: Burn Sphere Ground Rate
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 4.584609, y: 1.1461523, z: 1.1461523, w: 1}
+        m_Name: Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -1669,7 +1681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218165113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.58, y: 0, z: 0}
+  m_LocalPosition: {x: -4.58, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1775,6 +1787,9 @@ VisualEffect:
       - m_Value: 0
         m_Name: Flare Rate
         m_Overridden: 1
+      - m_Value: 0.5
+        m_Name: Glow Ground Rate
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -1798,6 +1813,116 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!1 &1588101564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588101567}
+  - component: {fileID: 1588101566}
+  - component: {fileID: 1588101565}
+  m_Layer: 0
+  m_Name: Aura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!73398921 &1588101565
+VFXRenderer:
+  serializedVersion: 1
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588101564}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!2083052967 &1588101566
+VisualEffect:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588101564}
+  m_Enabled: 1
+  m_Asset: {fileID: 8926484042661614526, guid: f94ea1201ed10a8499185fe499a6af0d, type: 3}
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
+  m_StartSeed: 0
+  m_ResetSeedOnPlay: 1
+  m_ResourceVersion: 1
+  m_PropertySheet:
+    m_Float:
+      m_Array: []
+    m_Vector2f:
+      m_Array: []
+    m_Vector3f:
+      m_Array: []
+    m_Vector4f:
+      m_Array: []
+    m_Uint:
+      m_Array: []
+    m_Int:
+      m_Array: []
+    m_Matrix4x4f:
+      m_Array: []
+    m_AnimationCurve:
+      m_Array: []
+    m_Gradient:
+      m_Array: []
+    m_NamedObject:
+      m_Array: []
+    m_Bool:
+      m_Array: []
+--- !u!4 &1588101567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588101564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.642, y: 1.468, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1673961116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2213,6 +2338,12 @@ VisualEffect:
       - m_Value: 0
         m_Name: Circle Mesh Up Speed
         m_Overridden: 1
+      - m_Value: 3
+        m_Name: Glow Ground Rate
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: Aura Rate
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -2225,7 +2356,7 @@ VisualEffect:
       - m_Value: {x: 0.9245283, y: 0.22308825, z: 0.06541473, w: 0}
         m_Name: Color
         m_Overridden: 1
-      - m_Value: {x: 6.886357, y: 2.9146907, z: 1.1530645, w: 0}
+      - m_Value: {x: 1.8443027, y: 0.7821388, z: 0.30899313, w: 1}
         m_Name: Circle Color
         m_Overridden: 1
     m_Uint:
@@ -2241,27 +2372,54 @@ VisualEffect:
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0
-            inSlope: 10
-            outSlope: 10
+            value: 0.08673096
+            inSlope: 9.13269
+            outSlope: 9.13269
             tangentMode: 34
             weightedMode: 0
             inWeight: 0
-            outWeight: 0
+            outWeight: 0.33333334
           - serializedVersion: 3
             time: 0.1
             value: 1
-            inSlope: 0.19296753
-            outSlope: 0.19296753
+            inSlope: -0.010076987
+            outSlope: -0.010076987
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.81643957
-            value: 1.0057509
-            inSlope: -0.24243434
-            outSlope: -0.24243434
+            time: 0.3
+            value: 1
+            inSlope: -0.009972296
+            outSlope: -0.009972296
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.5
+            value: 0.6
+            inSlope: 0.0014197825
+            outSlope: 0.0014197825
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.7
+            value: 1
+            inSlope: -0.00046133998
+            outSlope: -0.00046133998
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.9
+            value: 1
+            inSlope: -0.0007271765
+            outSlope: -0.0007271765
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
@@ -2269,11 +2427,11 @@ VisualEffect:
           - serializedVersion: 3
             time: 1
             value: 0
-            inSlope: -5.479127
-            outSlope: -5.479127
+            inSlope: -9.999998
+            outSlope: -9.999998
             tangentMode: 34
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.33333334
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
