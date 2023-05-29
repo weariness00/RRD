@@ -13,10 +13,12 @@ public class Managers : MonoBehaviour
     KeyManager keyManager;
     SceneManagerEx sceneManagerEx;
     SoundManager soundManager;
+    ExcelDataManager excelDataManger = new ExcelDataManager();
     public static DamageManager Damage { get { return Instance.damageManager; } }
     public static KeyManager Key { get { return Instance.keyManager; } }
     public static SceneManagerEx Scene { get { return Instance.sceneManagerEx; } }
     public static SoundManager Sound { get { return Instance.soundManager; } }
+    public static ExcelDataManager Excel { get { return Instance.excelDataManger; } }
 
     public Action StartCall;
     public Action UpdateCall;

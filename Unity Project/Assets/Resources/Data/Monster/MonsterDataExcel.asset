@@ -10,36 +10,55 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e01eaddc09ab8c4d8ff5dbf5808d958, type: 3}
-  m_Name: MonsterData
+  m_Name: MonsterDataExcel
   m_EditorClassIdentifier: 
-  data:
+  Type:
   - id: 0
     name: Slime
     type: 0
     rate: 0
     status: 0
-    hp: 100
-    mp: 0
-    damage: 3
-    speed: 1
-    range: 1
   - id: 1
     name: TurtleShell
     type: 0
     rate: 0
     status: 0
-    hp: 100
-    mp: 10
-    damage: 1
-    speed: 1
-    range: 1
   - id: 2
     name: DogKnight
     type: 0
     rate: 0
     status: 0
-    hp: 200
-    mp: 30
-    damage: 2
-    speed: 1
-    range: 1
+  Status:
+  - ID: 0
+    Name: Slime
+    MaxHP: 100
+    HP: 100
+    MaxMP: 0
+    MP: 0
+    Shield: 0
+    Damage: 10
+    AttackSpeed: 1
+    Speed: 1
+    Range: 1
+  - ID: 1
+    Name: TurtleShell
+    MaxHP: 200
+    HP: 200
+    MaxMP: 100
+    MP: 100
+    Shield: 100
+    Damage: 15
+    AttackSpeed: 1
+    Speed: 1
+    Range: 1
+  - ID: 2
+    Name: DogKnight
+    MaxHP: 300
+    HP: 300
+    MaxMP: 100
+    MP: 100
+    Shield: 50
+    Damage: 20
+    AttackSpeed: 1
+    Speed: 1.5
+    Range: 1

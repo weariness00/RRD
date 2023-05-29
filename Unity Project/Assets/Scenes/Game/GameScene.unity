@@ -2379,7 +2379,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081742727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3892758, y: 0.471658, z: 100.03629}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2740,6 +2740,22 @@ PrefabInstance:
       propertyPath: spawnPoolParant
       value: 
       objectReference: {fileID: 487272646}
+    - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: monsterDataExcel
+      value: 
+      objectReference: {fileID: 11400000, guid: 08da7e41320d3574eaf698f43a489937, type: 2}
+    - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: monsterList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: monsterList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: monsterList.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265802, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: m_RootOrder
       value: 1

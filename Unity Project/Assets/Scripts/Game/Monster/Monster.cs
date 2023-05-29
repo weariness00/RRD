@@ -30,7 +30,7 @@ public enum MonsterStatus
 };
 
 [System.Serializable]
-public class MonsterInfo
+public class MonsterTypeData
 {
     public int id;
     public string name;
@@ -39,15 +39,12 @@ public class MonsterInfo
     public MonsterType type;
     public MonsterRate rate;
     public MonsterStatus status;
+}
 
-    [Space]
-    public int hp;
-    public int mp;
-
-    [Space]
-    public int damage;
-    public float speed;
-    public float range;
+public class MonsterData
+{
+    public MonsterTypeData type;
+    public StatusData status;
 }
 
 public class Monster : MonoBehaviour, IDamage
@@ -98,21 +95,16 @@ public class Monster : MonoBehaviour, IDamage
         fsm.Update();
     }
 
-    public void Init(MonsterInfo info)
+    public void Init(MonsterData data)
     {
         status = Util.GetORAddComponet<Status>(gameObject);
-        name = info.name;
 
-        id = info.id;
-        type = info.type;
-        rate = info.rate;
-        status.hp.value = info.hp;
-        status.maxHp.value = info.hp;
-        status.mp.value = info.mp;
-        status.maxMp.value = info.mp;
-        status.speed.value = info.speed;
-        status.damage.value = info.damage;
-        status.range.value = info.range;
+        name = data.type.name;
+        id = data.type.id;
+        type = data.type.type;
+        rate = data.type.rate;
+
+        status.SetData(data.status);
     }
 
     protected virtual void Attack()

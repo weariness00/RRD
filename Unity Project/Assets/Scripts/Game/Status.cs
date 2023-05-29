@@ -20,9 +20,6 @@ public class StatusData
 {
     public int ID;
     public string Name;
-    public int Level;
-    public float Exp;
-    public float Need_Exp;
     public float MaxHP;
     public float HP;
     public float MaxMP;
@@ -97,5 +94,20 @@ public class Status : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetData(StatusData data)
+    {
+        maxHp.value = data.MaxHP;
+        maxMp.value = data.MaxMP;
+        hp.value = data.HP;
+        mp.value = data.MP;
+        shield.value = data.Shield;
+
+        damage.value = data.Damage;
+        attackSpeed.value = data.AttackSpeed;
+        speed.value = data.Speed;
+
+        range.value = data.Range;
     }
 }

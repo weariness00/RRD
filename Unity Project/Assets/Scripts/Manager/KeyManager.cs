@@ -73,9 +73,8 @@ public class KeyManager : UIUtil
     public void DefulatKeySetting()
 	{
         GameObject keyFieldObject = Resources.Load("Prefabs/UI/KeyField") as GameObject;
-        KeySettingData keyData = Resources.Load<ScriptableObject>("Data/Key/KeySettingData") as KeySettingData;
+        KeySettingData keyData = Managers.Excel.Load<KeySettingData>("Key/KeySettingData");
 
-        //RectTransform viewRect = GameObject.Find("KeyScrollView").GetComponent<RectTransform>();
         ScrollRect viewRect = Util.FindChild(Util.FindChild(Managers.Instance.gameObject, "Setting Canvas"), "Key UI").GetComponent<ScrollRect>();
         RectTransform contentsRect = viewRect.content;  // 맵핑을 하기위한 오브젝트 로드
 

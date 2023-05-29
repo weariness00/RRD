@@ -10,7 +10,7 @@ public class MonsterList : MonoBehaviour
 {
     public static MonsterList Instance = null;
 
-    public MonsterData monsterData;
+    public MonsterDataExcel monsterDataExcel;
     public GameObject[] monsterList;
 
     private void Awake()
@@ -20,13 +20,24 @@ public class MonsterList : MonoBehaviour
         InitList();
     }
 
-    public MonsterInfo GetMonsterData(int index) { return monsterData.data[index]; }
-    public MonsterInfo GetMonsterData(string monsterName)
+    public MonsterData GetMonsterData(int index) 
     {
-        foreach (var data in monsterData.data)
+        MonsterData data = new MonsterData();
+        data.type = monsterDataExcel.Type[index];
+        data.status = monsterDataExcel.Status[index];
+        return data;
+    }
+    public MonsterData GetMonsterData(string monsterName)
+    {
+        MonsterData data = new MonsterData();
+        for (int i = 0; i < monsterDataExcel.Type.Count; i++)
         {
-            if (data.name.Equals(monsterName))
+            if (monsterDataExcel.Type[i].name.Equals(monsterName))
+            {
+                data.type = monsterDataExcel.Type[i];
+                data.status = monsterDataExcel.Status[i];
                 return data;
+            }
         }
 
         return null;
@@ -44,7 +55,7 @@ public class MonsterList : MonoBehaviour
 
         foreach (var obj in objs)
         {
-            int id = monsterData.data.Find((info) => info.name.Equals(obj.name)).id;
+            int id = monsterDataExcel.Type.Find((type) => type.name.Equals(obj.name)).id;
             monsterList[id] = obj;
         }
     }

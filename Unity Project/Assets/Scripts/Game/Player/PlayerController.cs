@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using PlayerFSM;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 [CanEditMultipleObjects]
 public class PlayerController : MonoBehaviour, IDamage
@@ -38,6 +36,13 @@ public class PlayerController : MonoBehaviour, IDamage
         outofcombat = true;
 
         fsm.SetDefaultState(new Idle());
+    }
+
+    protected virtual void Start()
+    {
+        PlayerDataExcel data = Managers.Excel.Load<PlayerDataExcel>("Player/PlayerDataExcel");
+        var statusData = data.Status.Find((s) => { return s.Name.Equals(name); });
+        if (statusData != null) status.SetData(statusData);
     }
 
     protected virtual void Update()

@@ -8,8 +8,9 @@ public class Muryotaisu : PlayerController
     public Equipment equipment;
     public AudioClip attack;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         CreateWeapon();
     }
 
