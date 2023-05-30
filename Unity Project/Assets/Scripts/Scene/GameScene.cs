@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameScene : BaseScene
 {
+    public void Start()
+    {
+        GameManager.Instance.difficulty.SetDifficulty(LobbyScene.difficultyType);
+    }
     protected override void Init()
     {
         base.Init();

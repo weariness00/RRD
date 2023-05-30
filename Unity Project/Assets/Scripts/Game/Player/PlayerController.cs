@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public FSMStructer<PlayerController> fsm;
     [HideInInspector] public PlayerAnimationController animationController;
     [HideInInspector] public Status status;
+
     [HideInInspector] public Animator animator;
+    [HideInInspector] public Collider collider;
 
     public Skill skill_Q;
     public Skill skill_E;
@@ -29,9 +31,10 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         fsm = new FSMStructer<PlayerController>(this);
         animationController = GetComponent<PlayerAnimationController>();
-
         status = Util.GetORAddComponet<Status>(gameObject);
+
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider>();
 
         outofcombat = true;
 
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamage
     protected virtual void Update()
     {
         if (GameManager.Instance.isPause) return;
+        if (status.isDead) return;
 
         fsm.Update();
 
@@ -110,9 +114,12 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void Hit(float damage)
     {
+        if(status.isDead) return;
+
         status.hp.value -= damage;
 
-        fsm.PushState(new Hit());
+        if (status.CheckDead()) fsm.ChangeState(new Die());
+        else fsm.ChangeState(new Hit());
     }
 
     public void HitParticle()

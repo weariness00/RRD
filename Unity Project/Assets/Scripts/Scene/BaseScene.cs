@@ -23,6 +23,7 @@ public abstract class BaseScene : MonoBehaviour
     protected virtual void Init()
 	{
         Managers.Instance.enabled = true;
+        DontDestroyOnLoad(gameObject);
 	}
 
     public abstract void Clear();

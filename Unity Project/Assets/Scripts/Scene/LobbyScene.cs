@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LobbyScene : BaseScene
 {
+    public static DifficultyType difficultyType = DifficultyType.None;
+
     protected override void Init()
     {
         base.Init();
@@ -19,4 +21,6 @@ public class LobbyScene : BaseScene
     {
         Managers.Scene.LoadScene(SceneType.Game);
     }
+
+    public void SetDifficulty(int typeIndex) { difficultyType = (DifficultyType)typeIndex; }
 }

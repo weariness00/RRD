@@ -19,7 +19,9 @@ public class JsonUtil
 
 	public static void SaveFile<T>(T data, string path)
 	{
-		string defualtPath = $"Assets/Resourecs/Data/{path}.json";
-        string json = File.ReadAllText(defualtPath);
+		string defualtPath = $"{Application.dataPath}/Resources/Data/{path}.Json";
+		string json = JsonUtility.ToJson(data, true);
+
+        File.WriteAllText(defualtPath, json);
     }
 }

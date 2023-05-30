@@ -156,14 +156,15 @@ namespace PlayerFSM
             pc = component as PlayerController;
             pc.animator.ResetTrigger("EndAttack");
             pc.animator.SetTrigger("StartAttack");
+            pc.fsm.PopState();
 
-            pc.StartCoroutine(EndAttack());
+            //pc.StartCoroutine(EndAttack());
         }
 
         public void StateExit()
         {
-            pc.StopCoroutine(EndAttack());
-            pc.animator.SetTrigger("EndAttack");
+            //pc.StopCoroutine(EndAttack());
+            //pc.animator.SetTrigger("EndAttack");
         }
 
         public void StatePause()
@@ -194,19 +195,19 @@ namespace PlayerFSM
             // 애니메이션
         }
 
-        IEnumerator EndAttack()
-        {
-            AnimatorStateInfo clip;
-            while(true)
-            {
-                yield return null;
-                clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
-                if (clip.IsName("Attack")) break;
-            }
+        //IEnumerator EndAttack()
+        //{
+        //    AnimatorStateInfo clip;
+        //    while(true)
+        //    {
+        //        yield return null;
+        //        clip = pc.animator.GetCurrentAnimatorStateInfo(pc.animator.GetInteger("Layer"));
+        //        if (clip.IsName("Attack")) break;
+        //    }
 
-            yield return new WaitForSeconds(clip.length - 0.2f);
-            pc.fsm.PopState();
-        }
+        //    yield return new WaitForSeconds(clip.length - 0.2f);
+        //    pc.fsm.PopState();
+        //}
     }
 
     public class Hit : IStateMachine
@@ -276,10 +277,11 @@ namespace PlayerFSM
         {
             pc = component as PlayerController;
 
-            int count = GameManager.Instance.alivePlayerCount--;
-            if (count <= 0)
-                GameManager.Instance.GameEnd();
+            GameManager.Instance.alivePlayerCount--;
             // 사망 애니메이션 호출
+            pc.collider.enabled = false;
+            pc.GetComponent<Rigidbody>().useGravity = false;
+            pc.animator.SetTrigger("Die");
         }
 
         public void StateExit()

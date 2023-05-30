@@ -83,6 +83,12 @@ public class Status : MonoBehaviour
         }
     }
 
+    public bool CheckDead()
+    {
+        if (hp.value > 0) return false;
+        else return isDead = true;
+    }
+
     public bool LevelUP()
     {
         if (need_Exp < experience)

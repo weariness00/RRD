@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
     static GameManager instance;
 	public static GameManager Instance { get { Init(); return instance; } }
 
-    public AudioClip bgm;
-
+    public Difficulty difficulty;
     [HideInInspector] public PlayerController Player;
 
+    public AudioClip bgm;
     public Transform[] PlayerSpawnSpot; // 임시 나중에는 스테이지 별로 스크립트를 만들건데 거기서 다루기
 
     public bool isPause = false;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        difficulty = Util.GetORAddComponet<Difficulty>(gameObject);
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         waitWaveTime = new WaitForSeconds(waveTime);
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Managers.Sound.Play(bgm, SoundType.BGM);
+        Managers.Instance.StartCall += () => Managers.Sound.Play(bgm, SoundType.BGM);
      
         PlayerSpawn();
     }
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerSpawn()
     {
+        if (PlayerSpawnSpot == null) return;
         int index = Random.Range(0, PlayerSpawnSpot.Length);
         Player.transform.position = PlayerSpawnSpot[index].position;
     }
