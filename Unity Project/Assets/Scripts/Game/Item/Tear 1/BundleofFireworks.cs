@@ -6,7 +6,14 @@ public class BundleofFireworks : Item
 {
     public ItemData iteminfo;
     public GameObject misile;
+    public Rigidbody rd;
     public float misileSpeed = 5.0f;
+
+    private void Start()
+    {
+        NormalChest.Instance.ItemDropList[0].Add(gameObject);
+        rd = Util.GetORAddComponet<Rigidbody>(gameObject);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,6 +41,11 @@ public class BundleofFireworks : Item
     void MisileUpdateEvnet(ObjectEventHandle handle)
     {
         handle.transform.position = Vector3.MoveTowards(handle.transform.position ,handle.objects["Target"].transform.position, Time.deltaTime * misileSpeed);
+    }
+
+    public void DropEvent()
+    {
+        rd.AddForce(Vector3.up + Vector3.forward);
     }
     
 }
