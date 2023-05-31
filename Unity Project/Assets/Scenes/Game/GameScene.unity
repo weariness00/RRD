@@ -1206,6 +1206,18 @@ PrefabInstance:
       propertyPath: LookTransform
       value: 
       objectReference: {fileID: 1942640744}
+    - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: equipment.weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: equipment.weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 6810270921076145893, guid: 9effcc3d7b08ca644abb5d61c88043a7, type: 3}
+    - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: equipment.weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
 --- !u!1 &445344753

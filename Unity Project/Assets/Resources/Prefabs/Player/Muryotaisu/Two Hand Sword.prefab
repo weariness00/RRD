@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8127476406744750424}
   - component: {fileID: 3637495841746847807}
   m_Layer: 0
-  m_Name: Sword7_Blue
+  m_Name: Two Hand Sword
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

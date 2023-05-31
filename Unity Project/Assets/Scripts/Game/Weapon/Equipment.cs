@@ -19,7 +19,7 @@ public class Equipment
         {
             case Define.WeaponType.None:
                 break;
-            case Define.WeaponType.Sword:
+            case Define.WeaponType.OneHandSword:
                 weapon.transform.SetParent(leftHand.transform);
                 break;
             case Define.WeaponType.TwoHandSword:

@@ -34,6 +34,9 @@ public enum KeyToAction
 
     Skill_Q,
     Skill_E,
+    Skill_Enhance, // 강화 공격
+    Skill_Ultimate, // 궁극기
+    Skill_Sub, // 서브 스킬
 }
 
 /// <summary>

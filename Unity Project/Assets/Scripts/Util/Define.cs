@@ -13,7 +13,7 @@ public class Define
     public enum WeaponType
     {
 		None,		// 주먹
-		Sword,		// 한손검
+		OneHandSword,		// 한손검
 		TwoHandSword, // 양손검
 		Bow,		// 활
 		Wand,		// 지팡이

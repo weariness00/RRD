@@ -116,4 +116,19 @@ public class Status : MonoBehaviour
 
         range.value = data.Range;
     }
+
+    public void AddData(StatusData data)
+    {
+        maxHp.value += data.MaxHP;
+        maxMp.value += data.MaxMP;
+        hp.value += data.HP;
+        mp.value += data.MP;
+        shield.value += data.Shield;
+
+        damage.value += data.Damage;
+        attackSpeed.value += data.AttackSpeed;
+        speed.value += data.Speed;
+
+        range.value += data.Range;
+    }
 }

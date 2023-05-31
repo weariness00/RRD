@@ -24,7 +24,7 @@ public class MonsterList : MonoBehaviour
     {
         MonsterData data = new MonsterData();
         data.type = monsterDataExcel.Type[index];
-        data.status = monsterDataExcel.Status[index];
+        data.status = monsterDataExcel.Default_Status[index];
         return data;
     }
     public MonsterData GetMonsterData(string monsterName)
@@ -35,7 +35,7 @@ public class MonsterList : MonoBehaviour
             if (monsterDataExcel.Type[i].name.Equals(monsterName))
             {
                 data.type = monsterDataExcel.Type[i];
-                data.status = monsterDataExcel.Status[i];
+                data.status = monsterDataExcel.Default_Status[i];
                 return data;
             }
         }

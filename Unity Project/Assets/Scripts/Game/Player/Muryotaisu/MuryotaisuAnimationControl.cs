@@ -13,15 +13,15 @@ public class MuryotaisuAnimationControl : MonoBehaviour
 
     void Attack()
 	{
-        player.equipment.weapon.OnEffect();
-        player.equipment.weapon.GetComponent<BoxCollider>().enabled = true;
+        player.equipment.main_Weapon.OnEffect();
+        player.equipment.main_Weapon.GetComponent<BoxCollider>().enabled = true;
         Managers.Sound.Play(player.attack, SoundType.Effect, 1.5f);
         StartCoroutine(StopAttack());
     }
 
     void EndAttack()
     {
-        player.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
+        player.equipment.main_Weapon.GetComponent<BoxCollider>().enabled = false;
         StopCoroutine(StopAttack());
     }
 
@@ -29,6 +29,6 @@ public class MuryotaisuAnimationControl : MonoBehaviour
     IEnumerator StopAttack()
     {
         yield return stopAttackTime;
-        player.equipment.weapon.GetComponent<BoxCollider>().enabled = false;
+        player.equipment.main_Weapon.GetComponent<BoxCollider>().enabled = false;
     }
 }

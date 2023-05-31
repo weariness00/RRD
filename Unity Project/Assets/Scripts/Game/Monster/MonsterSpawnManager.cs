@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public enum MonsterSpawnType
@@ -69,6 +70,7 @@ public class MonsterSpawnManager : MonoBehaviour
         spawnCoroutineList.Clear();
     }
 
+    public UnityEvent<Monster> MonsterSpawnCall = new UnityEvent<Monster>();
     List<IEnumerator> spawnCoroutineList = new List<IEnumerator>();
     IEnumerator monsterNodeSpawn(MonsterNode node)
     {
@@ -91,6 +93,8 @@ public class MonsterSpawnManager : MonoBehaviour
                 ItemDropTable idt = Util.GetORAddComponet<ItemDropTable>(obj);
 
                 monster.Init(MonsterList.Instance.GetMonsterData(node.monster.name));
+                MonsterSpawnCall?.Invoke(monster);
+
                 idt.SetDropItem(LootingSystem.Instance.SetDropTable(monster));
 
                 float dis = Mathf.Clamp(0.0f, spawnMinDistance, spawnMaxDistance);

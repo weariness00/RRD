@@ -59,11 +59,33 @@ public class Difficulty : MonoBehaviour
 
     IEnumerator ChangeDifficulty()
     {
+        MonsterDataExcel monsterDataExcel = Managers.Excel.Load<MonsterDataExcel>("Monster/MonsterDataExcel");
+        List<StatusData> difficultyMonsterData = null;
+        switch (data.type)
+        {
+            case DifficultyType.None:
+                difficultyMonsterData = monsterDataExcel.Easy_Status;
+                break;
+            case DifficultyType.Easy:
+                difficultyMonsterData = monsterDataExcel.Easy_Status;
+                break;
+            case DifficultyType.Normal:
+                difficultyMonsterData = monsterDataExcel.Normal_Status;
+                break;
+            case DifficultyType.Hard:
+                difficultyMonsterData = monsterDataExcel.Hard_Status;
+                break;
+        }
         foreach (float time in data.NextDifficultyTime)
         {
             endPosition = new Vector2(-(index + 1) * timeView.content.GetComponent<GridLayoutGroup>().cellSize.x, timeView.content.localPosition.y);
             yield return new WaitForSeconds(time);
             ++index;
+            MonsterSpawnManager.Instance.MonsterSpawnCall.AddListener((monster) =>
+            {
+                for (int i = 0; i < index; i++)
+                    monster.status.AddData(difficultyMonsterData[monster.id]);
+            });
         }
     }
 }

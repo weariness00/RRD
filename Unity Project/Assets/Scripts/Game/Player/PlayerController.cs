@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool outofcombat;
     public bool isStop = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         fsm = new FSMStructer<PlayerController>(this);
         animationController = GetComponent<PlayerAnimationController>();
