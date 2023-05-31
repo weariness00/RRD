@@ -9,7 +9,12 @@ interface IItem
 
 public class Item : MonoBehaviour
 {
-	protected bool isGet = false; // 이 아이템을 다른 누군가가 습득 할 수 있는지
+    public int id;
+    public GameObject prefab;
+    public Sprite icon;
+	public int amount = 0;
+
+    protected bool isGet = false; // 이 아이템을 다른 누군가가 습득 할 수 있는지
 
 	// 잠시 위로 쏫았다가 떨어지는
 	public IEnumerator InitRigidBody()

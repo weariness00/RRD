@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Managers.Sound.Play(bgm, SoundType.BGM);
+        Managers.Instance.StartCall += () => Managers.Sound.Play(bgm, SoundType.BGM);
      
         PlayerSpawn();
     }
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerSpawn()
     {
+        if (PlayerSpawnSpot == null) return;
         int index = Random.Range(0, PlayerSpawnSpot.Length);
         Player.transform.position = PlayerSpawnSpot[index].position;
     }

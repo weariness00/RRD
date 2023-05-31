@@ -45,6 +45,8 @@ public class MonsterSpawnManager : MonoBehaviour
 
         GameManager.Instance.StopWaveCall.AddListener(StopSpawn);
         GameManager.Instance.StopWaveCall.AddListener(AliveMonsterAllKill);
+
+        Monster.onDie.AddListener((transform) => --maxAliveMonsterCount);
     }
 
     void Spawn()

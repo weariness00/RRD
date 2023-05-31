@@ -7,6 +7,8 @@ public class ItemList : MonoBehaviour
     public static ItemList Instance;
     
     public List<ItemData> itemList;
+    public List<Item> tier1itemList;
+
 
     private void Awake()
     {

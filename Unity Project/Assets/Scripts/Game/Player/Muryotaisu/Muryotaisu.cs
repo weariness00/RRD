@@ -27,6 +27,7 @@ public class Muryotaisu : PlayerController
 
     protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
         if (other.tag == "Monster")
         {
             float damage = status.damage.Cal() + equipment.weapon.status.damage.Cal();

@@ -12,7 +12,7 @@ public class InteractionManager : MonoBehaviour
         Instance = this;
     }
 
-    public void NPCInteraction(GameObject gameObject)
+    public void Interaction(GameObject gameObject)
     {
         //RaycastHit[] hits;
         if (gameObject.tag == "NPC")
@@ -21,6 +21,11 @@ public class InteractionManager : MonoBehaviour
             {
                 
             }
+        }
+        else if (gameObject.tag == "Chset")
+        {
+            Managers.Key.InputAction(KeyToAction.Interact);
+
         }
     }
 

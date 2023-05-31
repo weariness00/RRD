@@ -26,6 +26,7 @@ public enum KeyToAction
     Run,
 
     Inventory,
+    Interact,
 
     Setting_UI,
     KeyManager,
