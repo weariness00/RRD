@@ -10,7 +10,8 @@ public class Weapon : MonoBehaviour
 
     public Define.WeaponType type;
 
-    public VisualEffect effect;
+    public AudioClip attackSound;
+    public VisualEffect effect = null;
 
     private void Start()
     {

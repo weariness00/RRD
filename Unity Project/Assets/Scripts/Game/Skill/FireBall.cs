@@ -15,6 +15,11 @@ public class FireBall : Skill
     {
         base.OnSkill();
 
+        CreateFireBallObject();
+    }
+
+    public GameObject CreateFireBallObject()
+    {
         GameObject obj = Instantiate(ballObject, transform.position, transform.rotation);
         ObjectEventHandle objEventHandle = obj.AddComponent<ObjectEventHandle>();
         VisualEffect vfx = obj.GetComponentInChildren<VisualEffect>();
@@ -24,6 +29,8 @@ public class FireBall : Skill
         objEventHandle.OnTriggerEnterEvent.AddListener(OnTriggerEnterEvent);
 
         Destroy(obj, 10f);
+
+        return obj;
     }
 
     public void UpdateEvent(ObjectEventHandle objectEventHandle)

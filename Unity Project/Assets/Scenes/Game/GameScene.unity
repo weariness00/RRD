@@ -871,10 +871,10 @@ RectTransform:
   m_Father: {fileID: 1499489318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -80}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &294756319
 MonoBehaviour:
@@ -1192,9 +1192,13 @@ PrefabInstance:
     - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
       propertyPath: equipment.weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+      objectReference: {fileID: 7047463289970218010, guid: 5142c757451540047b0b72d392fe6ef9, type: 3}
     - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
       propertyPath: equipment.weapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+    - target: {fileID: 7901373826340704574, guid: 9dfd0a2de9d9aec4fb34ce10f23710b3, type: 3}
+      propertyPath: equipment.weapons.Array.data[2]
       value: 
       objectReference: {fileID: 6810270921076145893, guid: 9effcc3d7b08ca644abb5d61c88043a7, type: 3}
     m_RemovedComponents: []
@@ -3122,10 +3126,10 @@ RectTransform:
   m_Father: {fileID: 1499489318}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181, y: -80}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852431174
 MonoBehaviour:

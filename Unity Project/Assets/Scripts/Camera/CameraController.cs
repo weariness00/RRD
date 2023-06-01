@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -79,7 +80,7 @@ public class CameraController : MonoBehaviour
         transform.position = ownerCollider.bounds.center;
         transform.eulerAngles = MousRotate(transform.eulerAngles);
         ownerLookTarget.transform.eulerAngles = transform.eulerAngles;
-        ownerLookTarget.transform.localPosition = owner.transform.position + ownerLookTarget.transform.forward;
+        ownerLookTarget.transform.localPosition = new Vector3(owner.transform.position.x, ownerCollider.bounds.max.y, owner.transform.position.z) + ownerLookTarget.transform.forward;
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.forward, out hit, camera_offset.magnitude, LayerMask.GetMask("Terrain")))

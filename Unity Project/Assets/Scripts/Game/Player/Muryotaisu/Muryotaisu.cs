@@ -6,7 +6,6 @@ using UnityEngine;
 public class Muryotaisu : PlayerController
 {
     public MuryotaisuEquipment equipment;
-    public AudioClip attack;
 
     protected override void Start()
     {
@@ -22,7 +21,7 @@ public class Muryotaisu : PlayerController
 
     public void CreateWeapon()
     {
-        int layer = (int)equipment.Equip(equipment.weapons[0], animator);
+        equipment.Equip(equipment.weapons[0], animator);
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -67,6 +66,7 @@ public class MuryotaisuEquipment
         main_Weapon?.gameObject.SetActive(false);
         _Weapon.gameObject.SetActive(true);
         main_Weapon = _Weapon;
+
         string animatorLayerName = "None";
         switch (main_Weapon.type)
         {
@@ -81,10 +81,10 @@ public class MuryotaisuEquipment
                 main_Weapon.transform.SetParent(rightHand.transform);
                 break;
             case Define.WeaponType.Bow:
-                animatorLayerName = "Wizard";
-                main_Weapon.transform.SetParent(rightHand.transform);
                 break;
             case Define.WeaponType.Wand:
+                animatorLayerName = "Wizard";
+                main_Weapon.transform.SetParent(rightHand.transform);
                 break;
             default:
                 break;
