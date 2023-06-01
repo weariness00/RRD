@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [HideInInspector] public Animator animator;
     [HideInInspector] public Collider collider;
 
-    public Skill skill_Q;
-    public Skill skill_E;
+    //public Skill skill_NormalAttack;
+    public Skill skill_EnhanceAttack;
+    public Skill skill_Auxiliary;
+    public Skill skill_Ultimate;
     public Vector3 motionSpeed;
 
     [HideInInspector] public UnityEvent<GameObject> AttackCall; // юс╫ц
@@ -55,18 +57,17 @@ public class PlayerController : MonoBehaviour, IDamage
 
         fsm.Update();
 
-        if (Managers.Key.InputActionDown(KeyToAction.Attack))
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_NormalAttack))
             fsm.PushState(new Attack());
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_EhanceAttack))
+            skill_EnhanceAttack?.OnSkill();
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_Auxiliary))
+            skill_Auxiliary?.OnSkill();
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_Ultimate))
+            skill_Ultimate?.OnSkill();
 
         if (status.LevelUP())
-            LevelUpCall?.Invoke();
-
-        if (Managers.Key.InputActionDown(KeyToAction.Skill_Q))
-            skill_Q.OnSkill();
-
-        if (Managers.Key.InputActionDown(KeyToAction.Skill_E))
-            skill_E.OnSkill();
-
+           LevelUpCall?.Invoke();
     }
 
     protected virtual void OnTriggerEnter(Collider other)

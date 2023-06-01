@@ -22,7 +22,6 @@ public enum KeyToAction
     MoveLeft,
     MoveRight,
 
-    Attack,
     Run,
 
     Inventory,
@@ -32,11 +31,10 @@ public enum KeyToAction
     WaveGenerator_UI,
     Quest_UI,
 
-    Skill_Q,
-    Skill_E,
-    Skill_Enhance, // 강화 공격
+    Skill_NormalAttack,
+    Skill_EhanceAttack, // 강화 공격
+    Skill_Auxiliary, // 보조 스킬
     Skill_Ultimate, // 궁극기
-    Skill_Sub, // 서브 스킬
 }
 
 /// <summary>

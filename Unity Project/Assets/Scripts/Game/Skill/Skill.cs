@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Skill : MonoBehaviour
 {
-    public float coolTime;
+    public float coolTime = 0;
     public bool isOn = true;    // true : can use skill, false : can't use skill
+    public Sprite icon;
 
     [HideInInspector] public Status status;
 
@@ -19,8 +22,6 @@ public class Skill : MonoBehaviour
         player = GameManager.Instance.Player;
         status = Util.GetORAddComponet<Status>(gameObject);
         layerMask = LayerMask.GetMask("Monster");
-
-        coolTime = 1f;
     }
 
     public virtual void OnSkill()

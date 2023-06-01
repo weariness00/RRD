@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Muryotaisu : PlayerController
 {
+    public PlayerInfoCanvas playerInfoCanvas;
     public MuryotaisuEquipment equipment;
+    public WeaponSkillPack[] skillPack;
 
     protected override void Start()
     {
@@ -16,12 +18,14 @@ public class Muryotaisu : PlayerController
 
     protected override void Update()
     {
-        base.Update();          
+        base.Update();
+        if (Managers.Key.InputActionDown(KeyToAction.Skill_Ultimate))
+            ChangeWeapon();
     }
 
     public void CreateWeapon()
     {
-        equipment.Equip(equipment.weapons[0], animator);
+        equipment.Equip(equipment.weapons[index], animator);
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -31,6 +35,26 @@ public class Muryotaisu : PlayerController
             float damage = status.damage.Cal() + equipment.main_Weapon.status.damage.Cal();
             Managers.Damage.Attack(other.GetComponentInParent<Monster>(),damage);
         }
+    }
+
+    int index = 0;
+    void ChangeWeapon()
+    {
+        if (++index == equipment.weapons.Length) index = 0;
+        equipment.Equip(equipment.weapons[index], animator);
+        skill_EnhanceAttack = skillPack[index].skill_EnhanceAttack;
+        skill_Auxiliary = skillPack[index].skill_Auxiliary;
+
+        //playerInfoCanvas.Skill_NormalAttackNode.icon.sprite = skill
+        playerInfoCanvas.Skill_EnhanceAttackNode.icon.sprite = skill_EnhanceAttack?.icon;
+        playerInfoCanvas.Skill_AuxiliaryNode.icon.sprite = skill_Auxiliary?.icon;
+    }
+    
+    [System.Serializable]
+    public class WeaponSkillPack
+    {
+        public Skill skill_EnhanceAttack;
+        public Skill skill_Auxiliary;
     }
 }
 
