@@ -945,6 +945,37 @@ Transform:
   m_Father: {fileID: 2145026874366720271}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2124759626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124759627}
+  m_Layer: 0
+  m_Name: Look Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2124759627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124759626}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1281510937689749551}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &618468374803096191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1331,7 @@ Transform:
   - {fileID: 4158239947747991842}
   - {fileID: 196164435}
   - {fileID: 586015227}
+  - {fileID: 2124759627}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2965,7 +2997,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3674613623355603864}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2999,10 +3031,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e37a2b0e2b06a40983091d059c6e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookTransform: {fileID: 3412080796648165987, guid: b0d63f79bd962de4793b88758ec912d1, type: 3}
+  LookTransform: {fileID: 2124759627}
   animationController: {fileID: 0}
   status: {fileID: 0}
   animator: {fileID: 0}
+  collider: {fileID: 0}
   skill_Q: {fileID: 701076782}
   skill_E: {fileID: 15996391}
   motionSpeed: {x: 0, y: 0, z: 0}
@@ -3016,7 +3049,10 @@ MonoBehaviour:
   outofcombat: 0
   isStop: 0
   equipment:
-    weapon: {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+    weapons:
+    - {fileID: 6810270921076145893, guid: 9effcc3d7b08ca644abb5d61c88043a7, type: 3}
+    - {fileID: 8127476406744750424, guid: 464d57c3c21729645b5c03fedae327d8, type: 3}
+    main_Weapon: {fileID: 0}
     leftHand: {fileID: 2092131846}
     rightHand: {fileID: 1101978231}
   attack: {fileID: 8300000, guid: 2902f2ff3aaa243418d8e358005a33a8, type: 3}
@@ -5006,7 +5042,7 @@ MonoBehaviour:
     m_SourceObjects:
       m_Length: 1
       m_Item0:
-        transform: {fileID: 0}
+        transform: {fileID: 2124759627}
         weight: 1
       m_Item1:
         transform: {fileID: 0}

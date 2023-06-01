@@ -81,6 +81,8 @@ public class MuryotaisuEquipment
                 main_Weapon.transform.SetParent(rightHand.transform);
                 break;
             case Define.WeaponType.Bow:
+                animatorLayerName = "Wizard";
+                main_Weapon.transform.SetParent(rightHand.transform);
                 break;
             case Define.WeaponType.Wand:
                 break;

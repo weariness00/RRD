@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
 {
     public Camera camera;
 	public GameObject owner;
+    public GameObject ownerLookTarget;
     Collider ownerCollider;
     public ViewType type = ViewType.Third_Person_View;
 
@@ -57,25 +58,28 @@ public class CameraController : MonoBehaviour
 
     float xRotate, yRotate, xRotateMove, yRotateMove;
     float rotateSpeed = 500.0f;
-    void MousRotate(Transform target)
+    Vector3 MousRotate(Vector3 angles)
     {
         xRotateMove = -Input.GetAxis("Mouse Y") * Time.deltaTime * rotateSpeed;
         yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
 
-        yRotate = transform.eulerAngles.y + yRotateMove;
+        yRotate = angles.y + yRotateMove;
         //xRotate = transform.eulerAngles.x + xRotateMove; 
         xRotate = xRotate + xRotateMove;
 
         xRotate = Mathf.Clamp(xRotate, -90, 90); // 위, 아래 고정
 
-        target.eulerAngles = new Vector3(xRotate, yRotate, 0);
+        return angles = new Vector3(xRotate, yRotate, 0);
     }
 
     void Third_Person_View()
     {
         camera.transform.LookAt(transform.position);
+
         transform.position = ownerCollider.bounds.center;
-        MousRotate(transform);
+        transform.eulerAngles = MousRotate(transform.eulerAngles);
+        ownerLookTarget.transform.eulerAngles = transform.eulerAngles;
+        ownerLookTarget.transform.localPosition = owner.transform.position + ownerLookTarget.transform.forward;
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.forward, out hit, camera_offset.magnitude, LayerMask.GetMask("Terrain")))
