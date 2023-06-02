@@ -38,17 +38,28 @@ public class PlayerInfoCanvas : MonoBehaviour
         Skill_NormalAttackNode.icon.sprite = player.skill_Ultimate?.icon;
     }
 
-    Coroutine[] skillCool = new Coroutine[3];
+    [HideInInspector] public Dictionary<int, Coroutine> skillCoolCoroutineDict = new();
+    [HideInInspector] public Dictionary<int, bool> skillUIIsActive = new();
     private void LateUpdate()
     {
-        //if (Managers.Key.InputActionDown(KeyToAction.Skill_NormalAttack))
-        //    StartCoroutine(OnSkill_UINode(player.skill_NormalAttack, Skill_NormalAttackNode));
-        if (Managers.Key.InputActionDown(KeyToAction.Skill_EhanceAttack) && skillCool[0] == null)
-            skillCool[0] = StartCoroutine(OnSkill_UINode(player.skill_EnhanceAttack, Skill_EnhanceAttackNode, 0));
-        if (Managers.Key.InputActionDown(KeyToAction.Skill_Auxiliary) && skillCool[1] == null)
-            skillCool[1] = StartCoroutine(OnSkill_UINode(player.skill_Auxiliary, Skill_AuxiliaryNode, 1));
-        if (Managers.Key.InputActionDown(KeyToAction.Skill_Ultimate) && skillCool[2] == null)
-            skillCool[2] = StartCoroutine(OnSkill_UINode(player.skill_Ultimate, Skill_UltimateNode, 2));
+        if (player.skill_EnhanceAttack != null && Managers.Key.InputActionDown(KeyToAction.Skill_EhanceAttack) && !skillCoolCoroutineDict.ContainsKey(player.skill_EnhanceAttack.GetInstanceID()))
+        {
+            int idIndex = player.skill_EnhanceAttack.GetInstanceID();
+            skillUIIsActive[idIndex] = true;
+            skillCoolCoroutineDict[idIndex] = StartCoroutine(OnSkill_UINode(player.skill_EnhanceAttack, Skill_EnhanceAttackNode));
+        }
+        if (player.skill_Auxiliary != null && Managers.Key.InputActionDown(KeyToAction.Skill_Auxiliary) && !skillCoolCoroutineDict.ContainsKey(player.skill_Auxiliary.GetInstanceID()))
+        {
+            int idIndex = player.skill_Auxiliary.GetInstanceID();
+            skillUIIsActive[idIndex] = true;
+            skillCoolCoroutineDict[idIndex] = StartCoroutine(OnSkill_UINode(player.skill_Auxiliary, Skill_AuxiliaryNode));
+        }
+        if (player.skill_Ultimate != null && Managers.Key.InputActionDown(KeyToAction.Skill_Ultimate) && !skillCoolCoroutineDict.ContainsKey(player.skill_Ultimate.GetInstanceID()))
+        {
+            int idIndex = player.skill_Ultimate.GetInstanceID();
+            skillUIIsActive[idIndex] = true;
+            skillCoolCoroutineDict[idIndex] = StartCoroutine(OnSkill_UINode(player.skill_Ultimate, Skill_UltimateNode));
+        }
 
         OnChangeStatusUI();
     }
@@ -65,7 +76,7 @@ public class PlayerInfoCanvas : MonoBehaviour
         level_Value.text = status.level.ToString();
     }
 
-    IEnumerator OnSkill_UINode(Skill skill, Skill_UINode skill_UINode, int index)
+    IEnumerator OnSkill_UINode(Skill skill, Skill_UINode skill_UINode)
     {
         if (skill == null || skill.coolTime == 0) yield break;
 
@@ -77,14 +88,21 @@ public class PlayerInfoCanvas : MonoBehaviour
             float coolTime = Time.time - startTime;
             if (skill.coolTime < coolTime) break;
 
-            skill_UINode.coolTimeText.text = ((int)(skill.coolTime - coolTime)).ToString();
-            skill_UINode.CoolTimeFilled.fillAmount = coolTime / skill.coolTime;
+            if (skillUIIsActive[skill.GetInstanceID()])
+            {
+                skill_UINode.coolTimeText.text = ((int)(skill.coolTime - coolTime)).ToString();
+                skill_UINode.CoolTimeFilled.fillAmount = 1 - (coolTime / skill.coolTime);
+            }
             yield return null;
         }
-        skill_UINode.coolTimeText.gameObject.SetActive(false);
-        skill_UINode.CoolTimeFilled.gameObject.SetActive(false);
 
-        skillCool[index] = null;
+        if (skillUIIsActive[skill.GetInstanceID()])
+        {
+            skill_UINode.coolTimeText.gameObject.SetActive(false);
+            skill_UINode.CoolTimeFilled.gameObject.SetActive(false);
+        }
+
+        skillCoolCoroutineDict.Remove(skill.GetInstanceID());
     }
 
     [System.Serializable]
@@ -101,5 +119,11 @@ public class PlayerInfoCanvas : MonoBehaviour
         public TMP_Text nameText;
         public TMP_Text coolTimeText;
         public Image CoolTimeFilled;
+
+        public void CoolUI_Active(bool value)
+        {
+            coolTimeText.gameObject.SetActive(value);
+            CoolTimeFilled.gameObject.SetActive(value);
+        }
     }
 }

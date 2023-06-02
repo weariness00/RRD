@@ -14,6 +14,8 @@ public class Muryotaisu : PlayerController
         base.Start();
         equipment.Init();
         CreateWeapon();
+        skill_EnhanceAttack = skillPack[index].skill_EnhanceAttack;
+        skill_Auxiliary = skillPack[index].skill_Auxiliary;
     }
 
     protected override void Update()
@@ -40,14 +42,23 @@ public class Muryotaisu : PlayerController
     int index = 0;
     void ChangeWeapon()
     {
-        if (++index == equipment.weapons.Length) index = 0;
+        playerInfoCanvas.skillUIIsActive[skill_EnhanceAttack.GetInstanceID()] = false;
+        playerInfoCanvas.skillUIIsActive[skill_Auxiliary.GetInstanceID()] = false;
+
+        if(++index == equipment.weapons.Length) index = 0;
+
         equipment.Equip(equipment.weapons[index], animator);
         skill_EnhanceAttack = skillPack[index].skill_EnhanceAttack;
         skill_Auxiliary = skillPack[index].skill_Auxiliary;
 
-        //playerInfoCanvas.Skill_NormalAttackNode.icon.sprite = skill
         playerInfoCanvas.Skill_EnhanceAttackNode.icon.sprite = skill_EnhanceAttack?.icon;
         playerInfoCanvas.Skill_AuxiliaryNode.icon.sprite = skill_Auxiliary?.icon;
+            
+        playerInfoCanvas.skillUIIsActive[skill_EnhanceAttack.GetInstanceID()] = true;
+        playerInfoCanvas.skillUIIsActive[skill_Auxiliary.GetInstanceID()] = true;
+
+        playerInfoCanvas.Skill_EnhanceAttackNode.CoolUI_Active(!skill_EnhanceAttack.isOn);
+        playerInfoCanvas.Skill_AuxiliaryNode.CoolUI_Active(!skill_Auxiliary.isOn);
     }
     
     [System.Serializable]
