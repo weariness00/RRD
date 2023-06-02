@@ -13,6 +13,8 @@ public class FireBall : Skill
 
     public override void OnSkill()
     {
+        if (isOn == false) return;
+
         base.OnSkill();
 
         CreateFireBallObject();

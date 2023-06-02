@@ -64,6 +64,9 @@ public class Monster : MonoBehaviour, IDamage
     public FSMStructer<Monster> fsm;
     public FindToMove ftm;
     ItemDropTable idt;
+    Monster_UI ui;
+
+    [HideInInspector] public UnityEvent HitCall = new();
 
     [Space]
     public GameObject crowbar;
@@ -81,7 +84,7 @@ public class Monster : MonoBehaviour, IDamage
         ftm = Util.GetORAddComponet<FindToMove>(gameObject);
         idt = Util.GetORAddComponet<ItemDropTable>(gameObject);
 
-        Util.GetORAddComponet<Monster_UI>(gameObject);
+        ui = Util.GetORAddComponet<Monster_UI>(gameObject);
         onDie = new UnityEvent<Transform>();
 
         if (isOnIdle) fsm.SetDefaultState(ReturnIdle());
@@ -152,6 +155,7 @@ public class Monster : MonoBehaviour, IDamage
                 damage = crowbar.GetComponent<Crowbar>().ItemEffect(damage);
         }
         status.hp.value -= damage;
+        HitCall?.Invoke();
 
         if (CheckDie()) fsm.ChangeState(ReturnDie());
         else fsm.ChangeState(ReturnHit());

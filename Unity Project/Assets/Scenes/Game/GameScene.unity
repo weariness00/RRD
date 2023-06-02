@@ -1539,10 +1539,10 @@ RectTransform:
   m_Father: {fileID: 1499489318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &294756319
 MonoBehaviour:
@@ -2200,7 +2200,7 @@ GameObject:
   - component: {fileID: 445344754}
   - component: {fileID: 445344755}
   m_Layer: 0
-  m_Name: Scene
+  m_Name: Game Scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4491,10 +4491,10 @@ RectTransform:
   m_Father: {fileID: 1499489318}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 181, y: -80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852431174
 MonoBehaviour:
@@ -4558,7 +4558,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880916514}
-  m_LocalRotation: {x: -0, y: -0, z: -0.01589389, w: 0.99987376}
+  m_LocalRotation: {x: -0.0023068914, y: 0.14512494, z: -0.015725577, w: 0.9892857}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4569,7 +4569,7 @@ RectTransform:
   - {fileID: 572287730}
   m_Father: {fileID: 306087729}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.821}
+  m_LocalEulerAnglesHint: {x: 0, y: 16.691, z: -1.821}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -280, y: 130.7}
@@ -6238,13 +6238,21 @@ PrefabInstance:
       value: WaveNodeGenerator Canavs
       objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: spawnTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 235970876}
     - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: spawnPoolParant
       value: 
       objectReference: {fileID: 487272646}
+    - target: {fileID: 5469570013708265800, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
+      propertyPath: spawnSpot_Object.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5469570013708265801, guid: 65b0c66cb6c099d45a8b3e385cbda534, type: 3}
       propertyPath: monsterDataExcel
       value: 

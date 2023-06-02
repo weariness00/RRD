@@ -21,26 +21,38 @@ public class Monster_UI : MonoBehaviour
 
         collider = GetComponentInChildren<Collider>();
         bar_UI = Instantiate(hp_Bar, canvas.transform).GetComponent<Scrollbar>();
+
+        bar_UI.gameObject.SetActive(false);
+
+        gameObject.GetComponent<Monster>().HitCall.AddListener(HitEvent);
     }
 
     private void OnDestroy()
     {
+        StopCoroutine(barPositionCoroutine);
         Destroy(bar_UI.gameObject);
     }
 
-    private void Update()
+    Coroutine barPositionCoroutine = null;
+    IEnumerator Update_BarPosition()
     {
-        Vector3 pos = transform.position;
-        pos.y = collider.bounds.max.y;
-        pos = Camera.main.WorldToScreenPoint(pos);
-        if (pos.z <= 0) return;
-        bar_UI.transform.position = pos;
+        while(true)
+        {
+            Vector3 pos = transform.position;
+            pos.y = collider.bounds.max.y;
+            pos = Camera.main.WorldToScreenPoint(pos);
+            if (pos.z <= 0) bar_UI.gameObject.SetActive(false);
+            else bar_UI.gameObject.SetActive(true);
+            bar_UI.transform.position = pos;
+            yield return null;
+        }
     }
 
-    private void LateUpdate()
+    public void HitEvent()
     {
+        if(barPositionCoroutine == null) barPositionCoroutine = StartCoroutine(Update_BarPosition());
         bar_UI.size = Mathf.InverseLerp(0, status.maxHp.Cal(), status.hp.Cal());
-        if(bar_UI.size.Equals(0))
+        if (bar_UI.size.Equals(0))
         {
             Destroy(this);
         }

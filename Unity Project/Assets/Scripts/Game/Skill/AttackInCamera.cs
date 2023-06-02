@@ -16,8 +16,7 @@ public class AttackInCamera : Skill
 
     public override void OnSkill()
     {
-        if (!isOn)
-            return;
+        if (!isOn) return;
 
         base.OnSkill();
 

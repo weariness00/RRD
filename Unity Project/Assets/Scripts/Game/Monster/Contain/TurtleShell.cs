@@ -22,7 +22,7 @@ namespace Monsters
 
         public override void Hit(float damage)
         {
-            status.hp.value -= damage;
+            base.Hit(damage);
 
             if (!isDefend && status.hp.value < Mathf.Lerp(0, status.maxMp.value, 0.3f))
             {
@@ -33,9 +33,8 @@ namespace Monsters
             if (CheckDie())
             {
                 isDefend = false;
-                fsm.ChangeState(ReturnDie());
             }
-            else fsm.ChangeState(ReturnHit());
+
         }
     }
 
