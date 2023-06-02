@@ -40,6 +40,8 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Cursor.visible == true) return;
+
         switch (type)
         {
             case ViewType.Friest_Person_View:

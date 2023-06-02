@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (GameManager.Instance.isPause) return;
         if (status.isDead) return;
+        if (Cursor.visible == true) return;
 
         fsm.Update();
 

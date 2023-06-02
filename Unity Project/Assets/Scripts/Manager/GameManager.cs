@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public AudioClip bgm;
     public Transform[] PlayerSpawnSpot; // 임시 나중에는 스테이지 별로 스크립트를 만들건데 거기서 다루기
 
+    public int OnWindowIndex = 0; // 현재 켜진 UI가 몇개인지 ( 설정창, 웨이브창, 인벤토리 창 등)
     public bool isPause = false;
     public bool isWave = false;
     public float waveTime = 60f;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(InitData());
         isPause = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Start()
@@ -55,6 +58,18 @@ public class GameManager : MonoBehaviour
             PauseCall?.Invoke();
     }
 
+    public void GamePause()
+    {
+        isPause = true;
+        Time.timeScale = 0;
+    }
+
+    public void GameResume()
+    {
+        isPause = false;
+        Time.timeScale = 1f;
+    }
+
     static void Init()
     {
         if(instance == null)
@@ -64,22 +79,6 @@ public class GameManager : MonoBehaviour
                 obj = new GameObject { name = "GameManager" };
 
             instance = Util.GetORAddComponet<GameManager>(obj);
-        }
-    }
-
-    public void Pause()
-    {
-        isPause = !isPause;
-
-        if(isPause)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1;
         }
     }
 
@@ -99,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
-        Pause();
+        GamePause();
         Managers.Scene.LoadScene(SceneType.GameEnd);
     }
 

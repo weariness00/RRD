@@ -51,6 +51,23 @@ public class WaveGenrator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        ++GameManager.Instance.OnWindowIndex;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnDisable()
+    {
+        --GameManager.Instance.OnWindowIndex;
+        if (GameManager.Instance.OnWindowIndex.Equals(0))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     public void OnOff()
     {
         if (Managers.Key.InputActionDown(KeyToAction.WaveGenerator_UI))
