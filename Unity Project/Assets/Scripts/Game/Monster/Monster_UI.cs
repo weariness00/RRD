@@ -29,7 +29,7 @@ public class Monster_UI : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopCoroutine(barPositionCoroutine);
+        if(barPositionCoroutine != null) StopCoroutine(barPositionCoroutine);
         Destroy(bar_UI.gameObject);
     }
 

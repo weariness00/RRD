@@ -19,7 +19,7 @@ public enum QuestAction
 public class Quest_UI : UIUtil
 {
     int nodeLenth = 0;
-    public void AddNode(GameObject ui, Quest quest)
+    public void AddNode(GameObject ui, QuestData quest)
     {
         Bind<TMP_Text>(ui, new string[] { "Title" });
         Bind<TMP_Text>(ui, new string[] { "Text" });
@@ -29,7 +29,7 @@ public class Quest_UI : UIUtil
         ++nodeLenth;
     }
 
-    public void UpdateNode(Quest quest, int index)
+    public void UpdateNode(QuestData quest, int index)
     {
         Get<TMP_Text>(index * 2).text = quest.title;
         Get<TMP_Text>(index * 2 + 1).text = quest.text;
@@ -47,16 +47,17 @@ public class QuestManager : MonoBehaviour
     public Transform NodeParentTransform;
     public GameObject uiNode;
 
-    public List<Quest> questList;
+    public List<QuestData> questList;
 
     private void Awake()
     {
 		Instance = this;
 
-		foreach (var quest in questList)
-		{
+        for (int i = 0; i < questList.Count; i++)
+        {
+            questList[i] = Instantiate(questList[i]);
             GameObject uiObj = Instantiate(uiNode, NodeParentTransform);
-            ui.AddNode(uiObj, quest);
+            ui.AddNode(uiObj, questList[i]);
         }
     }
 
@@ -71,7 +72,26 @@ public class QuestManager : MonoBehaviour
 			gameObject.SetActive(!gameObject.activeSelf);
 	}
 
-    public void AddQuest(Quest node)
+    //public bool CheckProgress(QuestData data,QuestAction[] actions)
+    //{
+    //    for (int i = 0; i < actions.Length; i++)
+    //        if (actions[i] != data.Progress[i]) return false;
+    //    Debug.Log($"{data.title} 퀘스트 진행중");
+
+    //    if (data.golaCount.Equals(++data.count)) data.isScessce = true;
+    //    Scessce(data);
+
+    //    return true;
+    //}
+
+    //public void Scessce(QuestData data)
+    //{
+    //    if (!data.isScessce) return;
+    //    data.RewardEvent?.Invoke();
+    //    Debug.Log("보상 지급");
+    //}
+
+    public void AddQuest(QuestData node)
 	{
 		Array.Sort(node.Progress);
 		questList.Add(node);
@@ -93,9 +113,4 @@ public class QuestManager : MonoBehaviour
 			++count;
         });
     }
-
-	public void CreateObject(GameObject obj)
-	{
-		Instantiate(obj);
-	}
 }

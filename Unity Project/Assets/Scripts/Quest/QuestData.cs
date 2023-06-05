@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "Quest Node", menuName = "Scriptable Object/Quest", order = int.MaxValue)]
-public class Quest : ScriptableObject
+[CreateAssetMenu(fileName = "Quest Data", menuName = "Scriptable Object/Quest", order = int.MaxValue)]
+public class QuestData : ScriptableObject
 {
     public int id;
 
@@ -25,8 +26,8 @@ public class Quest : ScriptableObject
         for (int i = 0; i < actions.Length; i++)
             if (actions[i] != Progress[i]) return false;
         Debug.Log($"{title} 퀘스트 진행중");
-        
-        if(golaCount.Equals(++count)) isScessce = true;
+
+        if (golaCount.Equals(++count)) isScessce = true;
         Scessce();
 
         return true;
