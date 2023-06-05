@@ -9,7 +9,6 @@ public enum SceneType
     Lobby,
     Game,
     GameEnd,
-    GameOver,
 }
 
 public abstract class BaseScene : MonoBehaviour

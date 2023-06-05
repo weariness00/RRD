@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public enum DifficultyType

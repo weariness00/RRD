@@ -11,6 +11,10 @@ public class LobbyScene : BaseScene
         base.Init();
 
         Type = SceneType.Lobby;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 1f;
     }
 
     public override void Clear()

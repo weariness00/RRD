@@ -1,12 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using UnityEditor;
-using UnityEngine.Events;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using System;
 
 public class ItemGenerator : MonoBehaviour
@@ -54,9 +50,10 @@ public class ItemGenerator : MonoBehaviour
 
         string curPath = $"{path}/{currentItemName}.asset";
 
+#if UNITY_EDITOR
         // 스크립터블 오브젝트 저장
         AssetDatabase.CreateAsset(scriptableObject, curPath);
-
+#endif
         itemListScript.itemList.Add(scriptableObject);
 
         Debug.Log($"Create Item : {curPath}");

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 using PlayerFSM;
 using UnityEditor;
 
-[CanEditMultipleObjects]
 public class PlayerController : MonoBehaviour, IDamage
 {
     public Transform LookTransform;
@@ -54,7 +53,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (GameManager.Instance.isPause) return;
         if (status.isDead) return;
-        if (Cursor.visible == true) return;
+        if (Cursor.lockState == CursorLockMode.None) return;
 
         fsm.Update();
 

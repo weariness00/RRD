@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Cursor.visible == true) return;
+        if (Cursor.lockState == CursorLockMode.None) return;
 
         switch (type)
         {

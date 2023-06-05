@@ -8,6 +8,7 @@ public class GameScene : BaseScene
     public void Start()
     {
         GameManager.Instance.difficulty.SetDifficulty(LobbyScene.difficultyType);
+        Destroy(GameObject.FindObjectOfType<LobbyScene>());
     }
     protected override void Init()
     {
@@ -22,8 +23,8 @@ public class GameScene : BaseScene
     {
     }
 
-    public void GameOver()
+    public void GameEnd()
     {
-        Managers.Scene.LoadScene(SceneType.GameOver);
+        Managers.Scene.LoadScene(SceneType.GameEnd);
     }
 }

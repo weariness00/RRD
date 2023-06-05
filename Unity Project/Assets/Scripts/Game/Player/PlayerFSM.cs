@@ -278,6 +278,7 @@ namespace PlayerFSM
             pc = component as PlayerController;
 
             GameManager.Instance.alivePlayerCount--;
+            GameManager.Instance.Invoke("GameEnd", 5f);
             // 사망 애니메이션 호출
             pc.collider.enabled = false;
             pc.GetComponent<Rigidbody>().useGravity = false;
